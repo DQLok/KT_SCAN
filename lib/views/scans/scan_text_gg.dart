@@ -6,7 +6,6 @@ import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart
 import 'package:kt_scan_text/objects/list_bill_status.dart';
 import 'package:kt_scan_text/objects/text_group.dart';
 import 'package:kt_scan_text/store_preference/store_preference.dart';
-import 'package:kt_scan_text/views/result_filter/result_filter.dart';
 import 'package:kt_scan_text/views/result_filter/widgets/result_scan.dart';
 import 'package:kt_scan_text/views/scans/widgets/detector_view.dart';
 import 'package:kt_scan_text/views/scans/widgets/text_detector_painter.dart';
@@ -21,7 +20,7 @@ class ScanTextGg extends StatefulWidget {
 
 class _ScanTextGgState extends State<ScanTextGg> {
   // var _script = TextRecognitionScript.latin;
-  var _textRecognizer = TextRecognizer(script: TextRecognitionScript.latin);
+  final _textRecognizer = TextRecognizer(script: TextRecognitionScript.latin);
   bool _canProcess = true;
   bool _isBusy = false;
   CustomPaint? _customPaint;
@@ -55,7 +54,7 @@ class _ScanTextGgState extends State<ScanTextGg> {
           onImage: _processImage,
           initialCameraLensDirection: _cameraLensDirection,
           onCameraLensDirectionChanged: (value) => _cameraLensDirection = value,
-          blocks: showAndHide ? formatBlocks() : SizedBox(),
+          blocks: showAndHide ? formatBlocks() : const SizedBox(),
           fileImage: widget.xFile,
           saveData: saveDataPreference,
           viewDetail: viewDetailScan,
@@ -276,7 +275,7 @@ class _ScanTextGgState extends State<ScanTextGg> {
                                             Border.all(color: Colors.blueAccent)),
                                     child: Text(
                                       "${listKeyValues.elementAt(index).keyTG.index}: ${listKeyValues.elementAt(index).keyTG.text}",
-                                      style: TextStyle(color: Colors.blue,fontSize: 10),
+                                      style: const TextStyle(color: Colors.blue,fontSize: 10),
                                     ),
                                   ),
                                 ),
@@ -305,7 +304,7 @@ class _ScanTextGgState extends State<ScanTextGg> {
                                                           .valueTG
                                                           .elementAt(indexChild)
                                                           .text,
-                                                      style: TextStyle(
+                                                      style: const TextStyle(
                                                           color: Colors.blue,fontSize: 10),
                                                     ),
                                                   )),
@@ -352,6 +351,7 @@ class _ScanTextGgState extends State<ScanTextGg> {
       }
 
       //------
+      // ignore: use_build_context_synchronously
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => ResultScan(pathIamge: pathImage,)));
     }

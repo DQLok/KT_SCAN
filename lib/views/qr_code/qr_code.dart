@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
-import 'package:qr_mobile_vision/qr_mobile_vision.dart';
 
 class QRCode extends StatefulWidget {
   const QRCode({super.key});
@@ -29,13 +26,13 @@ class _QRCodeState extends State<QRCode> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Scan QRCode"),
+        title: const Text("Scan QRCode"),
         centerTitle: true,
       ),
       backgroundColor: Colors.black,
       body: Column(
         children: [
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height / 1.5,
             width: MediaQuery.of(context).size.width / 1.2,
             child: MobileScanner(
@@ -66,16 +63,16 @@ class _QRCodeState extends State<QRCode> {
           SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   child: Text(
                     "Tính năng đang phát triển!!!",
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
                 SizedBox(
-                  child: resultQr.isEmpty? SizedBox(): Text(
+                  child: resultQr.isEmpty? const SizedBox(): Text(
                     "Kết quả: $resultQr",
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ),
                 ),
                 ElevatedButton(onPressed: (){
@@ -83,7 +80,7 @@ class _QRCodeState extends State<QRCode> {
                     isScanComplete = false;
                     resultQr = "";
                   });
-                }, child: Text("Reset"))
+                }, child: const Text("Reset"))
               ],
             ),
           ),

@@ -1,11 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:kt_scan_text/views/qr_code/qr_code.dart';
 import 'package:kt_scan_text/views/result_filter/result_filter.dart';
 import 'package:kt_scan_text/views/result_filter/widgets/camera_customer.dart';
-import 'package:kt_scan_text/views/result_filter/widgets/result_scan.dart';
-import 'package:kt_scan_text/views/scans/scan_text_gg.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -20,7 +16,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("KT Scan".toUpperCase(),
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 30,
               fontStyle: FontStyle.normal,
               fontWeight: FontWeight.bold,
@@ -36,7 +32,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             Row(
               children: [
-                Expanded(child: SizedBox()),
+                const Expanded(child: SizedBox()),
                 Expanded(
                   flex: 2,
                   child: ElevatedButton(
@@ -44,22 +40,22 @@ class _HomePageState extends State<HomePage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => CameraCustomer()));
+                                builder: (context) => const CameraCustomer()));
                       },
                       style: ButtonStyle(
                           backgroundColor:
-                              MaterialStateProperty.all(Colors.redAccent)),
-                      child: Text(
+                              WidgetStateProperty.all(Colors.redAccent)),
+                      child: const Text(
                         "Scan Bill",
                         style: TextStyle(color: Colors.white),
                       )),
                 ),
-                Expanded(child: SizedBox())
+                const Expanded(child: SizedBox())
               ],
             ),
             Row(
               children: [
-                Expanded(child: SizedBox()),
+                const Expanded(child: SizedBox()),
                 Expanded(
                     flex: 2,
                     child: ElevatedButton(
@@ -67,16 +63,16 @@ class _HomePageState extends State<HomePage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QRCode()));
+                                  builder: (context) => const QRCode()));
                         },
                         style: ButtonStyle(
                             backgroundColor:
-                                MaterialStateProperty.all(Colors.redAccent)),
-                        child: Text(
+                                WidgetStateProperty.all(Colors.redAccent)),
+                        child: const Text(
                           "Scan QRCode",
                           style: TextStyle(color: Colors.white),
                         ))),
-                Expanded(child: SizedBox()),
+                const Expanded(child: SizedBox()),
               ],
             ),
             Row(
@@ -87,9 +83,9 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ResultFilterPage()));
+                              builder: (context) => const ResultFilterPage()));
                     },
-                    child: Text(
+                    child: const Text(
                       "Danh sách bill của bạn",
                       style: TextStyle(color: Colors.redAccent),
                     ))

@@ -40,27 +40,27 @@ class _ResultFilterPageState extends State<ResultFilterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Danh sách Bill".toUpperCase(),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
-        titleTextStyle: TextStyle(fontSize: 20, fontStyle: FontStyle.normal),
+        title: Text("Danh sách Bill".toUpperCase(),style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+        titleTextStyle: const TextStyle(fontSize: 20, fontStyle: FontStyle.normal),
         backgroundColor: Colors.redAccent,
         centerTitle: true,
         leading: IconButton(
             onPressed: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => HomePage()));
+                  context, MaterialPageRoute(builder: (context) => const HomePage()));
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.home_rounded,
               color: Colors.white,
             )),
-        actionsIconTheme: IconThemeData(color: Colors.white),
+        actionsIconTheme: const IconThemeData(color: Colors.white),
         actions: [
           IconButton(
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => CameraCustomer()));
+                    MaterialPageRoute(builder: (context) => const CameraCustomer()));
               },
-              icon: Icon(Icons.camera_alt_outlined))
+              icon: const Icon(Icons.camera_alt_outlined))
         ],
       ),
       backgroundColor: Colors.white.withOpacity(.9),
@@ -76,22 +76,22 @@ class _ResultFilterPageState extends State<ResultFilterPage> {
               onItemSelected: (index) => changeTab(index),
               items: [
                 FlashyTabBarItem(
-                  icon: Icon(Icons.list_alt),
-                  title: Text('Đang đợi'),
+                  icon: const Icon(Icons.list_alt),
+                  title: const Text('Đang đợi'),
                 ),
                 FlashyTabBarItem(
-                  icon: Icon(Icons.fact_check_outlined),
-                  title: Text('Thành công'),
+                  icon: const Icon(Icons.fact_check_outlined),
+                  title: const Text('Thành công'),
                 ),
                 FlashyTabBarItem(
-                  icon: Icon(Icons.remove_circle_outline_sharp),
-                  title: Text('Thất Bại'),
+                  icon: const Icon(Icons.remove_circle_outline_sharp),
+                  title: const Text('Thất Bại'),
                 ),
               ],
             ),
             showAndHide
                 ? listBillStatus.listInforBill.isEmpty
-                    ? Center(
+                    ? const Center(
                         child: SizedBox(
                           child: Text(
                             "Không có Bill nào!",
@@ -110,7 +110,7 @@ class _ResultFilterPageState extends State<ResultFilterPage> {
                                       .elementAt(index),
                                 )),
                       )
-                : Center(
+                : const Center(
                     child: SizedBox(
                       child: Text(
                         "Không có Bill nào!",
@@ -131,7 +131,7 @@ class _ResultFilterPageState extends State<ResultFilterPage> {
               listBillStatus = ListBillStatus(status: "", listInforBill: []);
             });
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.delete_forever_outlined,
             color: Colors.black,
           )),

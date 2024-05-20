@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:kt_scan_text/utils/utils.dart';
 import 'package:kt_scan_text/views/home/home.dart';
 import 'package:kt_scan_text/views/result_filter/result_filter.dart';
@@ -62,9 +61,9 @@ class _ResultScanState extends State<ResultScan> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => CameraCustomer()));
+                              builder: (context) => const CameraCustomer()));
                     },
-                    icon: CircleAvatar(
+                    icon: const CircleAvatar(
                         backgroundColor: Colors.white,
                         radius: 20,
                         child: Icon(
@@ -73,12 +72,12 @@ class _ResultScanState extends State<ResultScan> {
                         ))),
                 Text(
                   "Hoàn tất".toUpperCase(),
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 20,
                       fontStyle: FontStyle.normal,
                       fontWeight: FontWeight.bold),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 50,
                 )
               ],
@@ -105,13 +104,13 @@ class _ResultScanState extends State<ResultScan> {
                           Positioned(
                               bottom: 0,
                               left: MediaQuery.of(context).size.width / 3.5,
-                              child: Icon(
+                              child: const Icon(
                                 Icons.check_circle,
                                 color: Colors.greenAccent,
                                 size: 50,
                               ))
                         ]),
-                        Text("Thông tin Bill được lưu thành công")
+                        const Text("Thông tin Bill được lưu thành công")
                       ],
                     )
                   : Stack(children: [
@@ -129,34 +128,34 @@ class _ResultScanState extends State<ResultScan> {
               children: [
                 Container(
                     width: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor:
-                            MaterialStateProperty.all(Colors.redAccent),
+                            WidgetStateProperty.all(Colors.redAccent),
                       ),
                       onPressed: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => HomePage()));
+                                builder: (context) => const HomePage()));
                       },
-                      child: Text("Trở về Trang chủ",
+                      child: const Text("Trở về Trang chủ",
                           style: TextStyle(
                               color: Colors.white,
                               fontStyle: FontStyle.normal)),
                     )),
                 Container(
                     width: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: ElevatedButton(
                         onPressed: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ResultFilterPage()));
+                                  builder: (context) => const ResultFilterPage()));
                         },
-                        child: Text("Danh sách Bill",
+                        child: const Text("Danh sách Bill",
                             style: TextStyle(
                                 color: Colors.black,
                                 fontStyle: FontStyle.normal))))

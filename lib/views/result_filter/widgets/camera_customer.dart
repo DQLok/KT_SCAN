@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:kt_scan_text/main.dart';
 import 'package:kt_scan_text/views/home/home.dart';
 import 'package:kt_scan_text/views/result_filter/result_filter.dart';
@@ -13,13 +16,17 @@ class CameraCustomer extends StatefulWidget {
 }
 
 class _CameraCustomerState extends State<CameraCustomer> {
-  late CameraController cameraController;
+  CameraController? cameraController;
+  File? fileImg;
+  ImagePicker? imgPicker;
 
   @override
   void initState() {
     super.initState();
+    imgPicker = ImagePicker();
+    if (cameras.isEmpty) return;
     cameraController = CameraController(cameras.first, ResolutionPreset.max);
-    cameraController.initialize().then((value) {
+    cameraController!.initialize().then((value) {
       if (!mounted) {
         return;
       }
@@ -28,10 +35,8 @@ class _CameraCustomerState extends State<CameraCustomer> {
       if (e is CameraException) {
         switch (e.code) {
           case "CameraAccessDenied":
-            print("access was denied");
             break;
           default:
-            print(e.description);
             break;
         }
       }
@@ -39,17 +44,18 @@ class _CameraCustomerState extends State<CameraCustomer> {
   }
 
   takeAPicture() async {
-    if (!cameraController.value.isInitialized) {
+    if (!cameraController!.value.isInitialized) {
       return null;
     }
-    if (cameraController.value.isTakingPicture) {
+    if (cameraController!.value.isTakingPicture) {
       return null;
     }
 
     try {
-      await cameraController.setFlashMode(FlashMode.auto);
-      XFile picture = await cameraController.takePicture();
+      await cameraController!.setFlashMode(FlashMode.auto);
+      XFile picture = await cameraController!.takePicture();
       if (picture.path.isNotEmpty) {
+        // ignore: use_build_context_synchronously
         Navigator.push(
             context,
             MaterialPageRoute(
@@ -63,6 +69,13 @@ class _CameraCustomerState extends State<CameraCustomer> {
     }
   }
 
+  Future getImage(ImageSource source) async {
+    setState(() {
+      imgPicker = null;
+    });
+    // final pickedfile = await imgPicker!.pickImage(source: source);
+  }
+
   @override
   Widget build(BuildContext context) {
     double paddingV = MediaQuery.viewPaddingOf(context).vertical;
@@ -72,12 +85,15 @@ class _CameraCustomerState extends State<CameraCustomer> {
       body: Stack(children: [
         Center(
           child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
+                  color: Colors.blue,
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   shape: BoxShape.rectangle),
-              height: MediaQuery.of(context).size.height/1.5,
-              width: MediaQuery.of(context).size.width/1.3,
-              child: CameraPreview(cameraController)),
+              height: MediaQuery.of(context).size.height / 1.5,
+              width: MediaQuery.of(context).size.width / 1.3,
+              child: cameraController != null
+                  ? CameraPreview(cameraController!)
+                  : const SizedBox()),
         ),
         Container(
           padding:
@@ -94,9 +110,9 @@ class _CameraCustomerState extends State<CameraCustomer> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomePage()));
+                                  builder: (context) => const HomePage()));
                         },
-                        icon: CircleAvatar(
+                        icon: const CircleAvatar(
                             backgroundColor: Colors.white,
                             radius: 15,
                             child: Icon(
@@ -104,7 +120,7 @@ class _CameraCustomerState extends State<CameraCustomer> {
                               color: Colors.black,
                             ))),
                   ),
-                  Expanded(
+                  const Expanded(
                     child: Text(
                       "Quét Bill",
                       textAlign: TextAlign.center,
@@ -115,24 +131,37 @@ class _CameraCustomerState extends State<CameraCustomer> {
                           fontWeight: FontWeight.bold),
                     ),
                   ),
-                  Expanded(
-                      child: SizedBox())
+                  const Expanded(child: SizedBox())
                 ],
               ),
               Column(
                 children: [
-                  IconButton(
-                      onPressed: () {
-                        takeAPicture();
-                      },
-                      icon: CircleAvatar(
-                        radius: 30,
-                        backgroundColor: Colors.redAccent,
-                        child: Icon(
-                          Icons.camera_alt,
-                          color: Colors.white,
-                        ),
-                      )),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      SizedBox(
+                        child: IconButton(
+                            onPressed: () {},
+                            icon: const Icon(Icons.photo_size_select_actual_rounded)),
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            takeAPicture();
+                          },
+                          icon: const CircleAvatar(
+                            radius: 30,
+                            backgroundColor: Colors.redAccent,
+                            child: Icon(
+                              Icons.camera_alt,
+                              color: Colors.white,
+                            ),
+                          )),
+                      SizedBox(
+                        child: IconButton(
+                            onPressed: () {}, icon: const Icon(Icons.camera)),
+                      )
+                    ],
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -145,16 +174,16 @@ class _CameraCustomerState extends State<CameraCustomer> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => HomePage()));
+                                          builder: (context) => const HomePage()));
                                 },
-                                child: Text(
+                                child: const Text(
                                   "Trở về Trang chủ",
                                   style: TextStyle(
                                       color: Colors.redAccent,
                                       fontStyle: FontStyle.normal),
                                 )),
                           )),
-                      Expanded(child: Spacer()),
+                      const Expanded(child: Spacer()),
                       Expanded(
                           flex: 2,
                           child: Container(
@@ -164,11 +193,12 @@ class _CameraCustomerState extends State<CameraCustomer> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => ResultFilterPage()));
+                                        builder: (context) =>
+                                            const ResultFilterPage()));
                               },
                               child: Text(
                                 "Danh sách bill".toUpperCase(),
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Colors.redAccent,
                                     fontStyle: FontStyle.normal),
                               ),

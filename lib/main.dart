@@ -1,8 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:kt_scan_text/views/home/home.dart';
-import 'package:kt_scan_text/views/result_filter/widgets/result_scan.dart';
-import 'package:kt_scan_text/views/scans/scan_text_gg.dart';
 
 late List<CameraDescription> cameras;
 
@@ -25,7 +23,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       
-      home: HomePage(),
+      home: const HomePage(),
     );
   }
 }

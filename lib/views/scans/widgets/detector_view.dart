@@ -1,15 +1,14 @@
 import 'package:camera/camera.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:google_mlkit_commons/google_mlkit_commons.dart';
+import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:kt_scan_text/views/scans/widgets/camera_view.dart';
 import 'package:kt_scan_text/views/scans/widgets/gallery_view.dart';
 
 enum DetectorViewMode { liveFeed, gallery }
 
 class DetectorView extends StatefulWidget {
-  DetectorView({
-    Key? key,
+  const DetectorView({
+    super.key,
     required this.title,
     required this.onImage,
     this.customPaint,
@@ -23,7 +22,7 @@ class DetectorView extends StatefulWidget {
     required this.fileImage,
     required this.saveData,
     required this.viewDetail
-  }) : super(key: key);
+  });
 
   final String title;
   final CustomPaint? customPaint;

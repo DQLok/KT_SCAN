@@ -7,26 +7,31 @@ List<CameraDescription> cameras = [];
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   cameras = await availableCameras();
-  
-  runApp(MyApp());
+
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: CameraScreen(),
     );
   }
 }
 
 class CameraScreen extends StatefulWidget {
+  const CameraScreen({super.key});
+
   @override
   _CameraScreenState createState() => _CameraScreenState();
 }
 
 class _CameraScreenState extends State<CameraScreen> {
-  CameraController controller = CameraController(cameras[0], ResolutionPreset.medium);
+  CameraController controller =
+      CameraController(cameras[0], ResolutionPreset.medium);
 
   @override
   void initState() {
@@ -58,7 +63,7 @@ class _CameraScreenState extends State<CameraScreen> {
         CropAspectRatioPreset.ratio4x3,
         CropAspectRatioPreset.ratio16x9
       ],
-      
+
       // androidUiSettings: AndroidUiSettings(
       //     toolbarTitle: 'Cropper',
       //     toolbarColor: Colors.deepOrange,
@@ -70,7 +75,7 @@ class _CameraScreenState extends State<CameraScreen> {
     if (croppedFile != null) {
       // Sử dụng file đã được cắt ở đây
     }
-    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +86,7 @@ class _CameraScreenState extends State<CameraScreen> {
       body: CameraPreview(controller),
       floatingActionButton: FloatingActionButton(
         onPressed: _captureAndCropImage,
-        child: Icon(Icons.camera),
+        child: const Icon(Icons.camera),
       ),
     );
   }

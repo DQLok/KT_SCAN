@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:kt_scan_text/objects/list_bill_status.dart';
-import 'package:kt_scan_text/objects/text_group.dart';
 import 'package:kt_scan_text/utils/utils.dart';
 import 'package:kt_scan_text/views/result_filter/widgets/detail_result_filter.dart';
 
@@ -62,7 +61,7 @@ class _CardResultFilterState extends State<CardResultFilter> {
         color: Colors.white,
         child: Container(
           padding: const EdgeInsets.all(5),
-          decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)),color: Colors.white),
+          decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)),color: Colors.white),
           child: Column(
             children: [
               Row(
@@ -118,11 +117,11 @@ class _CardResultFilterState extends State<CardResultFilter> {
                               image:
                                   DecorationImage(image: FileImage(fileImge))),
                         )
-                      : IntrinsicWidth(
+                      : const IntrinsicWidth(
                           child: Icon(Icons.photo_size_select_actual_rounded))
                 ],
               ),
-              Row(mainAxisAlignment: MainAxisAlignment.end,children: [
+              const Row(mainAxisAlignment: MainAxisAlignment.end,children: [
                 Text("Nhấn để xem chi tiết ->",style: TextStyle(color: Colors.redAccent,fontSize: 10),)
               ],)
             ],
