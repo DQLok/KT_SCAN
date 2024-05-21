@@ -71,9 +71,20 @@ class _CameraCustomerState extends State<CameraCustomer> {
 
   Future getImage(ImageSource source) async {
     setState(() {
-      imgPicker = null;
+      imgPicker = ImagePicker();
     });
-    // final pickedfile = await imgPicker!.pickImage(source: source);
+    final pickedfile = await imgPicker!.pickImage(source: source);
+    if (pickedfile != null) {
+      if (pickedfile.path.isNotEmpty) {
+        // ignore: use_build_context_synchronously
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ScanTextGg(
+                      xFile: pickedfile,
+                    )));
+      }
+    }
   }
 
   @override
@@ -141,13 +152,18 @@ class _CameraCustomerState extends State<CameraCustomer> {
                     children: [
                       SizedBox(
                         child: IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.photo_size_select_actual_rounded)),
+                            onPressed: () {
+                              getImage(ImageSource.gallery);
+                            },
+                            icon: const Icon(
+                                Icons.photo_size_select_actual_rounded)),
                       ),
                       IconButton(
-                          onPressed: () {
-                            takeAPicture();
-                          },
+                          onPressed: cameraController == null
+                              ? null
+                              : () {
+                                  takeAPicture();
+                                },
                           icon: const CircleAvatar(
                             radius: 30,
                             backgroundColor: Colors.redAccent,
@@ -174,7 +190,8 @@ class _CameraCustomerState extends State<CameraCustomer> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => const HomePage()));
+                                          builder: (context) =>
+                                              const HomePage()));
                                 },
                                 child: const Text(
                                   "Trở về Trang chủ",

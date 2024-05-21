@@ -58,6 +58,9 @@ class _ScanTextGgState extends State<ScanTextGg> {
           fileImage: widget.xFile,
           saveData: saveDataPreference,
           viewDetail: viewDetailScan,
+          listTextGroup: listTextGroupBlocks,
+          listKeyValues: listKeyValues,
+          listStandardAngle: listStandardAngle,
         ),
       ]),
     );
@@ -241,15 +244,40 @@ class _ScanTextGgState extends State<ScanTextGg> {
 
   List<TextGroup> getValueWithKey(KeyValueFilter key, List<TextGroup> values) {
     return values
-        .where((el) =>
-            key.keyTG.index != el.index &&
-            ((key.keyTG.conrnerPoints.pointRT.y - el.conrnerPoints.pointRT.y)
-                        .abs() <
-                    10 ||
-                (key.keyTG.conrnerPoints.pointRB.y - el.conrnerPoints.pointRB.y)
-                        .abs() <
-                    10))
+        .where(
+            (el) => key.keyTG.index != el.index && (checkCornerValue(key, el)))
         .toList();
+  }
+
+  bool checkCornerValue(KeyValueFilter key, TextGroup value) {
+    List<int> keyY = [
+      key.keyTG.conrnerPoints.pointLT.y,
+      key.keyTG.conrnerPoints.pointRT.y,
+      key.keyTG.conrnerPoints.pointRB.y,
+      key.keyTG.conrnerPoints.pointLB.y
+    ];
+    keyY.sort(
+      (a, b) => a.compareTo(b),
+    );
+    //---------
+    List<int> valY = [
+      value.conrnerPoints.pointLT.y,
+      value.conrnerPoints.pointRT.y,
+      value.conrnerPoints.pointRB.y,
+      value.conrnerPoints.pointLB.y
+    ];
+    valY.sort(
+      (a, b) => a.compareTo(b),
+    );
+    if ((keyY.last - valY.first).abs() <= 10
+        // ||
+        // (keyY.first - valY.last).abs() <= 10 ||
+        // (keyY.last - valY.first).abs() <= 10 ||
+        // (keyY.last - valY.first).abs() <= 10
+        ) {
+      return true;
+    }
+    return false;
   }
   //-------------------------------------------------------------------------
 
@@ -271,11 +299,12 @@ class _ScanTextGgState extends State<ScanTextGg> {
                                 IntrinsicWidth(
                                   child: Container(
                                     decoration: BoxDecoration(
-                                        border:
-                                            Border.all(color: Colors.blueAccent)),
+                                        border: Border.all(
+                                            color: Colors.blueAccent)),
                                     child: Text(
                                       "${listKeyValues.elementAt(index).keyTG.index}: ${listKeyValues.elementAt(index).keyTG.text}",
-                                      style: const TextStyle(color: Colors.blue,fontSize: 10),
+                                      style: const TextStyle(
+                                          color: Colors.blue, fontSize: 10),
                                     ),
                                   ),
                                 ),
@@ -292,8 +321,9 @@ class _ScanTextGgState extends State<ScanTextGg> {
                                                   .valueTG
                                                   .length,
                                               (indexChild) => Container(
-                                                    margin: const EdgeInsets.only(
-                                                        left: 20),
+                                                    margin:
+                                                        const EdgeInsets.only(
+                                                            left: 20),
                                                     decoration: BoxDecoration(
                                                         border: Border.all(
                                                             color: Colors
@@ -305,7 +335,8 @@ class _ScanTextGgState extends State<ScanTextGg> {
                                                           .elementAt(indexChild)
                                                           .text,
                                                       style: const TextStyle(
-                                                          color: Colors.blue,fontSize: 10),
+                                                          color: Colors.blue,
+                                                          fontSize: 10),
                                                     ),
                                                   )),
                                         ),
@@ -325,7 +356,7 @@ class _ScanTextGgState extends State<ScanTextGg> {
       ListBillStatus listBillStatus =
           ListBillStatus(status: "", listInforBill: []);
       if (value.isNotEmpty) {
-        try {          
+        try {
           listBillStatus = ListBillStatus.fromJson(jsonDecode(value));
         } catch (e) {
           // appPreference.clearAll();
@@ -341,7 +372,8 @@ class _ScanTextGgState extends State<ScanTextGg> {
         } else {
           pathImage = "";
         }
-        listInforBill.add(InforBill(pathIamge: pathImage,listKeyValueFilter: listKeyValues));
+        listInforBill.add(
+            InforBill(pathIamge: pathImage, listKeyValueFilter: listKeyValues));
         //----
         ListBillStatus newListBillStatus =
             ListBillStatus(status: "ok", listInforBill: listInforBill);
@@ -353,7 +385,11 @@ class _ScanTextGgState extends State<ScanTextGg> {
       //------
       // ignore: use_build_context_synchronously
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => ResultScan(pathIamge: pathImage,)));
+          context,
+          MaterialPageRoute(
+              builder: (context) => ResultScan(
+                    pathIamge: pathImage,
+                  )));
     }
   }
 

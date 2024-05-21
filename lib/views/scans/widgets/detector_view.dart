@@ -1,28 +1,31 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
+import 'package:kt_scan_text/objects/text_group.dart';
 import 'package:kt_scan_text/views/scans/widgets/camera_view.dart';
 import 'package:kt_scan_text/views/scans/widgets/gallery_view.dart';
 
 enum DetectorViewMode { liveFeed, gallery }
 
 class DetectorView extends StatefulWidget {
-  const DetectorView({
-    super.key,
-    required this.title,
-    required this.onImage,
-    this.customPaint,
-    this.text,
-    this.blocks,
-    this.initialDetectionMode = DetectorViewMode.liveFeed,
-    this.initialCameraLensDirection = CameraLensDirection.back,
-    this.onCameraFeedReady,
-    this.onDetectorViewModeChanged,
-    this.onCameraLensDirectionChanged,
-    required this.fileImage,
-    required this.saveData,
-    required this.viewDetail
-  });
+  const DetectorView(
+      {super.key,
+      required this.title,
+      required this.onImage,
+      this.customPaint,
+      this.text,
+      this.blocks,
+      this.initialDetectionMode = DetectorViewMode.liveFeed,
+      this.initialCameraLensDirection = CameraLensDirection.back,
+      this.onCameraFeedReady,
+      this.onDetectorViewModeChanged,
+      this.onCameraLensDirectionChanged,
+      required this.fileImage,
+      required this.saveData,
+      required this.viewDetail,
+      required this.listTextGroup,
+      required this.listKeyValues,
+      required this.listStandardAngle});
 
   final String title;
   final CustomPaint? customPaint;
@@ -37,7 +40,10 @@ class DetectorView extends StatefulWidget {
   final XFile fileImage;
   final Function() saveData;
   final Function() viewDetail;
-
+  //----
+  final List<TextGroup> listTextGroup;
+  final List<KeyValueFilter> listKeyValues;
+  final List<TextGroup> listStandardAngle;
 
   @override
   State<DetectorView> createState() => _DetectorViewState();
@@ -72,6 +78,9 @@ class _DetectorViewState extends State<DetectorView> {
             fileImage: widget.fileImage,
             saveData: widget.saveData,
             viewDetail: widget.viewDetail,
+            listTextGroup: widget.listTextGroup,
+            listKeyValues: widget.listKeyValues,
+            listStandardAngle: widget.listStandardAngle,
           );
   }
 

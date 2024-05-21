@@ -6,20 +6,24 @@ import 'package:flutter/material.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:kt_scan_text/objects/text_group.dart';
 import 'package:kt_scan_text/views/result_filter/widgets/camera_customer.dart';
+import 'package:kt_scan_text/views/result_filter/widgets/default_data_scan.dart';
 
 class GalleryView extends StatefulWidget {
-  const GalleryView({
-    super.key,
-    required this.title,
-    this.text,
-    this.blocks,
-    required this.onImage,
-    required this.onDetectorViewModeChanged,
-    required this.fileImage,
-    required this.saveData,
-    required this.viewDetail,
-  });
+  const GalleryView(
+      {super.key,
+      required this.title,
+      this.text,
+      this.blocks,
+      required this.onImage,
+      required this.onDetectorViewModeChanged,
+      required this.fileImage,
+      required this.saveData,
+      required this.viewDetail,
+      required this.listTextGroup,
+      required this.listKeyValues,
+      required this.listStandardAngle});
 
   final String title;
   final String? text;
@@ -29,6 +33,10 @@ class GalleryView extends StatefulWidget {
   final XFile fileImage;
   final Function() saveData;
   final Function() viewDetail;
+  //----
+  final List<TextGroup> listTextGroup;
+  final List<KeyValueFilter> listKeyValues;
+  final List<TextGroup> listStandardAngle;
 
   @override
   State<GalleryView> createState() => _GalleryViewState();
@@ -41,10 +49,6 @@ class _GalleryViewState extends State<GalleryView> {
   @override
   void initState() {
     super.initState();
-
-    // _imagePicker = ImagePicker();
-    // _getImage(ImageSource.camera);
-
     processFilePicture();
   }
 
@@ -92,7 +96,6 @@ class _GalleryViewState extends State<GalleryView> {
                     const Expanded(child: SizedBox())
                   ],
                 ),
-                
                 _image != null
                     ? SingleChildScrollView(
                         child: Column(
@@ -103,18 +106,19 @@ class _GalleryViewState extends State<GalleryView> {
                                   image: DecorationImage(
                                       image: FileImage(_image!),
                                       fit: BoxFit.fill)),
-                              height:
-                                  MediaQuery.of(context).size.height / 1.5,
+                              height: MediaQuery.of(context).size.height / 1.8,
                               width: MediaQuery.of(context).size.width / 1.3,
                               alignment: Alignment.center,
                               child: Stack(
                                 fit: StackFit.expand,
                                 children: <Widget>[
                                   // Image.file(_image!),
-                                  widget.blocks == null ? const SizedBox(): widget.blocks!
+                                  widget.blocks == null
+                                      ? const SizedBox()
+                                      : widget.blocks!
                                 ],
                               ),
-                            ) ,
+                            ),
                             TextButton(
                                 onPressed: () {
                                   widget.viewDetail();
@@ -126,6 +130,31 @@ class _GalleryViewState extends State<GalleryView> {
                                       fontSize: 10,
                                       fontWeight: FontWeight.normal,
                                       fontStyle: FontStyle.italic),
+                                )),
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => DefaultDataScan(
+                                                pathIamge: _image != null
+                                                    ? _image!.path
+                                                    : "",
+                                                listTextGroup:
+                                                    widget.listTextGroup,
+                                                listKeyValues:
+                                                    widget.listKeyValues,
+                                                listStandardAngle:
+                                                    widget.listStandardAngle,
+                                              )));
+                                },
+                                child: const Text(
+                                  "default",
+                                  style: TextStyle(
+                                      color: Colors.green,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.normal,
+                                      fontStyle: FontStyle.italic),
                                 ))
                           ],
                         ),
@@ -133,17 +162,15 @@ class _GalleryViewState extends State<GalleryView> {
                     : const Icon(
                         Icons.image,
                         size: 200,
-                      ) 
-                      
+                      )
               ],
             ),
           ),
-          
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
-                flex: 2,
+                  flex: 2,
                   child: ElevatedButton(
                       onPressed: () {
                         Navigator.push(
@@ -158,20 +185,20 @@ class _GalleryViewState extends State<GalleryView> {
                       ))),
               const Expanded(child: SizedBox()),
               Expanded(
-                flex: 2,
+                  flex: 2,
                   child: ElevatedButton(
-                onPressed: () {
-                  widget.saveData();
-                },
-                style: ButtonStyle(
-                    backgroundColor:
-                        WidgetStateProperty.all(Colors.redAccent)),
-                child: const Text(
-                  "Hoàn thành",
-                  style: TextStyle(
-                      color: Colors.white, fontStyle: FontStyle.normal),
-                ),
-              ))
+                    onPressed: () {
+                      widget.saveData();
+                    },
+                    style: ButtonStyle(
+                        backgroundColor:
+                            WidgetStateProperty.all(Colors.redAccent)),
+                    child: const Text(
+                      "Hoàn thành",
+                      style: TextStyle(
+                          color: Colors.white, fontStyle: FontStyle.normal),
+                    ),
+                  ))
             ],
           )
         ],
@@ -186,9 +213,7 @@ class _GalleryViewState extends State<GalleryView> {
   }
 
   Future _getImage(ImageSource source) async {
-    // setState(() {
     _image = null;
-    // });
     final pickedFile = await _imagePicker?.pickImage(
       source: source,
     );
@@ -232,8 +257,8 @@ class _GalleryViewState extends State<GalleryView> {
       });
       inputImage = InputImage.fromFilePath(croppedFile.path);
     } else {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const CameraCustomer()));
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const CameraCustomer()));
     }
     widget.onImage(inputImage);
   }

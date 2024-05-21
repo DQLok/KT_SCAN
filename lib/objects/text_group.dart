@@ -5,7 +5,7 @@ class TextGroup {
 
   TextGroup(
       {required this.index, required this.conrnerPoints, required this.text});
-  
+
   factory TextGroup.fromJson(Map<String, dynamic> json) => TextGroup(
         index: json["index"],
         conrnerPoints: ConrnerPoints.fromJson(json["conrnerPoints"]),
@@ -71,6 +71,11 @@ class Point {
         "x": x,
         "y": y,
       };
+
+  @override
+  String toString() {
+    return ("($x, $y)");
+  }
 }
 
 Point comparePointLeft(Point pointDefault, Point pointLT, Point pointLB) {
@@ -132,7 +137,8 @@ class KeyValueFilter {
 
   factory KeyValueFilter.fromJson(Map<String, dynamic> json) => KeyValueFilter(
         keyTG: TextGroup.fromJson(json["keyTG"]),
-        valueTG: List<TextGroup>.from(json["valueTG"].map((x) => TextGroup.fromJson(x))),
+        valueTG: List<TextGroup>.from(
+            json["valueTG"].map((x) => TextGroup.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
