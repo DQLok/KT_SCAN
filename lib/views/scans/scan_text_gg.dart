@@ -231,10 +231,26 @@ class _ScanTextGgState extends State<ScanTextGg> {
 
       listKeyValueWithInfor.add(listChild);
     }
+    //version 1: value & infor => key-value
     for (var element in listKeyValueWithInfor) {
       listKeyValues.add(
           KeyValueFilter(keyTG: element.first, valueTG: element.sublist(1)));
     }
+    //--------------------------
+    //version 2(v3)
+    // for (var element in listKeyValues) {
+    //   List<TextGroup> listValues = listFilterValueInfors
+    //       .where((el) => checkCornerValue(element, el))
+    //       .toList();
+    //   if (listValues.isNotEmpty) {
+    //     element.valueTG.addAll(listValues);
+    //   }
+    //   element.valueTG.sort(
+    //     (a, b) =>
+    //         a.conrnerPoints.pointLT.x.compareTo(b.conrnerPoints.pointLT.x),
+    //   );
+    // }
+    //------------------
 
     //---Step6: final scan----
     listKeyValues.sort(
@@ -243,6 +259,18 @@ class _ScanTextGgState extends State<ScanTextGg> {
   }
 
   List<TextGroup> getValueWithKey(KeyValueFilter key, List<TextGroup> values) {
+    //version 1:
+    // return values
+    //     .where((el) =>
+    //         key.keyTG.index != el.index &&
+    //         ((key.keyTG.conrnerPoints.pointRT.y - el.conrnerPoints.pointRT.y)
+    //                     .abs() <
+    //                 10 ||
+    //             (key.keyTG.conrnerPoints.pointRB.y - el.conrnerPoints.pointRB.y)
+    //                     .abs() <
+    //                 10))
+    //     .toList();
+    //version 2:
     return values
         .where(
             (el) => key.keyTG.index != el.index && (checkCornerValue(key, el)))
@@ -269,12 +297,10 @@ class _ScanTextGgState extends State<ScanTextGg> {
     valY.sort(
       (a, b) => a.compareTo(b),
     );
-    if ((keyY.last - valY.first).abs() <= 10
-        // ||
-        // (keyY.first - valY.last).abs() <= 10 ||
-        // (keyY.last - valY.first).abs() <= 10 ||
-        // (keyY.last - valY.first).abs() <= 10
-        ) {
+    if ((keyY.first - valY.first).abs() <= 10 ||
+        (keyY.first - valY.last).abs() <= 10 ||
+        (keyY.last - valY.first).abs() <= 10 ||
+        (keyY.last - valY.last).abs() <= 10) {
       return true;
     }
     return false;

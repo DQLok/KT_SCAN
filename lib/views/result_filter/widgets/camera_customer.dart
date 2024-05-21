@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:kt_scan_text/main.dart';
 import 'package:kt_scan_text/views/home/home.dart';
 import 'package:kt_scan_text/views/result_filter/result_filter.dart';
+import 'package:kt_scan_text/views/scan_doc.dart/scan_doc.dart';
 import 'package:kt_scan_text/views/scans/scan_text_gg.dart';
 
 class CameraCustomer extends StatefulWidget {
@@ -142,7 +143,22 @@ class _CameraCustomerState extends State<CameraCustomer> {
                           fontWeight: FontWeight.bold),
                     ),
                   ),
-                  const Expanded(child: SizedBox())
+                  Expanded(
+                      child: Platform.isAndroid
+                          ? IconButton(
+                              alignment: Alignment.centerRight,
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ScanDocPage()));
+                              },
+                              icon: const Icon(
+                                Icons.document_scanner_outlined,
+                                color: Colors.white,
+                              ))
+                          : const SizedBox())
                 ],
               ),
               Column(
@@ -181,46 +197,41 @@ class _CameraCustomerState extends State<CameraCustomer> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Expanded(
-                          flex: 2,
-                          child: Container(
-                            alignment: Alignment.centerLeft,
-                            child: TextButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const HomePage()));
-                                },
-                                child: const Text(
-                                  "Trở về Trang chủ",
-                                  style: TextStyle(
-                                      color: Colors.redAccent,
-                                      fontStyle: FontStyle.normal),
-                                )),
-                          )),
-                      const Expanded(child: Spacer()),
-                      Expanded(
-                          flex: 2,
-                          child: Container(
-                            alignment: Alignment.centerRight,
-                            child: TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const ResultFilterPage()));
-                              },
-                              child: Text(
-                                "Danh sách bill".toUpperCase(),
-                                style: const TextStyle(
-                                    color: Colors.redAccent,
-                                    fontStyle: FontStyle.normal),
-                              ),
-                            ),
-                          ))
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        child: TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const HomePage()));
+                            },
+                            child: const Text(
+                              "Trở về Trang chủ",
+                              style: TextStyle(
+                                  color: Colors.redAccent,
+                                  fontStyle: FontStyle.normal),
+                            )),
+                      ),
+                      const Spacer(),
+                      Container(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const ResultFilterPage()));
+                          },
+                          child: Text(
+                            "Danh sách bill".toUpperCase(),
+                            style: const TextStyle(
+                                color: Colors.redAccent,
+                                fontStyle: FontStyle.normal),
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ],
