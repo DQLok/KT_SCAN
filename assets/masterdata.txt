@@ -1,0 +1,919 @@
+{
+  "companies": [
+    {
+      "id": 1,
+      "name": "CÔNG TY CỔ PHẦN PIZZA NGON",
+      "shortName": "PIZZA NGON",
+      "lang": {
+        "vn": "CÔNG TY CỔ PHẦN PIZZA NGON",
+        "en": "PIZZA NGON"
+      },
+      "status": "active"
+    }
+  ],
+  "brands": [
+    {
+      "id": 1,
+      "companyId": 1,
+      "name": "The Pizza Company",
+      "shortName": "TPC",
+      "lang": {
+        "vn": "The Pizza Company",
+        "en": "The Pizza Company"
+      },
+      "status": "active"
+    }
+  ],
+  "attributes": [
+    {
+      "brandId": 1,
+      "id": 1,
+      "name": "Size",
+      "lang": {
+        "vn": "Kích thước",
+        "en": "Size"
+      },
+      "numering": 0,
+      "status": "active"
+    },
+    {
+      "brandId": 1,
+      "id": 2,
+      "name": "Dough",
+      "lang": {
+        "vn": "Đế",
+        "en": "Dough"
+      },
+      "numering": 1,
+      "status": "active"
+    }
+  ],
+  "attributeOptions": [
+    {
+      "id": 1,
+      "attributeId": 1,
+      "name": "Small",
+      "shortName": "S",
+      "lang": {
+        "vn": "Nhỏ 6\"",
+        "en": "Small 6\""
+      },
+      "numering": 0,
+      "status": "active"
+    },
+    {
+      "id": 2,
+      "attributeId": 1,
+      "name": "Medium",
+      "shortName": "M",
+      "lang": {
+        "vn": "Vừa 9\"",
+        "en": "Medium 9\""
+      },
+      "numering": 1,
+      "status": "active"
+    },
+    {
+      "id": 3,
+      "attributeId": 1,
+      "name": "Large",
+      "shortName": "L",
+      "lang": {
+        "vn": "Lớn 12\"",
+        "en": "Large 12\""
+      },
+      "numering": 2,
+      "status": "active"
+    },
+    {
+      "id": 4,
+      "attributeId": 2,
+      "name": "Pan",
+      "shortName": "P",
+      "lang": {
+        "vn": "Dày",
+        "en": "Pan"
+      },
+      "numering": 0,
+      "status": "active"
+    },
+    {
+      "id": 5,
+      "attributeId": 2,
+      "name": "Crispy Thin",
+      "shortName": "CT",
+      "lang": {
+        "vn": "Mỏng giòn",
+        "en": "Crispy Thin"
+      },
+      "numering": 1,
+      "status": "active"
+    },
+    {
+      "id": 6,
+      "attributeId": 2,
+      "name": "Extreme Cheese",
+      "shortName": "CC",
+      "lang": {
+        "vn": "Viền phô mai",
+        "en": "Extreme Cheese"
+      },
+      "numering": 2,
+      "status": "active"
+    },
+    {
+      "id": 7,
+      "attributeId": 2,
+      "name": "Extreme Sausage and Cheese",
+      "shortName": "2C",
+      "lang": {
+        "vn": "Viền phô mai xúc xích",
+        "en": "Extreme Sausage and Cheese"
+      },
+      "numering": 3,
+      "status": "active"
+    }
+  ],
+  "menus": [
+    {
+      "brandId": 1,
+      "id": 1,
+      "parent": 0,
+      "depth": 1,
+      "name": "Pizza",
+      "numering": 0,
+      "lang": {
+        "vn": "Pizza",
+        "en": "Pizza"
+      },
+      "objectRef": "category",
+      "objectIds": "1",
+      "status": "active"
+    },
+    {
+      "brandId": 1,
+      "id": 2,
+      "parent": 1,
+      "depth": 2,
+      "name": "Gourmet Seafood",
+      "numering": 0,
+      "lang": {
+        "vn": "Hải Sản Cao Cấp",
+        "en": "Gourmet Seafood"
+      },
+      "objectRef": "category",
+      "objectIds": "2",
+      "status": "active"
+    },
+    {
+      "brandId": 1,
+      "id": 3,
+      "parent": 0,
+      "depth": 1,
+      "name": "Salad",
+      "numering": 1,
+      "lang": {
+        "vn": "Salad",
+        "en": "Salad"
+      },
+      "objectRef": "category",
+      "objectIds": "3",
+      "status": "active"
+    },
+    {
+      "brandId": 1,
+      "id": 4,
+      "parent": 0,
+      "depth": 1,
+      "name": "Pasta",
+      "numering": 2,
+      "lang": {
+        "vn": "Mỳ Ý",
+        "en": "Pasta"
+      },
+      "objectRef": "category",
+      "objectIds": "4",
+      "status": "active"
+    }
+  ],
+  "categories": [
+    {
+      "brandId": 1,
+      "id": 1,
+      "name": "Pizza",
+      "parent": 0,
+      "depth": 1,
+      "numering": 0,
+      "lang": {
+        "vn": "Pizza",
+        "en": "Pizza"
+      },
+      "status": "active"
+    },
+    {
+      "brandId": 1,
+      "id": 2,
+      "name": "Gourmet Seafood",
+      "parent": 1,
+      "depth": 2,
+      "numering": 0,
+      "lang": {
+        "vn": "Gourmet Seafood",
+        "en": "Hải Sản Cao Cấp"
+      },
+      "status": "active"
+    },
+    {
+      "brandId": 1,
+      "id": 3,
+      "name": "Salad",
+      "parent": 0,
+      "depth": 1,
+      "numering": 1,
+      "lang": {
+        "vn": "Salad",
+        "en": "Salad"
+      },
+      "status": "active"
+    },
+    {
+      "brandId": 1,
+      "id": 4,
+      "name": "Pasta",
+      "parent": 0,
+      "depth": 1,
+      "numering": 2,
+      "lang": {
+        "vn": "Mỳ Ý",
+        "en": "Pasta"
+      },
+      "status": "active"
+    }
+  ],
+  "items": [
+    {
+      "brandId": 1,
+      "id": 1,
+      "caregoryId": 2,
+      "name": "Seafood Pesto",
+      "type": "alacart",
+      "mType": "product",
+      "numering": 0,
+      "lang": {
+        "vn": "Pizza Hải Sản Pesto Xanh",
+        "en": "Seafood Pesto"
+      },
+      "status": "active",
+      "isAttribute": true
+    },
+    {
+      "brandId": 1,
+      "id": 2,
+      "caregoryId": 3,
+      "name": "Golden Salad",
+      "type": "alacart",
+      "mType": "product",
+      "numering": 0,
+      "lang": {
+        "vn": "Salad Trộn Dầu Giấm",
+        "en": "Golden Salad"
+      },
+      "status": "active",
+      "isAttribute": true
+    },
+    {
+      "brandId": 1,
+      "id": 3,
+      "caregoryId": 4,
+      "name": "Pasta Shrimp Rose",
+      "type": "alacart",
+      "mType": "product",
+      "numering": 0,
+      "lang": {
+        "vn": "Mỳ Ý Tôm Sốt Kem Cà Chua",
+        "en": "Pasta shrimp rose"
+      },
+      "status": "active",
+      "isAttribute": false
+    }
+  ],
+  "itemDetails": [
+    {
+      "id": 1,
+      "itemId": 1,
+      "name": "Seafood Pesto-P-S",
+      "code": "",
+      "posCode": "1000260",
+      "erpCode": "",
+      "price": 169000,
+      "details": {
+        "attributeOptions": [
+          {
+            "attributeId": 1,
+            "optionId": 1
+          },
+          {
+            "attributeId": 2,
+            "optionId": 4
+          }
+        ],
+        "isDefault": true
+      }
+    },
+    {
+      "id": 2,
+      "itemId": 1,
+      "name": "Seafood Pesto-P-M",
+      "code": "",
+      "posCode": "1000234",
+      "erpCode": "",
+      "price": 249000,
+      "details": {
+        "attributeOptions": [
+          {
+            "attributeId": 1,
+            "optionId": 2
+          },
+          {
+            "attributeId": 2,
+            "optionId": 4
+          }
+        ],
+        "isDefault": true
+      }
+    },
+    {
+      "id": 3,
+      "itemId": 1,
+      "name": "Seafood Pesto-CT-M",
+      "code": "",
+      "posCode": "1000232",
+      "erpCode": "",
+      "price": 249000,
+      "details": {
+        "attributeOptions": [
+          {
+            "attributeId": 1,
+            "optionId": 2
+          },
+          {
+            "attributeId": 2,
+            "optionId": 5
+          }
+        ],
+        "isDefault": false
+      }
+    },
+    {
+      "id": 4,
+      "itemId": 1,
+      "name": "Seafood Pesto-CC-M",
+      "code": "",
+      "posCode": "1000236",
+      "erpCode": "",
+      "price": 299000,
+      "details": {
+        "attributeOptions": [
+          {
+            "attributeId": 1,
+            "optionId": 2
+          },
+          {
+            "attributeId": 2,
+            "optionId": 6
+          }
+        ],
+        "isDefault": false
+      }
+    },
+    {
+      "id": 5,
+      "itemId": 1,
+      "name": "Seafood Pesto-2C-M",
+      "code": "",
+      "posCode": "1040274",
+      "erpCode": "",
+      "price": 349000,
+      "details": {
+        "attributeOptions": [
+          {
+            "attributeId": 1,
+            "optionId": 2
+          },
+          {
+            "attributeId": 2,
+            "optionId": 7
+          }
+        ],
+        "isDefault": false
+      }
+    },
+    {
+      "id": 6,
+      "itemId": 1,
+      "name": "Seafood Pesto-P-L",
+      "code": "",
+      "posCode": "1000233",
+      "erpCode": "",
+      "price": 359000,
+      "details": {
+        "attributeOptions": [
+          {
+            "attributeId": 1,
+            "optionId": 3
+          },
+          {
+            "attributeId": 2,
+            "optionId": 4
+          }
+        ],
+        "isDefault": true
+      }
+    },
+    {
+      "id": 7,
+      "itemId": 1,
+      "name": "Seafood Pesto-CT-L",
+      "code": "",
+      "posCode": "1000235",
+      "erpCode": "",
+      "price": 359000,
+      "details": {
+        "attributeOptions": [
+          {
+            "attributeId": 1,
+            "optionId": 3
+          },
+          {
+            "attributeId": 2,
+            "optionId": 5
+          }
+        ],
+        "isDefault": false
+      }
+    },
+    {
+      "id": 8,
+      "itemId": 1,
+      "name": "Seafood Pesto-CC-L",
+      "code": "",
+      "posCode": "1000237",
+      "erpCode": "",
+      "price": 429000,
+      "details": {
+        "attributeOptions": [
+          {
+            "attributeId": 1,
+            "optionId": 3
+          },
+          {
+            "attributeId": 2,
+            "optionId": 6
+          }
+        ],
+        "isDefault": false
+      }
+    },
+    {
+      "id": 9,
+      "itemId": 1,
+      "name": "Seafood Pesto-2C-L",
+      "code": "",
+      "posCode": "1000239",
+      "erpCode": "",
+      "price": 499000,
+      "details": {
+        "attributeOptions": [
+          {
+            "attributeId": 1,
+            "optionId": 3
+          },
+          {
+            "attributeId": 2,
+            "optionId": 7
+          }
+        ],
+        "isDefault": false
+      }
+    },
+    {
+      "id": 10,
+      "itemId": 2,
+      "name": "Golden Sald-M",
+      "code": "",
+      "posCode": "",
+      "erpCode": "",
+      "price": 79000,
+      "details": {
+        "attributeOptions": [
+          {
+            "attributeId": 1,
+            "optionId": 3
+          }
+        ],
+        "isDefault": false
+      }
+    },
+    {
+      "id": 11,
+      "itemId": 2,
+      "name": "Golden Sald-L",
+      "code": "",
+      "posCode": "",
+      "erpCode": "",
+      "price": 149000,
+      "details": {
+        "attributeOptions": [
+          {
+            "attributeId": 1,
+            "optionId": 2
+          }
+        ],
+        "isDefault": true
+      }
+    },
+    {
+      "id": 11,
+      "itemId": 3,
+      "name": "Pasta Shrimp Rose",
+      "code": "",
+      "posCode": "",
+      "erpCode": "",
+      "price": 139000,
+      "details": null
+    }
+  ],
+  "itemAttributeDetails": [
+    {
+      "id": 1,
+      "itemId": 1,
+      "attributes": [
+        {
+          "id": 1,
+          "name": "Size",
+          "numering": 0,
+          "isPreSelected": true,
+          "options": [
+            {
+              "id": 1,
+              "name": "Small",
+              "numering": 0
+            },
+            {
+              "id": 2,
+              "name": "Medium",
+              "numering": 1
+            },
+            {
+              "id": 3,
+              "name": "Large",
+              "numering": 2
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Dough",
+          "numering": 1,
+          "isPreSelected": false,
+          "options": [
+            {
+              "id": 4,
+              "name": "Pan",
+              "numering": 0
+            },
+            {
+              "id": 5,
+              "name": "Crispy Thin",
+              "numering": 1
+            },
+            {
+              "id": 6,
+              "name": "Extreme Cheese",
+              "numering": 2
+            },
+            {
+              "id": 7,
+              "name": "Extreme Sausage and Cheese",
+              "numering": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "itemId": 2,
+      "attributes": [
+        {
+          "id": 1,
+          "name": "Size",
+          "numering": 0,
+          "isPreSelected": true,
+          "options": [
+            {
+              "id": 2,
+              "name": "Medium",
+              "numering": 0
+            },
+            {
+              "id": 3,
+              "name": "Large",
+              "numering": 1
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "dataMappingChannels": [
+    {
+      "id": 1,
+      "name": "Seafood Pesto-P-S",
+      "gf": {
+        "id": "126453271",
+        "name": "Pizza Hải Sản Pesto Xanh",
+        "price": 185000,
+        "addons": {
+          "name": "Đế Dày - cỡ Nhỏ",
+          "price": 0
+        }
+      },
+      "spf": {},
+      "posCode": "1000260",
+      "price": 169000
+    },
+    {
+      "id": 2,
+      "name": "Seafood Pesto-P-M",
+      "gf": {
+        "id": "145754253",
+        "name": "Pizza Hải Sản Pesto Xanh",
+        "price": 185000,
+        "addons": {
+          "name": "Đế Dày - cỡ Vừa",
+          "price": 90000
+        }
+      },
+      "spf": {},
+      "posCode": "1000234",
+      "price": 249000
+    },
+    {
+      "id": 6,
+      "name": "Seafood Pesto-P-L",
+      "gf": {
+        "id": "183753643",
+        "name": "Pizza Hải Sản Pesto Xanh",
+        "price": 185000,
+        "addons": {
+          "name": "Đế Dày - cỡ Lớn",
+          "price": 200000
+        }
+      },
+      "spf": {},
+      "posCode": "1000233",
+      "price": 359000
+    },
+    {
+      "id": 3,
+      "name": "Seafood Pesto-CT-M",
+      "gf": {
+        "id": "191453742",
+        "name": "Pizza Hải Sản Pesto Xanh",
+        "price": 185000,
+        "addons": {
+          "name": "Đế Mỏng - cỡ Vừa",
+          "price": 90000
+        }
+      },
+      "spf": {},
+      "posCode": "1000232",
+      "price": 249000
+    },
+    {
+      "id": 7,
+      "name": "Seafood Pesto-CT-L",
+      "gf": {
+        "id": "163573638",
+        "name": "Pizza Hải Sản Pesto Xanh",
+        "price": 185000,
+        "addons": {
+          "name": "Đế Mỏng - cỡ Lớn",
+          "price": 200000
+        }
+      },
+      "spf": {},
+      "posCode": "1000235",
+      "price": 359000
+    },
+    {
+      "id": 4,
+      "name": "Seafood Pesto-CC-M",
+      "gf": {
+        "id": "132543851",
+        "name": "Pizza Hải Sản Pesto Xanh",
+        "price": 185000,
+        "addons": {
+          "name": "Đế Đặc Biệt Viền Phô Mai - cỡ Vừa",
+          "price": 140000
+        }
+      },
+      "spf": {},
+      "posCode": "1000236",
+      "price": 299000
+    },
+    {
+      "id": 8,
+      "name": "Seafood Pesto-CC-L",
+      "gf": {
+        "id": "121443876",
+        "name": "Pizza Hải Sản Pesto Xanh",
+        "price": 185000,
+        "addons": {
+          "name": "Đế Đặc Biệt Viền Phô Mai - cỡ Lớn",
+          "price": 270000
+        }
+      },
+      "spf": {},
+      "posCode": "1000237",
+      "price": 429000
+    },
+    {
+      "id": 5,
+      "name": "Seafood Pesto-2C-M",
+      "gf": {
+        "id": "116543974",
+        "name": "Pizza Hải Sản Pesto Xanh",
+        "price": 185000,
+        "addons": {
+          "name": "Đế Đặc Biệt Viền Phô Mai Xúc Xích - Vừa",
+          "price": 190000
+        }
+      },
+      "spf": {},
+      "posCode": "1040274",
+      "price": 349000
+    },
+    {
+      "id": 9,
+      "name": "Seafood Pesto-2C-L",
+      "gf": {
+        "id": "112334334",
+        "name": "Pizza Hải Sản Pesto Xanh",
+        "price": 185000,
+        "addons": {
+          "name": "Đế Đặc Biệt Viền Phô Mai Xúc Xích - Lớn",
+          "price": 340000
+        }
+      },
+      "spf": {},
+      "posCode": "1000239",
+      "price": 499000
+    },
+    {
+      "id": 10,
+      "name": "Double Cheese-P-S",
+      "gf": {
+        "id": "167454794",
+        "name": "Pizza Phô Mai",
+        "price": 139000,
+        "addons": {
+          "name": "Đế Dày - cỡ Nhỏ",
+          "price": 0
+        }
+      },
+      "spf": {},
+      "posCode": "1129567",
+      "price": 119000
+    },
+    {
+      "id": 11,
+      "name": "Double Cheese-P-M",
+      "gf": {
+        "id": "167789794",
+        "name": "Pizza Phô Mai",
+        "price": 139000,
+        "addons": {
+          "name": "Đế Dày - cỡ Vừa",
+          "price": 90000
+        }
+      },
+      "spf": {},
+      "posCode": "1876567",
+      "price": 199000
+    },
+    {
+      "id": 12,
+      "name": "Double Cheese-P-L",
+      "gf": {
+        "id": "167123794",
+        "name": "Pizza Phô Mai",
+        "price": 139000,
+        "addons": {
+          "name": "Đế Dày - cỡ Lớn",
+          "price": 200000
+        }
+      },
+      "spf": {},
+      "posCode": "1857167",
+      "price": 309000
+    },
+    {
+      "id": 13,
+      "name": "Double Cheese-CT-M",
+      "gf": {
+        "id": "167129876",
+        "name": "Pizza Phô Mai",
+        "price": 139000,
+        "addons": {
+          "name": "Đế Mỏng - cỡ Vừa",
+          "price": 90000
+        }
+      },
+      "spf": {},
+      "posCode": "1851234",
+      "price": 199000
+    },
+    {
+      "id": 14,
+      "name": "Double Cheese-CT-L",
+      "gf": {
+        "id": "167124676",
+        "name": "Pizza Phô Mai",
+        "price": 139000,
+        "addons": {
+          "name": "Đế Mỏng - cỡ Lớn",
+          "price": 200000
+        }
+      },
+      "spf": {},
+      "posCode": "1845674",
+      "price": 309000
+    },
+    {
+      "id": 15,
+      "name": "Double Cheese-CC-M",
+      "gf": {
+        "id": "164789676",
+        "name": "Pizza Phô Mai",
+        "price": 139000,
+        "addons": {
+          "name": "Đế Đặc Biệt Viền Phô Mai - cỡ Vừa",
+          "price": 140000
+        }
+      },
+      "spf": {},
+      "posCode": "1843216",
+      "price": 249000
+    },
+    {
+      "id": 16,
+      "name": "Double Cheese-CC-M",
+      "gf": {
+        "id": "164569321",
+        "name": "Pizza Phô Mai",
+        "price": 139000,
+        "addons": {
+          "name": "Đế Đặc Biệt Viền Phô Mai - cỡ Lớn",
+          "price": 270000
+        }
+      },
+      "spf": {},
+      "posCode": "1563321",
+      "price": 379000
+    },
+    {
+      "id": 17,
+      "name": "Double Cheese-2C-M",
+      "gf": {
+        "id": "164569375",
+        "name": "Pizza Phô Mai",
+        "price": 139000,
+        "addons": {
+          "name": "Đế Đặc Biệt Viền Phô Mai Xúc Xích - Vừa",
+          "price": 190000
+        }
+      },
+      "spf": {},
+      "posCode": "1563753",
+      "price": 299000
+    },
+    {
+      "id": 17,
+      "name": "Double Cheese-2C-L",
+      "gf": {
+        "id": "164566925",
+        "name": "Pizza Phô Mai",
+        "price": 139000,
+        "addons": {
+          "name": "Đế Đặc Biệt Viền Phô Mai Xúc Xích - Lớn",
+          "price": 340000
+        }
+      },
+      "spf": {},
+      "posCode": "1564587",
+      "price": 449000
+    }
+  ]
+}

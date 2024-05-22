@@ -26,21 +26,19 @@ class _CardResultFilterState extends State<CardResultFilter> {
   }
 
   checkFileinLocal() async {
-      String path = widget.inforBill.pathIamge;
-      if (path.isNotEmpty) {
-        path = await getLocalPathCache(path);
-        fileImge = File(path);
-        if (fileImge.existsSync()) {
-          checkPathImg = true;
-        } else {
-          checkPathImg = false;
-        }
+    String path = widget.inforBill.pathIamge;
+    if (path.isNotEmpty) {
+      path = await getLocalPathCache(path);
+      fileImge = File(path);
+      if (fileImge.existsSync()) {
+        checkPathImg = true;
       } else {
         checkPathImg = false;
       }
-      setState(() {
-        
-      });
+    } else {
+      checkPathImg = false;
+    }
+    setState(() {});
   }
 
   @override
@@ -61,52 +59,33 @@ class _CardResultFilterState extends State<CardResultFilter> {
         color: Colors.white,
         child: Container(
           padding: const EdgeInsets.all(5),
-          decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)),color: Colors.white),
+          decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(5)),
+              color: Colors.white),
           child: Column(
             children: [
               Row(
                 children: [
                   Expanded(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Column(
-                          children: List.generate(
-                              widget.inforBill.listKeyValueFilter.length > 5
-                                  ? 5
-                                  : widget.inforBill.listKeyValueFilter.length,
-                              (index) => Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        widget.inforBill.listKeyValueFilter
-                                            .elementAt(index)
-                                            .keyTG
-                                            .text,
-                                        overflow: TextOverflow.ellipsis,
-                                        textAlign: TextAlign.start,
-                                      ),
-                                      Text(
-                                        widget.inforBill.listKeyValueFilter
-                                                .elementAt(index)
-                                                .valueTG
-                                                .isEmpty
-                                            ? ""
-                                            : widget
-                                                .inforBill.listKeyValueFilter
-                                                .elementAt(index)
-                                                .valueTG
-                                                .first
-                                                .text,
-                                        overflow: TextOverflow.ellipsis,
-                                        textAlign: TextAlign.start,
-                                      ),
-                                    ],
-                                  )),
-                        )
-                      ],
+                      children: List.generate(
+                          widget.inforBill.listKeyValueFilter.length > 5
+                              ? 5
+                              : widget.inforBill.listKeyValueFilter.length,
+                          (index) => Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    widget.inforBill.listKeyValueFilter
+                                        .elementAt(index)
+                                        .keyTG
+                                        .text,
+                                    overflow: TextOverflow.ellipsis,
+                                    textAlign: TextAlign.start,
+                                  ),
+                                ],
+                              )),
                     ),
                   ),
                   checkPathImg
@@ -118,12 +97,18 @@ class _CardResultFilterState extends State<CardResultFilter> {
                                   DecorationImage(image: FileImage(fileImge))),
                         )
                       : const IntrinsicWidth(
-                          child: Icon(Icons.photo_size_select_actual_rounded))
+                          child: Icon(Icons.photo_size_select_actual_rounded)),
                 ],
               ),
-              const Row(mainAxisAlignment: MainAxisAlignment.end,children: [
-                Text("Nhấn để xem chi tiết ->",style: TextStyle(color: Colors.redAccent,fontSize: 10),)
-              ],)
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    "Nhấn để xem chi tiết ->",
+                    style: TextStyle(color: Colors.redAccent, fontSize: 10),
+                  )
+                ],
+              )
             ],
           ),
         ),

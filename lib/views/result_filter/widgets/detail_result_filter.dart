@@ -96,64 +96,115 @@ class _DetailResultFilterState extends State<DetailResultFilter> {
                         margin: const EdgeInsets.all(5),
                         child: Column(
                           children: List.generate(
-                              widget.listKeyValues.length,
-                              (index) => Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      IntrinsicWidth(
-                                        child: Container(
+                            widget.listKeyValues.length,
+                            (index) => SizedBox(
+                              height: 100,
+                              child: ListView.builder(
+                                itemCount: 1 +
+                                    widget.listKeyValues
+                                        .elementAt(index)
+                                        .valueTG
+                                        .length,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, indexx) {
+                                  List<TextGroup> listChild = [
+                                    widget.listKeyValues.elementAt(index).keyTG,
+                                    ...widget.listKeyValues
+                                        .elementAt(index)
+                                        .valueTG
+                                  ];
+                                  return IntrinsicWidth(
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          margin: const EdgeInsets.only(
+                                              top: 10, right: 20, bottom: 10),
+                                          padding: const EdgeInsets.all(10),
                                           decoration: BoxDecoration(
                                               border: Border.all(
                                                   color: Colors.blueAccent)),
                                           child: Text(
-                                            widget.listKeyValues.elementAt(index).keyTG.text,
-                                            style:
-                                                const TextStyle(color: Colors.blue),
+                                            listChild.elementAt(indexx).text,
+                                            style: const TextStyle(
+                                                color: Colors.blue),
                                           ),
                                         ),
-                                      ),
-                                      widget.listKeyValues
-                                              .elementAt(index)
-                                              .valueTG
-                                              .isEmpty
-                                          ? const SizedBox()
-                                          : Expanded(
-                                              flex: 1,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                children: List.generate(
-                                                    widget.listKeyValues
-                                                        .elementAt(index)
-                                                        .valueTG
-                                                        .length,
-                                                    (indexChild) => Container(
-                                                          margin:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                                  left: 20),
-                                                          decoration: BoxDecoration(
-                                                              border: Border.all(
-                                                                  color: Colors
-                                                                      .blueAccent)),
-                                                          child: Text(
-                                                            widget.listKeyValues
-                                                                .elementAt(
-                                                                    index)
-                                                                .valueTG
-                                                                .elementAt(
-                                                                    indexChild)
-                                                                .text,
-                                                            style: const TextStyle(
-                                                                color: Colors
-                                                                    .blue),
-                                                          ),
-                                                        )),
-                                              ),
-                                            ),
-                                    ],
-                                  )),
+                                        IconButton(
+                                          onPressed: () {},
+                                          icon: Icon(Icons.edit),
+                                        ),
+                                        IconButton(
+                                            onPressed: () {},
+                                            icon: Icon(Icons
+                                                .lightbulb_outline_rounded))
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                            // Row(
+                            //       mainAxisAlignment:
+                            //           MainAxisAlignment.spaceBetween,
+                            //       children: [
+                            //         IntrinsicWidth(
+                            //           child: Container(
+                            //             decoration: BoxDecoration(
+                            //                 border: Border.all(
+                            //                     color: Colors.blueAccent)),
+                            //             child: Text(
+                            //               widget.listKeyValues
+                            //                   .elementAt(index)
+                            //                   .keyTG
+                            //                   .text,
+                            //               style: const TextStyle(
+                            //                   color: Colors.blue),
+                            //             ),
+                            //           ),
+                            //         ),
+                            //         widget.listKeyValues
+                            //                 .elementAt(index)
+                            //                 .valueTG
+                            //                 .isEmpty
+                            //             ? const SizedBox()
+                            //             : Expanded(
+                            //                 flex: 1,
+                            //                 child: Row(
+                            //                   mainAxisAlignment:
+                            //                       MainAxisAlignment.end,
+                            //                   children: List.generate(
+                            //                       widget.listKeyValues
+                            //                           .elementAt(index)
+                            //                           .valueTG
+                            //                           .length,
+                            //                       (indexChild) => Container(
+                            //                             margin:
+                            //                                 const EdgeInsets
+                            //                                     .only(
+                            //                                     left: 20),
+                            //                             decoration: BoxDecoration(
+                            //                                 border: Border.all(
+                            //                                     color: Colors
+                            //                                         .blueAccent)),
+                            //                             child: Text(
+                            //                               widget.listKeyValues
+                            //                                   .elementAt(
+                            //                                       index)
+                            //                                   .valueTG
+                            //                                   .elementAt(
+                            //                                       indexChild)
+                            //                                   .text,
+                            //                               style:
+                            //                                   const TextStyle(
+                            //                                       color: Colors
+                            //                                           .blue),
+                            //                             ),
+                            //                           )),
+                            //                 ),
+                            //               ),
+                            //       ],
+                            //     )
+                          ),
                         ),
                       )
               ],
