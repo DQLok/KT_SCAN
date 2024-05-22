@@ -22,6 +22,7 @@ class DefaultDataScan extends StatefulWidget {
 class _DefaultDataScanState extends State<DefaultDataScan> {
   File fileImge = File("");
   bool checkPathImg = false;
+  String textData = "";
 
   @override
   void initState() {
@@ -43,6 +44,16 @@ class _DefaultDataScanState extends State<DefaultDataScan> {
     } else {
       checkPathImg = false;
     }
+  }
+
+  readDataFromFileAssets() async {
+    textData = "";
+    try {
+    final File file = File('.../assets/masterdata.txt');
+    textData = await file.readAsString();
+  } catch (e) {
+    print("Couldn't read file");
+  }
   }
 
   @override

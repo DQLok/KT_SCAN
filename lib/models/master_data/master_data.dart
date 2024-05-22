@@ -10,7 +10,9 @@ import 'package:kt_scan_text/models/master_data/category_element.dart';
 import 'package:kt_scan_text/models/master_data/data_mapping_channel.dart';
 import 'package:kt_scan_text/models/master_data/enum_master_data/enum_master_data.dart';
 import 'package:kt_scan_text/models/master_data/enum_values.dart';
-import 'package:kt_scan_text/models/master_data/lang_data.dart';
+import 'package:kt_scan_text/models/master_data/item_attribute_detail.dart';
+import 'package:kt_scan_text/models/master_data/item_data.dart';
+import 'package:kt_scan_text/models/master_data/item_detail.dart';
 
 MasterData masterDataFromJson(String str) =>
     MasterData.fromJson(json.decode(str));
@@ -24,7 +26,7 @@ class MasterData {
   List<MasterDataAttributeOption> attributeOptions;
   List<CategoryElement> menus;
   List<CategoryElement> categories;
-  List<Item> items;
+  List<ItemData> items;
   List<ItemDetail> itemDetails;
   List<ItemAttributeDetail> itemAttributeDetails;
   List<DataMappingChannel> dataMappingChannels;
@@ -56,7 +58,7 @@ class MasterData {
             json["menus"].map((x) => CategoryElement.fromJson(x))),
         categories: List<CategoryElement>.from(
             json["categories"].map((x) => CategoryElement.fromJson(x))),
-        items: List<Item>.from(json["items"].map((x) => Item.fromJson(x))),
+        items: List<ItemData>.from(json["items"].map((x) => ItemData.fromJson(x))),
         itemDetails: List<ItemDetail>.from(
             json["itemDetails"].map((x) => ItemDetail.fromJson(x))),
         itemAttributeDetails: List<ItemAttributeDetail>.from(
@@ -275,293 +277,293 @@ final statusValues = EnumValues({"active": Status.ACTIVE});
 //       };
 // }
 
-class Gf {
-  String id;
-  Name name;
-  int price;
-  Addons addons;
+// class Gf {
+//   String id;
+//   Name name;
+//   int price;
+//   Addons addons;
 
-  Gf({
-    required this.id,
-    required this.name,
-    required this.price,
-    required this.addons,
-  });
+//   Gf({
+//     required this.id,
+//     required this.name,
+//     required this.price,
+//     required this.addons,
+//   });
 
-  factory Gf.fromJson(Map<String, dynamic> json) => Gf(
-        id: json["id"],
-        name: nameValues.map[json["name"]]!,
-        price: json["price"],
-        addons: Addons.fromJson(json["addons"]),
-      );
+//   factory Gf.fromJson(Map<String, dynamic> json) => Gf(
+//         id: json["id"],
+//         name: nameValues.map[json["name"]]!,
+//         price: json["price"],
+//         addons: Addons.fromJson(json["addons"]),
+//       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": nameValues.reverse[name],
-        "price": price,
-        "addons": addons.toJson(),
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "id": id,
+//         "name": nameValues.reverse[name],
+//         "price": price,
+//         "addons": addons.toJson(),
+//       };
+// }
 
-class Addons {
-  String name;
-  int price;
+// class Addons {
+//   String name;
+//   int price;
 
-  Addons({
-    required this.name,
-    required this.price,
-  });
+//   Addons({
+//     required this.name,
+//     required this.price,
+//   });
 
-  factory Addons.fromJson(Map<String, dynamic> json) => Addons(
-        name: json["name"],
-        price: json["price"],
-      );
+//   factory Addons.fromJson(Map<String, dynamic> json) => Addons(
+//         name: json["name"],
+//         price: json["price"],
+//       );
 
-  Map<String, dynamic> toJson() => {
-        "name": name,
-        "price": price,
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "name": name,
+//         "price": price,
+//       };
+// }
 
 // enum Name { PIZZA_HI_SN_PESTO_XANH, PIZZA_PH_MAI }
 
-final nameValues = EnumValues({
-  "Pizza Hải Sản Pesto Xanh": Name.PIZZA_HI_SN_PESTO_XANH,
-  "Pizza Phô Mai": Name.PIZZA_PH_MAI
-});
+// final nameValues = EnumValues({
+//   "Pizza Hải Sản Pesto Xanh": Name.PIZZA_HI_SN_PESTO_XANH,
+//   "Pizza Phô Mai": Name.PIZZA_PH_MAI
+// });
 
-class Spf {
-  Spf();
+// class Spf {
+//   Spf();
 
-  factory Spf.fromJson(Map<String, dynamic> json) => Spf();
+//   factory Spf.fromJson(Map<String, dynamic> json) => Spf();
 
-  Map<String, dynamic> toJson() => {};
-}
+//   Map<String, dynamic> toJson() => {};
+// }
 
-class ItemAttributeDetail {
-  int id;
-  int itemId;
-  List<ItemAttributeDetailAttribute> attributes;
+// class ItemAttributeDetail {
+//   int id;
+//   int itemId;
+//   List<ItemAttributeDetailAttribute> attributes;
 
-  ItemAttributeDetail({
-    required this.id,
-    required this.itemId,
-    required this.attributes,
-  });
+//   ItemAttributeDetail({
+//     required this.id,
+//     required this.itemId,
+//     required this.attributes,
+//   });
 
-  factory ItemAttributeDetail.fromJson(Map<String, dynamic> json) =>
-      ItemAttributeDetail(
-        id: json["id"],
-        itemId: json["itemId"],
-        attributes: List<ItemAttributeDetailAttribute>.from(json["attributes"]
-            .map((x) => ItemAttributeDetailAttribute.fromJson(x))),
-      );
+//   factory ItemAttributeDetail.fromJson(Map<String, dynamic> json) =>
+//       ItemAttributeDetail(
+//         id: json["id"],
+//         itemId: json["itemId"],
+//         attributes: List<ItemAttributeDetailAttribute>.from(json["attributes"]
+//             .map((x) => ItemAttributeDetailAttribute.fromJson(x))),
+//       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "itemId": itemId,
-        "attributes": List<dynamic>.from(attributes.map((x) => x.toJson())),
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "id": id,
+//         "itemId": itemId,
+//         "attributes": List<dynamic>.from(attributes.map((x) => x.toJson())),
+//       };
+// }
 
-class ItemAttributeDetailAttribute {
-  int id;
-  String name;
-  int numering;
-  bool isPreSelected;
-  List<Option> options;
+// class ItemAttributeDetailAttribute {
+//   int id;
+//   String name;
+//   int numering;
+//   bool isPreSelected;
+//   List<Option> options;
 
-  ItemAttributeDetailAttribute({
-    required this.id,
-    required this.name,
-    required this.numering,
-    required this.isPreSelected,
-    required this.options,
-  });
+//   ItemAttributeDetailAttribute({
+//     required this.id,
+//     required this.name,
+//     required this.numering,
+//     required this.isPreSelected,
+//     required this.options,
+//   });
 
-  factory ItemAttributeDetailAttribute.fromJson(Map<String, dynamic> json) =>
-      ItemAttributeDetailAttribute(
-        id: json["id"],
-        name: json["name"],
-        numering: json["numering"],
-        isPreSelected: json["isPreSelected"],
-        options:
-            List<Option>.from(json["options"].map((x) => Option.fromJson(x))),
-      );
+//   factory ItemAttributeDetailAttribute.fromJson(Map<String, dynamic> json) =>
+//       ItemAttributeDetailAttribute(
+//         id: json["id"],
+//         name: json["name"],
+//         numering: json["numering"],
+//         isPreSelected: json["isPreSelected"],
+//         options:
+//             List<Option>.from(json["options"].map((x) => Option.fromJson(x))),
+//       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "numering": numering,
-        "isPreSelected": isPreSelected,
-        "options": List<dynamic>.from(options.map((x) => x.toJson())),
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "id": id,
+//         "name": name,
+//         "numering": numering,
+//         "isPreSelected": isPreSelected,
+//         "options": List<dynamic>.from(options.map((x) => x.toJson())),
+//       };
+// }
 
-class Option {
-  int id;
-  String name;
-  int numering;
+// class Option {
+//   int id;
+//   String name;
+//   int numering;
 
-  Option({
-    required this.id,
-    required this.name,
-    required this.numering,
-  });
+//   Option({
+//     required this.id,
+//     required this.name,
+//     required this.numering,
+//   });
 
-  factory Option.fromJson(Map<String, dynamic> json) => Option(
-        id: json["id"],
-        name: json["name"],
-        numering: json["numering"],
-      );
+//   factory Option.fromJson(Map<String, dynamic> json) => Option(
+//         id: json["id"],
+//         name: json["name"],
+//         numering: json["numering"],
+//       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "numering": numering,
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "id": id,
+//         "name": name,
+//         "numering": numering,
+//       };
+// }
 
-class ItemDetail {
-  int id;
-  int itemId;
-  String name;
-  String code;
-  String posCode;
-  String erpCode;
-  int price;
-  Details? details;
+// class ItemDetail {
+//   int id;
+//   int itemId;
+//   String name;
+//   String code;
+//   String posCode;
+//   String erpCode;
+//   int price;
+//   Details? details;
 
-  ItemDetail({
-    required this.id,
-    required this.itemId,
-    required this.name,
-    required this.code,
-    required this.posCode,
-    required this.erpCode,
-    required this.price,
-    required this.details,
-  });
+//   ItemDetail({
+//     required this.id,
+//     required this.itemId,
+//     required this.name,
+//     required this.code,
+//     required this.posCode,
+//     required this.erpCode,
+//     required this.price,
+//     required this.details,
+//   });
 
-  factory ItemDetail.fromJson(Map<String, dynamic> json) => ItemDetail(
-        id: json["id"],
-        itemId: json["itemId"],
-        name: json["name"],
-        code: json["code"],
-        posCode: json["posCode"],
-        erpCode: json["erpCode"],
-        price: json["price"],
-        details:
-            json["details"] == null ? null : Details.fromJson(json["details"]),
-      );
+//   factory ItemDetail.fromJson(Map<String, dynamic> json) => ItemDetail(
+//         id: json["id"],
+//         itemId: json["itemId"],
+//         name: json["name"],
+//         code: json["code"],
+//         posCode: json["posCode"],
+//         erpCode: json["erpCode"],
+//         price: json["price"],
+//         details:
+//             json["details"] == null ? null : Details.fromJson(json["details"]),
+//       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "itemId": itemId,
-        "name": name,
-        "code": code,
-        "posCode": posCode,
-        "erpCode": erpCode,
-        "price": price,
-        "details": details?.toJson(),
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "id": id,
+//         "itemId": itemId,
+//         "name": name,
+//         "code": code,
+//         "posCode": posCode,
+//         "erpCode": erpCode,
+//         "price": price,
+//         "details": details?.toJson(),
+//       };
+// }
 
-class Details {
-  List<DetailsAttributeOption> attributeOptions;
-  bool isDefault;
+// class Details {
+//   List<DetailsAttributeOption> attributeOptions;
+//   bool isDefault;
 
-  Details({
-    required this.attributeOptions,
-    required this.isDefault,
-  });
+//   Details({
+//     required this.attributeOptions,
+//     required this.isDefault,
+//   });
 
-  factory Details.fromJson(Map<String, dynamic> json) => Details(
-        attributeOptions: List<DetailsAttributeOption>.from(
-            json["attributeOptions"]
-                .map((x) => DetailsAttributeOption.fromJson(x))),
-        isDefault: json["isDefault"],
-      );
+//   factory Details.fromJson(Map<String, dynamic> json) => Details(
+//         attributeOptions: List<DetailsAttributeOption>.from(
+//             json["attributeOptions"]
+//                 .map((x) => DetailsAttributeOption.fromJson(x))),
+//         isDefault: json["isDefault"],
+//       );
 
-  Map<String, dynamic> toJson() => {
-        "attributeOptions":
-            List<dynamic>.from(attributeOptions.map((x) => x.toJson())),
-        "isDefault": isDefault,
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "attributeOptions":
+//             List<dynamic>.from(attributeOptions.map((x) => x.toJson())),
+//         "isDefault": isDefault,
+//       };
+// }
 
-class DetailsAttributeOption {
-  int attributeId;
-  int optionId;
+// class DetailsAttributeOption {
+//   int attributeId;
+//   int optionId;
 
-  DetailsAttributeOption({
-    required this.attributeId,
-    required this.optionId,
-  });
+//   DetailsAttributeOption({
+//     required this.attributeId,
+//     required this.optionId,
+//   });
 
-  factory DetailsAttributeOption.fromJson(Map<String, dynamic> json) =>
-      DetailsAttributeOption(
-        attributeId: json["attributeId"],
-        optionId: json["optionId"],
-      );
+//   factory DetailsAttributeOption.fromJson(Map<String, dynamic> json) =>
+//       DetailsAttributeOption(
+//         attributeId: json["attributeId"],
+//         optionId: json["optionId"],
+//       );
 
-  Map<String, dynamic> toJson() => {
-        "attributeId": attributeId,
-        "optionId": optionId,
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "attributeId": attributeId,
+//         "optionId": optionId,
+//       };
+// }
 
-class Item {
-  int brandId;
-  int id;
-  int caregoryId;
-  String name;
-  String type;
-  String mType;
-  int numering;
-  LangData lang;
-  Status status;
-  bool isAttribute;
+// class Item {
+//   int brandId;
+//   int id;
+//   int caregoryId;
+//   String name;
+//   String type;
+//   String mType;
+//   int numering;
+//   LangData lang;
+//   Status status;
+//   bool isAttribute;
 
-  Item({
-    required this.brandId,
-    required this.id,
-    required this.caregoryId,
-    required this.name,
-    required this.type,
-    required this.mType,
-    required this.numering,
-    required this.lang,
-    required this.status,
-    required this.isAttribute,
-  });
+//   Item({
+//     required this.brandId,
+//     required this.id,
+//     required this.caregoryId,
+//     required this.name,
+//     required this.type,
+//     required this.mType,
+//     required this.numering,
+//     required this.lang,
+//     required this.status,
+//     required this.isAttribute,
+//   });
 
-  factory Item.fromJson(Map<String, dynamic> json) => Item(
-        brandId: json["brandId"],
-        id: json["id"],
-        caregoryId: json["caregoryId"],
-        name: json["name"],
-        type: json["type"],
-        mType: json["mType"],
-        numering: json["numering"],
-        lang: LangData.fromJson(json["lang"]),
-        status: statusValues.map[json["status"]]!,
-        isAttribute: json["isAttribute"],
-      );
+//   factory Item.fromJson(Map<String, dynamic> json) => Item(
+//         brandId: json["brandId"],
+//         id: json["id"],
+//         caregoryId: json["caregoryId"],
+//         name: json["name"],
+//         type: json["type"],
+//         mType: json["mType"],
+//         numering: json["numering"],
+//         lang: LangData.fromJson(json["lang"]),
+//         status: statusValues.map[json["status"]]!,
+//         isAttribute: json["isAttribute"],
+//       );
 
-  Map<String, dynamic> toJson() => {
-        "brandId": brandId,
-        "id": id,
-        "caregoryId": caregoryId,
-        "name": name,
-        "type": type,
-        "mType": mType,
-        "numering": numering,
-        "lang": lang.toJson(),
-        "status": statusValues.reverse[status],
-        "isAttribute": isAttribute,
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "brandId": brandId,
+//         "id": id,
+//         "caregoryId": caregoryId,
+//         "name": name,
+//         "type": type,
+//         "mType": mType,
+//         "numering": numering,
+//         "lang": lang.toJson(),
+//         "status": statusValues.reverse[status],
+//         "isAttribute": isAttribute,
+//       };
+// }
 
 // class EnumValues<T> {
 //   Map<String, T> map;

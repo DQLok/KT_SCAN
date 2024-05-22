@@ -19,13 +19,15 @@ class _ScanDocPageState extends State<ScanDocPage> {
   @override
   void initState() {
     super.initState();
-    startScan();
+    if (mounted) {
+      startScan();
+    }
   }
 
   startScan() async {
     DocumentScannerOptions documentScannerOptions = DocumentScannerOptions(
         mode: ScannerMode.full,
-        documentFormat: DocumentFormat.pdf,
+        documentFormat: DocumentFormat.jpeg,
         isGalleryImport: true);
     var image = DocumentScanner(options: documentScannerOptions);
     result = await image.scanDocument();

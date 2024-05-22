@@ -1,4 +1,5 @@
-import 'package:kt_scan_text/models/master_data/master_data.dart';
+import 'package:kt_scan_text/models/master_data/gf.dart';
+import 'package:kt_scan_text/models/master_data/spf.dart';
 
 class DataMappingChannel {
   int id;
