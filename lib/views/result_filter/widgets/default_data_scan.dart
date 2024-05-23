@@ -3,7 +3,9 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:kt_scan_text/models/master_data/data_mapping_channel.dart';
 import 'package:kt_scan_text/models/master_data/master_data.dart';
+import 'package:kt_scan_text/objects/key_value_master_data.dart';
 import 'package:kt_scan_text/objects/text_group.dart';
 import 'package:kt_scan_text/utils/dice_formula.dart';
 import 'package:kt_scan_text/utils/levenshtein_formula.dart';
@@ -39,6 +41,8 @@ class _DefaultDataScanState extends State<DefaultDataScan> {
   bool checkMap = false;
   //------
   String formula = "";
+  //------
+  List<KeyValuesChildsMasterData> listKeyValueChildMasterData = [];
 
   @override
   void initState() {
@@ -109,6 +113,67 @@ class _DefaultDataScanState extends State<DefaultDataScan> {
     for (var element in masterData!.dataMappingChannels) {
       listName.add(removeVietnameseAccent(element.gf.name.toLowerCase()));
     }
+    listKeyValueChildMasterData.clear();
+    List<DataMappingChannel> listDataFilter = masterData!.dataMappingChannels.where((element) => listKeyValuesChild.any((el) {
+      String key = removeVietnameseAccent(element.gf.name).toLowerCase();
+      String values = removeVietnameseAccent(el.keyTG.text).toLowerCase();
+      bool check = getMaxRating(key, [values]);
+      if (check) {
+        listKeyValueChildMasterData.add(KeyValuesChildsMasterData(parent: KeyValueMasterData(key: el, dataMappingChannel: element), child: []));
+      }
+      return check;
+      },),).toList();
+    print("---alo-----");
+    for (var element in listDataFilter) {
+      print(element.gf.name);
+    }
+    print("before: ${listKeyValueChildMasterData.length}");
+    for (var element in listKeyValueChildMasterData) {
+      print(element.parent.dataMappingChannel.gf.name);
+    }
+    listKeyValueChildMasterData = listKeyValueChildMasterData.where((element) => listKeyValuesChild.any((el) {
+      String key = removeVietnameseAccent(element.parent.dataMappingChannel.gf.addons.name).toLowerCase();
+      String values = removeVietnameseAccent(el.keyTG.text).toLowerCase();
+      bool check = getMaxRating(key, [values]) || key.contains(values);
+      if (check) {
+        element.child.add(KeyValueMasterData(key: el, dataMappingChannel: element.parent.dataMappingChannel));
+      }
+      return check;
+      },),).toList();
+    print("after: ${listKeyValueChildMasterData.length}");
+    for (var element in listKeyValueChildMasterData) {
+      print(element.parent.dataMappingChannel.gf.name);
+    }
+    //----------
+    if (listKeyValueChildMasterData.isNotEmpty && listKeyValueChildMasterData.length > 1){
+      for (var element in listKeyValueChildMasterData) {
+        print(element.parent.key.keyTG.text+" - "+element.parent.dataMappingChannel.posCode);
+        if (element.child.isNotEmpty) {
+          print("final:");
+          print(element.child.first.dataMappingChannel.gf.addons.name);
+          print(element.child.first.key.valueTG.last.text);
+          print("*****");
+          print(element.child.first.dataMappingChannel.gf.addons.price.toString());
+          print(double.parse(element.child.first.key.valueTG.last.text).toInt().toString());
+          print("*****");
+          if (element.child.first.dataMappingChannel.gf.addons.price == int.parse(element.child.first.key.valueTG.last.text.replaceAll(".",""))) {
+            print("OKKKKKK");
+          }
+        }
+      }
+    }
+
+    //------
+    // List<DataMappingChannel> listDataFilterChild = listDataFilter.where((element) => listKeyValuesChild.any((el) {
+    //   String key = removeVietnameseAccent(element.gf.addons.name).toLowerCase();
+    //   print(key);
+    //   String values = removeVietnameseAccent(el.keyTG.text).toLowerCase();
+    //   return getMaxRating(key, [values]) || key.contains(values);
+    //   },),).toList();
+    //   print("child: ${listDataFilterChild.length}");
+    // for (var element in listDataFilterChild) {
+    //   print(element.posCode);
+    // }
     String key = listKeyValuesChild.elementAt(6).keyTG.text.toLowerCase();
     print("key: ${listKeyValuesChild.elementAt(6).keyTG.text.toLowerCase()}");
     print("-----Dice----");
@@ -249,6 +314,18 @@ class _DefaultDataScanState extends State<DefaultDataScan> {
                 listKeyValuesChild.isEmpty
                     ? const SizedBox()
                     : showListKeyValue(listKeyValuesChild),
+                    const Divider(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ElevatedButton(
+                        onPressed: () {
+                          mappingData();
+                        },
+                        child: const Text("Check Data")),
+                    Text(checkMap.toString())
+                  ],
+                ),
                 const Divider(),
                 ElevatedButton(
                     onPressed: () {
@@ -269,19 +346,7 @@ class _DefaultDataScanState extends State<DefaultDataScan> {
                           ],
                         ),
                       )
-                    : const SizedBox(),
-                const Divider(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ElevatedButton(
-                        onPressed: () {
-                          mappingData();
-                        },
-                        child: const Text("Check Data")),
-                    Text(checkMap.toString())
-                  ],
-                )
+                    : const SizedBox(),                
               ],
             )),
       ]),
