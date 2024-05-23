@@ -1,0 +1,1 @@
+Dice-coefficient(big data) and Levenshtein-distance(small data)

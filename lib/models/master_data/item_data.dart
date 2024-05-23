@@ -1,6 +1,4 @@
-import 'package:kt_scan_text/models/master_data/enum_master_data/enum_master_data.dart';
 import 'package:kt_scan_text/models/master_data/lang_data.dart';
-import 'package:kt_scan_text/models/master_data/master_data.dart';
 
 class ItemData {
   int brandId;
@@ -11,7 +9,7 @@ class ItemData {
   String mType;
   int numering;
   LangData lang;
-  Status status;
+  String status;
   bool isAttribute;
 
   ItemData({
@@ -36,7 +34,7 @@ class ItemData {
         mType: json["mType"],
         numering: json["numering"],
         lang: LangData.fromJson(json["lang"]),
-        status: statusValues.map[json["status"]]!,
+        status: json["status"],
         isAttribute: json["isAttribute"],
       );
 
@@ -49,7 +47,7 @@ class ItemData {
         "mType": mType,
         "numering": numering,
         "lang": lang.toJson(),
-        "status": statusValues.reverse[status],
+        "status": status,
         "isAttribute": isAttribute,
       };
 }

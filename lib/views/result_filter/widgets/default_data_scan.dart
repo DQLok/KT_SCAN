@@ -1,7 +1,14 @@
+import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:kt_scan_text/models/master_data/master_data.dart';
 import 'package:kt_scan_text/objects/text_group.dart';
+import 'package:kt_scan_text/utils/dice_formula.dart';
+import 'package:kt_scan_text/utils/levenshtein_formula.dart';
+import 'package:kt_scan_text/utils/regex.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 class DefaultDataScan extends StatefulWidget {
   const DefaultDataScan(
@@ -22,13 +29,24 @@ class DefaultDataScan extends StatefulWidget {
 class _DefaultDataScanState extends State<DefaultDataScan> {
   File fileImge = File("");
   bool checkPathImg = false;
+  //--------
   String textData = "";
+  List<KeyValueFilter> listKeyValuesChild = [];
+  MasterData? masterData;
+  String testData = "";
+  //-------
+  bool showHideButton = false;
+  bool checkMap = false;
+  //------
+  String formula = "";
 
   @override
   void initState() {
     super.initState();
     if (mounted) {
       checkFileinLocal();
+      processText();
+      readDataFromFileAssets();
     }
   }
 
@@ -46,14 +64,74 @@ class _DefaultDataScanState extends State<DefaultDataScan> {
     }
   }
 
+  //read file master data
   readDataFromFileAssets() async {
     textData = "";
     try {
-    final File file = File('.../assets/masterdata.txt');
-    textData = await file.readAsString();
-  } catch (e) {
-    print("Couldn't read file");
+      textData = await rootBundle.loadString("assets/masterdata.txt");
+      if (textData.isNotEmpty) {
+        masterData = MasterData.fromJson(jsonDecode(textData));
+        if (masterData != null) {
+          testData = masterData!.dataMappingChannels.first.name;
+        }
+      }
+      setState(() {});
+    } catch (e) {
+      //
+    }
   }
+
+  //format data
+  processText() {
+    listKeyValuesChild.clear();
+    listKeyValuesChild = List.from(widget.listKeyValues);
+    if (listKeyValuesChild.isNotEmpty) {
+      for (var element in listKeyValuesChild) {
+        element.keyTG.text = removeVietnameseAccent(element.keyTG.text);
+        if (element.valueTG.isNotEmpty) {
+          for (var el in element.valueTG) {
+            el.text = removeVietnameseAccent(el.text);
+          }
+        }
+      }
+    }
+    setState(() {});
+  }
+
+  mappingData() {
+    checkMap = listKeyValuesChild.any(
+      (element) => masterData!.dataMappingChannels.any(
+        (el) => removeVietnameseAccent(el.gf.name).contains(element.keyTG.text),
+      ),
+    );
+    print(checkMap);
+    List<String> listName = [];
+    for (var element in masterData!.dataMappingChannels) {
+      listName.add(removeVietnameseAccent(element.gf.name.toLowerCase()));
+    }
+    String key = listKeyValuesChild.elementAt(6).keyTG.text.toLowerCase();
+    print("key: ${listKeyValuesChild.elementAt(6).keyTG.text.toLowerCase()}");
+    print("-----Dice----");
+    //--------------
+    print(DiceFormula.maxRating(key, listName));
+    print("-----------");
+    print("-----Leven-----");
+    print(LevenshteinFormula.maxRating(key, listName));
+    setState(() {});
+  }
+
+  bool getMaxRating(String key, List<String> values) {
+    return max(DiceFormula.maxRating(key, values),
+                LevenshteinFormula.maxRating(key, values)) >
+            0.5
+        ? true
+        : false;
+  }
+
+  showHideMasterData() {
+    setState(() {
+      showHideButton = !showHideButton;
+    });
   }
 
   @override
@@ -166,81 +244,44 @@ class _DefaultDataScanState extends State<DefaultDataScan> {
                       ),
                 widget.listKeyValues.isEmpty
                     ? const SizedBox()
-                    : Container(
-                        margin: const EdgeInsets.all(5),
+                    : showListKeyValue(widget.listKeyValues),
+                const Divider(),
+                listKeyValuesChild.isEmpty
+                    ? const SizedBox()
+                    : showListKeyValue(listKeyValuesChild),
+                const Divider(),
+                ElevatedButton(
+                    onPressed: () {
+                      showHideMasterData();
+                    },
+                    child: const Text("Show Master Data")),
+                showHideButton
+                    ? Container(
+                        margin: const EdgeInsets.symmetric(vertical: 5),
                         child: Column(
-                          children: List.generate(
-                              widget.listKeyValues.length,
-                              (index) => Container(
-                                    margin:
-                                        const EdgeInsets.symmetric(vertical: 5),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                          flex: 1,
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                                border: Border.all(
-                                                    color: Colors.blueAccent)),
-                                            child: Text(
-                                              "${widget.listKeyValues.elementAt(index).keyTG.index}: ${widget.listKeyValues.elementAt(index).keyTG.text}",
-                                              style: const TextStyle(
-                                                  color: Colors.blue,
-                                                  fontSize: 12),
-                                            ),
-                                          ),
-                                        ),
-                                        widget.listKeyValues
-                                                .elementAt(index)
-                                                .valueTG
-                                                .isEmpty
-                                            ? const SizedBox()
-                                            : Expanded(
-                                                flex: 2,
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.end,
-                                                  children: List.generate(
-                                                      widget.listKeyValues
-                                                          .elementAt(index)
-                                                          .valueTG
-                                                          .length,
-                                                      (indexChild) => Container(
-                                                            margin:
-                                                                const EdgeInsets
-                                                                    .only(
-                                                                    left: 20),
-                                                            decoration: BoxDecoration(
-                                                                border: Border.all(
-                                                                    color: Colors
-                                                                        .blueAccent)),
-                                                            child: Text(
-                                                              widget
-                                                                  .listKeyValues
-                                                                  .elementAt(
-                                                                      index)
-                                                                  .valueTG
-                                                                  .elementAt(
-                                                                      indexChild)
-                                                                  .text,
-                                                              overflow:
-                                                                  TextOverflow
-                                                                      .ellipsis,
-                                                              style: const TextStyle(
-                                                                  color: Colors
-                                                                      .blue,
-                                                                  fontSize: 12),
-                                                            ),
-                                                          )),
-                                                ),
-                                              ),
-                                      ],
-                                    ),
-                                  )),
+                          children: [
+                            ElevatedButton(
+                                onPressed: () {
+                                  readDataFromFileAssets();
+                                },
+                                child: const Text("Get Data")),
+                            Text(textData),
+                          ],
                         ),
                       )
+                    : const SizedBox(),
+                const Divider(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ElevatedButton(
+                        onPressed: () {
+                          mappingData();
+                        },
+                        child: const Text("Check Data")),
+                    Text(checkMap.toString())
+                  ],
+                )
               ],
             )),
       ]),
@@ -283,6 +324,64 @@ class _DefaultDataScanState extends State<DefaultDataScan> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget showListKeyValue(List<KeyValueFilter> keyValues) {
+    return Container(
+      margin: const EdgeInsets.all(5),
+      child: Column(
+        children: List.generate(
+            keyValues.length,
+            (index) => Container(
+                  margin: const EdgeInsets.symmetric(vertical: 5),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.blueAccent)),
+                          child: Text(
+                            "${keyValues.elementAt(index).keyTG.index}: ${keyValues.elementAt(index).keyTG.text}",
+                            style: const TextStyle(
+                                color: Colors.blue, fontSize: 12),
+                          ),
+                        ),
+                      ),
+                      keyValues.elementAt(index).valueTG.isEmpty
+                          ? const SizedBox()
+                          : Expanded(
+                              flex: 2,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: List.generate(
+                                    keyValues.elementAt(index).valueTG.length,
+                                    (indexChild) => Container(
+                                          margin:
+                                              const EdgeInsets.only(left: 20),
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.blueAccent)),
+                                          child: Text(
+                                            keyValues
+                                                .elementAt(index)
+                                                .valueTG
+                                                .elementAt(indexChild)
+                                                .text,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: const TextStyle(
+                                                color: Colors.blue,
+                                                fontSize: 12),
+                                          ),
+                                        )),
+                              ),
+                            ),
+                    ],
+                  ),
+                )),
+      ),
     );
   }
 }

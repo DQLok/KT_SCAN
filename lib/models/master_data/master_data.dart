@@ -8,8 +8,6 @@ import 'package:kt_scan_text/models/master_data/attribute_option.dart';
 import 'package:kt_scan_text/models/master_data/brand_data.dart';
 import 'package:kt_scan_text/models/master_data/category_element.dart';
 import 'package:kt_scan_text/models/master_data/data_mapping_channel.dart';
-import 'package:kt_scan_text/models/master_data/enum_master_data/enum_master_data.dart';
-import 'package:kt_scan_text/models/master_data/enum_values.dart';
 import 'package:kt_scan_text/models/master_data/item_attribute_detail.dart';
 import 'package:kt_scan_text/models/master_data/item_data.dart';
 import 'package:kt_scan_text/models/master_data/item_detail.dart';
@@ -58,7 +56,8 @@ class MasterData {
             json["menus"].map((x) => CategoryElement.fromJson(x))),
         categories: List<CategoryElement>.from(
             json["categories"].map((x) => CategoryElement.fromJson(x))),
-        items: List<ItemData>.from(json["items"].map((x) => ItemData.fromJson(x))),
+        items:
+            List<ItemData>.from(json["items"].map((x) => ItemData.fromJson(x))),
         itemDetails: List<ItemDetail>.from(
             json["itemDetails"].map((x) => ItemDetail.fromJson(x))),
         itemAttributeDetails: List<ItemAttributeDetail>.from(
@@ -149,7 +148,7 @@ class MasterData {
 
 // enum Status { ACTIVE }
 
-final statusValues = EnumValues({"active": Status.ACTIVE});
+// final statusValues = EnumValues({"active": Status.ACTIVE});
 
 // class CategoryElement {
 //   int brandId;

@@ -1,6 +1,4 @@
-import 'package:kt_scan_text/models/master_data/enum_master_data/enum_master_data.dart';
 import 'package:kt_scan_text/models/master_data/lang_data.dart';
-import 'package:kt_scan_text/models/master_data/master_data.dart';
 
 class MasterDataAttributeOption {
   int id;
@@ -9,7 +7,7 @@ class MasterDataAttributeOption {
   String shortName;
   LangData lang;
   int numering;
-  Status status;
+  String status;
 
   MasterDataAttributeOption({
     required this.id,
@@ -29,7 +27,7 @@ class MasterDataAttributeOption {
         shortName: json["shortName"],
         lang: LangData.fromJson(json["lang"]),
         numering: json["numering"],
-        status: statusValues.map[json["status"]]!,
+        status: json["status"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -39,6 +37,6 @@ class MasterDataAttributeOption {
         "shortName": shortName,
         "lang": lang.toJson(),
         "numering": numering,
-        "status": statusValues.reverse[status],
+        "status": status,
       };
 }

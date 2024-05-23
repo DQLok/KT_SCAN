@@ -1,9 +1,8 @@
 import 'package:kt_scan_text/models/master_data/addons.dart';
-import 'package:kt_scan_text/models/master_data/enum_master_data/enum_master_data.dart';
 
 class Gf {
   String id;
-  Name name;
+  String name;
   int price;
   Addons addons;
 
@@ -16,14 +15,14 @@ class Gf {
 
   factory Gf.fromJson(Map<String, dynamic> json) => Gf(
         id: json["id"],
-        name: nameValues.map[json["name"]]!,
+        name: json["name"],
         price: json["price"],
         addons: Addons.fromJson(json["addons"]),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "name": nameValues.reverse[name],
+        "name": name,
         "price": price,
         "addons": addons.toJson(),
       };

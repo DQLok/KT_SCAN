@@ -1,6 +1,4 @@
-import 'package:kt_scan_text/models/master_data/enum_master_data/enum_master_data.dart';
 import 'package:kt_scan_text/models/master_data/lang_data.dart';
-import 'package:kt_scan_text/models/master_data/master_data.dart';
 
 class BrandData {
   int id;
@@ -8,7 +6,7 @@ class BrandData {
   String name;
   String shortName;
   LangData lang;
-  Status status;
+  String status;
 
   BrandData({
     required this.id,
@@ -25,7 +23,7 @@ class BrandData {
         name: json["name"],
         shortName: json["shortName"],
         lang: LangData.fromJson(json["lang"]),
-        status: statusValues.map[json["status"]]!,
+        status: json["status"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -34,6 +32,6 @@ class BrandData {
         "name": name,
         "shortName": shortName,
         "lang": lang.toJson(),
-        "status": statusValues.reverse[status],
+        "status": status,
       };
 }
