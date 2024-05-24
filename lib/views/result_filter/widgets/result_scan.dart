@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:kt_scan_text/utils/utils.dart';
-import 'package:kt_scan_text/views/home/home.dart';
-import 'package:kt_scan_text/views/result_filter/result_filter.dart';
-import 'package:kt_scan_text/views/result_filter/widgets/camera_customer.dart';
+import 'package:teca/utils/utils.dart';
+import 'package:teca/views/home/home.dart';
+import 'package:teca/views/result_filter/result_filter.dart';
+import 'package:teca/views/result_filter/widgets/camera_customer.dart';
 
 class ResultScan extends StatefulWidget {
   const ResultScan({super.key, required this.pathIamge});

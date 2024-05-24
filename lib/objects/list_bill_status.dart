@@ -1,4 +1,4 @@
-import 'package:kt_scan_text/objects/text_group.dart';
+import 'package:teca/objects/text_group.dart';
 
 class ListBillStatus {
   String status;

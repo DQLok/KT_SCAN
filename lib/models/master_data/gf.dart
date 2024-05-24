@@ -1,4 +1,4 @@
-import 'package:kt_scan_text/models/master_data/modifier.dart';
+import 'package:teca/models/master_data/modifier.dart';
 
 class Gf {
   String id;

@@ -1,4 +1,4 @@
-import 'package:kt_scan_text/models/master_data/item_attribute_detail_attribute.dart';
+import 'package:teca/models/master_data/item_attribute_detail_attribute.dart';
 
 class ItemAttributeDetail {
   int id;

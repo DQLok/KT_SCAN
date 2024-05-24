@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:kt_scan_text/objects/text_group.dart';
-import 'package:kt_scan_text/views/result_filter/widgets/camera_customer.dart';
+import 'package:teca/objects/text_group.dart';
+import 'package:teca/views/result_filter/widgets/camera_customer.dart';
 
 class GalleryView extends StatefulWidget {
   const GalleryView(

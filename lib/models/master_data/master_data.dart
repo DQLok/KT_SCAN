@@ -4,13 +4,13 @@
 
 import 'dart:convert';
 
-import 'package:kt_scan_text/models/master_data/attribute_option.dart';
-import 'package:kt_scan_text/models/master_data/brand_data.dart';
-import 'package:kt_scan_text/models/master_data/category_element.dart';
-import 'package:kt_scan_text/models/master_data/data_mapping_channel.dart';
-import 'package:kt_scan_text/models/master_data/item_attribute_detail.dart';
-import 'package:kt_scan_text/models/master_data/item_data.dart';
-import 'package:kt_scan_text/models/master_data/item_detail.dart';
+import 'package:teca/models/master_data/attribute_option.dart';
+import 'package:teca/models/master_data/brand_data.dart';
+import 'package:teca/models/master_data/category_element.dart';
+import 'package:teca/models/master_data/data_mapping_channel.dart';
+import 'package:teca/models/master_data/item_attribute_detail.dart';
+import 'package:teca/models/master_data/item_data.dart';
+import 'package:teca/models/master_data/item_detail.dart';
 
 MasterData masterDataFromJson(String str) =>
     MasterData.fromJson(json.decode(str));

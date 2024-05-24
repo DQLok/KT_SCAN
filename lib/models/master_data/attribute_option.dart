@@ -1,4 +1,4 @@
-import 'package:kt_scan_text/models/master_data/lang_data.dart';
+import 'package:teca/models/master_data/lang_data.dart';
 
 class MasterDataAttributeOption {
   int id;

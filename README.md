@@ -1,4 +1,4 @@
-# kt_scan_text
+# teca
 
 A new Flutter project.
 

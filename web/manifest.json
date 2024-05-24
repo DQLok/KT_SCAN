@@ -1,6 +1,6 @@
 {
-    "name": "kt_scan_text",
-    "short_name": "kt_scan_text",
+    "name": "teca",
+    "short_name": "teca",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

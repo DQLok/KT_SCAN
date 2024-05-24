@@ -1,5 +1,5 @@
-import 'package:kt_scan_text/models/master_data/data_mapping_channel.dart';
-import 'package:kt_scan_text/objects/text_group.dart';
+import 'package:teca/models/master_data/data_mapping_channel.dart';
+import 'package:teca/objects/text_group.dart';
 
 class KeyValueMasterData {
   KeyValueFilter key;

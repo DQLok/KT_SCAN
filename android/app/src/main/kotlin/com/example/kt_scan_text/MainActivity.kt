@@ -1,4 +1,4 @@
-package com.example.kt_scan_text
+package com.example.teca
 
 import io.flutter.embedding.android.FlutterActivity
 

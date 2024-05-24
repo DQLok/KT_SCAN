@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:kt_scan_text/objects/account.dart';
-import 'package:kt_scan_text/store_preference/store_preference.dart';
-import 'package:kt_scan_text/views/splash/splash.dart';
-import 'package:kt_scan_text/widgets/toast_cus.dart';
+import 'package:teca/objects/account.dart';
+import 'package:teca/store_preference/store_preference.dart';
+import 'package:teca/views/splash/splash.dart';
+import 'package:teca/widgets/toast_cus.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -48,6 +48,10 @@ class _SignInPageState extends State<SignInPage> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
+              margin: const EdgeInsets.symmetric(vertical: 10),
+              child: Image.asset("assets/logo/logo.jpg"),
+            ),
+            Container(
               margin: const EdgeInsets.symmetric(vertical: 5),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,7 +59,7 @@ class _SignInPageState extends State<SignInPage> {
                 children: [
                   Container(
                       margin: const EdgeInsets.symmetric(vertical: 20),
-                      child: const Text(("Số điện thoại"))),
+                      child: const Text("Số điện thoại",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),)),
                   TextField(
                     controller: controllerPhone,
                     decoration:
@@ -72,7 +76,7 @@ class _SignInPageState extends State<SignInPage> {
                 children: [
                   Container(
                       margin: const EdgeInsets.symmetric(vertical: 20),
-                      child: const Text(("Mật khẩu"))),
+                      child: const Text("Mật khẩu",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),)),
                   TextField(
                     controller: controllerPassword,
                     decoration:
@@ -87,11 +91,11 @@ class _SignInPageState extends State<SignInPage> {
       bottomNavigationBar: Container(
         margin: EdgeInsets.fromLTRB(
             10, 0, 10, MediaQuery.viewPaddingOf(context).bottom),
-        child: ElevatedButton(
+        child: ElevatedButton(          
             onPressed: () {
               signInWithAccount();
             },
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.redAccent),
+            style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 20),backgroundColor: Colors.redAccent,),
             child: const Text(
               "Đăng nhập",
               style: TextStyle(color: Colors.white),

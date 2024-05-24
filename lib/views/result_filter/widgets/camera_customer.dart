@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:kt_scan_text/main.dart';
-import 'package:kt_scan_text/views/home/home.dart';
-import 'package:kt_scan_text/views/result_filter/result_filter.dart';
-import 'package:kt_scan_text/views/scans/scan_text_gg.dart';
+import 'package:teca/main.dart';
+import 'package:teca/views/home/home.dart';
+import 'package:teca/views/result_filter/result_filter.dart';
+import 'package:teca/views/scans/scan_text_gg.dart';
 
 class CameraCustomer extends StatefulWidget {
   const CameraCustomer({super.key});

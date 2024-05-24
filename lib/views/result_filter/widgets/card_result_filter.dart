@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:kt_scan_text/objects/list_bill_status.dart';
-import 'package:kt_scan_text/utils/utils.dart';
-import 'package:kt_scan_text/views/result_filter/widgets/detail_result_filter.dart';
+import 'package:teca/objects/list_bill_status.dart';
+import 'package:teca/utils/utils.dart';
+import 'package:teca/views/result_filter/widgets/detail_result_filter.dart';
 
 class CardResultFilter extends StatefulWidget {
   const CardResultFilter({super.key, required this.inforBill});

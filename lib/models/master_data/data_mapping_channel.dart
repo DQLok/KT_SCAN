@@ -1,5 +1,5 @@
-import 'package:kt_scan_text/models/master_data/gf.dart';
-import 'package:kt_scan_text/models/master_data/spf.dart';
+import 'package:teca/models/master_data/gf.dart';
+import 'package:teca/models/master_data/spf.dart';
 
 class DataMappingChannel {
   int id;

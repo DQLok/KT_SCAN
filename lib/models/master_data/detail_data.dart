@@ -1,4 +1,4 @@
-import 'package:kt_scan_text/models/master_data/details_attribute_option.dart';
+import 'package:teca/models/master_data/details_attribute_option.dart';
 
 class DetailsData {
   List<DetailsAttributeOption> attributeOptions;
