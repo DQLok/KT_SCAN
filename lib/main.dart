@@ -1,6 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:kt_scan_text/views/home/home.dart';
+import 'package:kt_scan_text/views/splash/splash.dart';
 
 late List<CameraDescription> cameras;
 
@@ -22,8 +22,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      
-      home: const HomePage(),
+      home: const SplashPage(),
     );
   }
 }

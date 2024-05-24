@@ -8,7 +8,6 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kt_scan_text/objects/text_group.dart';
 import 'package:kt_scan_text/views/result_filter/widgets/camera_customer.dart';
-import 'package:kt_scan_text/views/result_filter/widgets/default_data_scan.dart';
 
 class GalleryView extends StatefulWidget {
   const GalleryView(
@@ -131,31 +130,31 @@ class _GalleryViewState extends State<GalleryView> {
                                       fontWeight: FontWeight.normal,
                                       fontStyle: FontStyle.italic),
                                 )),
-                            TextButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => DefaultDataScan(
-                                                pathIamge: _image != null
-                                                    ? _image!.path
-                                                    : "",
-                                                listTextGroup:
-                                                    widget.listTextGroup,
-                                                listKeyValues:
-                                                    widget.listKeyValues,
-                                                listStandardAngle:
-                                                    widget.listStandardAngle,
-                                              )));
-                                },
-                                child: const Text(
-                                  "default",
-                                  style: TextStyle(
-                                      color: Colors.green,
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.normal,
-                                      fontStyle: FontStyle.italic),
-                                ))
+                            // TextButton(
+                            //     onPressed: () {
+                            //       Navigator.push(
+                            //           context,
+                            //           MaterialPageRoute(
+                            //               builder: (context) => DefaultDataScan(
+                            //                     pathIamge: _image != null
+                            //                         ? _image!.path
+                            //                         : "",
+                            //                     listTextGroup:
+                            //                         widget.listTextGroup,
+                            //                     listKeyValues:
+                            //                         widget.listKeyValues,
+                            //                     listStandardAngle:
+                            //                         widget.listStandardAngle,
+                            //                   )));
+                            //     },
+                            //     child: const Text(
+                            //       "default",
+                            //       style: TextStyle(
+                            //           color: Colors.green,
+                            //           fontSize: 10,
+                            //           fontWeight: FontWeight.normal,
+                            //           fontStyle: FontStyle.italic),
+                            //     ))
                           ],
                         ),
                       )

@@ -6,7 +6,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:kt_scan_text/main.dart';
 import 'package:kt_scan_text/views/home/home.dart';
 import 'package:kt_scan_text/views/result_filter/result_filter.dart';
-import 'package:kt_scan_text/views/scan_doc.dart/scan_doc.dart';
 import 'package:kt_scan_text/views/scans/scan_text_gg.dart';
 
 class CameraCustomer extends StatefulWidget {
@@ -56,8 +55,8 @@ class _CameraCustomerState extends State<CameraCustomer> {
       await cameraController!.setFlashMode(FlashMode.auto);
       XFile picture = await cameraController!.takePicture();
       if (picture.path.isNotEmpty) {
-        // ignore: use_build_context_synchronously
         Navigator.push(
+            // ignore: use_build_context_synchronously
             context,
             MaterialPageRoute(
                 builder: (context) => ScanTextGg(
@@ -77,8 +76,8 @@ class _CameraCustomerState extends State<CameraCustomer> {
     final pickedfile = await imgPicker!.pickImage(source: source);
     if (pickedfile != null) {
       if (pickedfile.path.isNotEmpty) {
-        // ignore: use_build_context_synchronously
         Navigator.push(
+            // ignore: use_build_context_synchronously
             context,
             MaterialPageRoute(
                 builder: (context) => ScanTextGg(
@@ -86,6 +85,23 @@ class _CameraCustomerState extends State<CameraCustomer> {
                     )));
       }
     }
+  }
+
+  switchCamera() {
+    if (cameras.isEmpty) return;
+    if (cameraController == null) return;
+    final lensDirection = cameraController!.description.lensDirection;
+    if (lensDirection == CameraLensDirection.front) {
+      cameraController = CameraController(cameras.first, ResolutionPreset.high);
+    } else {
+      cameraController = CameraController(cameras.last, ResolutionPreset.high);
+    }
+    cameraController!.initialize().then(
+      (value) {
+        if (!mounted) return;
+        setState(() {});
+      },
+    );
   }
 
   @override
@@ -97,9 +113,9 @@ class _CameraCustomerState extends State<CameraCustomer> {
       body: Stack(children: [
         Center(
           child: Container(
-              decoration: const BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
+              decoration: BoxDecoration(
+                  color: Colors.redAccent.shade100,
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
                   shape: BoxShape.rectangle),
               height: MediaQuery.of(context).size.height / 1.5,
               width: MediaQuery.of(context).size.width / 1.3,
@@ -132,33 +148,35 @@ class _CameraCustomerState extends State<CameraCustomer> {
                               color: Colors.black,
                             ))),
                   ),
-                  const Expanded(
+                  Expanded(
                     child: Text(
-                      "Quét Bill",
+                      "Quét Bill".toUpperCase(),
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.redAccent,
                           fontStyle: FontStyle.normal,
                           fontSize: 20,
                           fontWeight: FontWeight.bold),
                     ),
                   ),
-                  Expanded(
-                      child: Platform.isAndroid
-                          ? IconButton(
-                              alignment: Alignment.centerRight,
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const ScanDocPage()));
-                              },
-                              icon: const Icon(
-                                Icons.document_scanner_outlined,
-                                color: Colors.white,
-                              ))
-                          : const SizedBox())
+                  const Expanded(
+                      child:
+                          // Platform.isAndroid
+                          //     ? IconButton(
+                          //         alignment: Alignment.centerRight,
+                          //         onPressed: () {
+                          //           Navigator.push(
+                          //               context,
+                          //               MaterialPageRoute(
+                          //                   builder: (context) =>
+                          //                       const ScanDocPage()));
+                          //         },
+                          //         icon: const Icon(
+                          //           Icons.document_scanner_outlined,
+                          //           color: Colors.white,
+                          //         ))
+                          //     :
+                          SizedBox())
                 ],
               ),
               Column(
@@ -190,7 +208,12 @@ class _CameraCustomerState extends State<CameraCustomer> {
                           )),
                       SizedBox(
                         child: IconButton(
-                            onPressed: () {}, icon: const Icon(Icons.camera)),
+                            onPressed: cameraController == null
+                                ? null
+                                : () {
+                                    switchCamera();
+                                  },
+                            icon: const Icon(Icons.camera)),
                       )
                     ],
                   ),
@@ -206,9 +229,9 @@ class _CameraCustomerState extends State<CameraCustomer> {
                                   MaterialPageRoute(
                                       builder: (context) => const HomePage()));
                             },
-                            child: const Text(
-                              "Trở về Trang chủ",
-                              style: TextStyle(
+                            child: Text(
+                              "Trở về Trang chủ".toUpperCase(),
+                              style: const TextStyle(
                                   color: Colors.redAccent,
                                   fontStyle: FontStyle.normal),
                             )),

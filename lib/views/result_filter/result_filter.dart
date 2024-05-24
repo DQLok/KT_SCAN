@@ -40,14 +40,18 @@ class _ResultFilterPageState extends State<ResultFilterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Danh sách Bill".toUpperCase(),style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
-        titleTextStyle: const TextStyle(fontSize: 20, fontStyle: FontStyle.normal),
+        title: Text(
+          "Danh sách Bill".toUpperCase(),
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        ),
+        titleTextStyle:
+            const TextStyle(fontSize: 20, fontStyle: FontStyle.normal),
         backgroundColor: Colors.redAccent,
         centerTitle: true,
         leading: IconButton(
             onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const HomePage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const HomePage()));
             },
             icon: const Icon(
               Icons.home_rounded,
@@ -57,8 +61,10 @@ class _ResultFilterPageState extends State<ResultFilterPage> {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const CameraCustomer()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const CameraCustomer()));
               },
               icon: const Icon(Icons.camera_alt_outlined))
         ],
@@ -77,15 +83,15 @@ class _ResultFilterPageState extends State<ResultFilterPage> {
               items: [
                 FlashyTabBarItem(
                   icon: const Icon(Icons.list_alt),
-                  title: const Text('Đang đợi'),
+                  title: Text('Đang đợi'.toUpperCase()),
                 ),
                 FlashyTabBarItem(
                   icon: const Icon(Icons.fact_check_outlined),
-                  title: const Text('Thành công'),
+                  title: Text('Thành công'.toUpperCase()),
                 ),
                 FlashyTabBarItem(
                   icon: const Icon(Icons.remove_circle_outline_sharp),
-                  title: const Text('Thất Bại'),
+                  title: Text('Thất Bại'.toUpperCase()),
                 ),
               ],
             ),
@@ -131,9 +137,12 @@ class _ResultFilterPageState extends State<ResultFilterPage> {
               listBillStatus = ListBillStatus(status: "", listInforBill: []);
             });
           },
-          icon: const Icon(
-            Icons.delete_forever_outlined,
-            color: Colors.black,
+          icon: const CircleAvatar(
+            backgroundColor: Colors.redAccent,
+            child: Icon(
+              Icons.delete_forever_outlined,
+              color: Colors.white,
+            ),
           )),
     );
   }

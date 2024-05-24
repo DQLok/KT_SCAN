@@ -1,17 +1,25 @@
 String removeVietnameseAccent(String text) {
   return text
-      .replaceAll(RegExp(r'[àáạảãâầấậẩẫăằắặẳẵ]'), 'a')
-      .replaceAll(RegExp(r'[èéẹẻẽêềếệểễ]'), 'e')
-      .replaceAll(RegExp(r'[ìíịỉĩ]'), 'i')
-      .replaceAll(RegExp(r'[òóọỏõôồốộổỗơờớợởỡ]'), 'o')
-      .replaceAll(RegExp(r'[ùúụủũưừứựửữ]'), 'u')
-      .replaceAll(RegExp(r'[ỳýỵỷỹ]'), 'y')
+      .replaceAll(RegExp(r'[àáâãåǻāăąǎαάảạầấẫẩậằắẵẳặа]'), 'a')
+      .replaceAll(RegExp(r'[èéêëēĕėęěẽẻẹềếễểệе]'), 'e')
+      .replaceAll(RegExp(r'[ìíîïĩīĭǐįıỉịї]'), 'i')
+      .replaceAll(RegExp(r'[òóôõōŏǒőơøǿοόỏọồốỗổộờớỡởợо]'), 'o')
+      .replaceAll(RegExp(r'[ùúûũūŭůűųưǔǖǘǚǜủụừứữửự]'), 'u')
+      .replaceAll(RegExp(r'[ýÿŷỳỹỷỵ]'), 'y')
       .replaceAll(RegExp(r'[đ]'), 'd')
-      .replaceAll(RegExp(r'[ÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴ]'), 'A')
-      .replaceAll(RegExp(r'[ÈÉẸẺẼÊỀẾỆỂỄ]'), 'E')
-      .replaceAll(RegExp(r'[ÌÍỊỈĨ]'), 'I')
-      .replaceAll(RegExp(r'[ÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠ]'), 'O')
-      .replaceAll(RegExp(r'[ÙÚỤỦŨƯỪỨỰỬỮ]'), 'U')
-      .replaceAll(RegExp(r'[ỲÝỴỶỸ]'), 'Y')
-      .replaceAll(RegExp(r'[Đ]'), 'D');
+      .replaceAll(RegExp(r'[ÀÁÂÃÄÅǺĀĂĄǍΑΆẢẠẦẪẨẬẰẮẴẲẶА]'), 'A')
+      .replaceAll(RegExp(r'[ÈÉÊËĒĔĖĘĚΕΈẼẺẸỀẾỄỂỆЕ]'), 'E')
+      .replaceAll(RegExp(r'[ÌÍÎÏĨĪĬǏĮİΊΙΪỈỊ]'), 'I')
+      .replaceAll(RegExp(r'[ÒÓÔÕŌŎǑŐƠØǾΟΌỎỌỒỐỖỔỘỜỚỠỞỢО]'), 'O')
+      .replaceAll(RegExp(r'[ÙÚÛŨŪŬŮŰŲƯǓǕǗǙǛŨỦỤỪỨỮỬỰ]'), 'U')
+      .replaceAll(RegExp(r'[ÝŸŶΥΎΫỲỸỶỴ]'), 'Y')
+      .replaceAll(RegExp(r'[Đ]'), 'D')
+      .replaceAll(RegExp(r'ĹĻĽĿŁ'), 'L')
+      .replaceAll(RegExp(r'ĺļľŀł'), 'l')
+      .replaceAll(RegExp(r'ÇĆĈĊČ'), 'C')
+      .replaceAll(RegExp(r'çćĉċč'), 'c');
+}
+
+String removeChartGetOnlyNumber(String text) {
+  return text.replaceAll(RegExp(r'\D'), '');
 }

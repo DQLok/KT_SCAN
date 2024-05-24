@@ -218,8 +218,47 @@
       "depth": 2,
       "numering": 0,
       "lang": {
-        "vn": "Gourmet Seafood",
-        "en": "Hải Sản Cao Cấp"
+        "vn": "Hải Sản Cao Cấp",
+        "en": "Gourmet Seafood"
+      },
+      "status": "active"
+    },
+    {
+      "brandId": 1,
+      "id": 7,
+      "name": "Deluxe",
+      "parent": 1,
+      "depth": 2,
+      "numering": 1,
+      "lang": {
+        "vn": "Thập Cẩm Cao Cấp",
+        "en": "Deluxe"
+      },
+      "status": "active"
+    },
+    {
+      "brandId": 1,
+      "id": 8,
+      "name": "Classic",
+      "parent": 1,
+      "depth": 2,
+      "numering": 2,
+      "lang": {
+        "vn": "Truyền thống",
+        "en": "Classic"
+      },
+      "status": "active"
+    },
+    {
+      "brandId": 1,
+      "id": 9,
+      "name": "Vegetarian Pizza",
+      "parent": 1,
+      "depth": 2,
+      "numering": 3,
+      "lang": {
+        "vn": "Pizza Chay",
+        "en": "Vegetarian Pizza"
       },
       "status": "active"
     },
@@ -246,6 +285,32 @@
       "lang": {
         "vn": "Mỳ Ý",
         "en": "Pasta"
+      },
+      "status": "active"
+    },
+    {
+      "brandId": 1,
+      "id": 5,
+      "name": "Drink",
+      "parent": 0,
+      "depth": 1,
+      "numering": 3,
+      "lang": {
+        "vn": "Nước uống",
+        "en": "Drink"
+      },
+      "status": "active"
+    },
+    {
+      "brandId": 1,
+      "id": 6,
+      "name": "Appetizer",
+      "parent": 0,
+      "depth": 1,
+      "numering": 4,
+      "lang": {
+        "vn": "Khai vị",
+        "en": "Appetizer"
       },
       "status": "active"
     }
@@ -292,6 +357,96 @@
       "lang": {
         "vn": "Mỳ Ý Tôm Sốt Kem Cà Chua",
         "en": "Pasta shrimp rose"
+      },
+      "status": "active",
+      "isAttribute": false
+    },
+    {
+      "brandId": 1,
+      "id": 4,
+      "caregoryId": 4,
+      "name": "Stir fried pasta with spicy seafood",
+      "type": "alacart",
+      "mType": "product",
+      "numering": 0,
+      "lang": {
+        "vn": "Mỳ Ý Cay Hải Sản",
+        "en": "Stir fried pasta with spicy seafood"
+      },
+      "status": "active",
+      "isAttribute": false
+    },
+    {
+      "brandId": 1,
+      "id": 5,
+      "caregoryId": 4,
+      "name": "Stir fried pasta with spicy sausage",
+      "type": "alacart",
+      "mType": "product",
+      "numering": 0,
+      "lang": {
+        "vn": "Mỳ Ý Cay Xúc Xích",
+        "en": "Stir fried pasta with spicy sausage"
+      },
+      "status": "active",
+      "isAttribute": false
+    },
+    {
+      "brandId": 1,
+      "id": 6,
+      "caregoryId": 4,
+      "name": "Pasta ham & mushroom in creamy sauce",
+      "type": "alacart",
+      "mType": "product",
+      "numering": 0,
+      "lang": {
+        "vn": "Mỳ Ý Giăm Bông Và Nấm Sốt Kem",
+        "en": "Pasta ham & mushroom in creamy sauce"
+      },
+      "status": "active",
+      "isAttribute": false
+    },
+    {
+      "brandId": 1,
+      "id": 7,
+      "caregoryId": 4,
+      "name": "Pasta bolognese",
+      "type": "alacart",
+      "mType": "product",
+      "numering": 0,
+      "lang": {
+        "vn": "Mỳ Ý thịt bò bằm",
+        "en": "Pasta bolognese"
+      },
+      "status": "active",
+      "isAttribute": false
+    },
+    {
+      "brandId": 1,
+      "id": 8,
+      "caregoryId": 4,
+      "name": "Pasta with vegetable in marinara sauce",
+      "type": "alacart",
+      "mType": "product",
+      "numering": 0,
+      "lang": {
+        "vn": "Mỳ Ý Chay Sốt Marinara",
+        "en": "Pasta with vegetable in marinara sauce"
+      },
+      "status": "active",
+      "isAttribute": false
+    },
+    {
+      "brandId": 1,
+      "id": 9,
+      "caregoryId": 4,
+      "name": "Pasta mushroom with cream sauce",
+      "type": "alacart",
+      "mType": "product",
+      "numering": 0,
+      "lang": {
+        "vn": "Mỳ Ý Chay Sốt Kem Tươi",
+        "en": "Pasta mushroom with cream sauce"
       },
       "status": "active",
       "isAttribute": false
@@ -541,6 +696,66 @@
       "erpCode": "",
       "price": 139000,
       "details": null
+    },
+    {
+      "id": 12,
+      "itemId": 4,
+      "name": "Stir fried pasta with spicy seafood",
+      "code": "",
+      "posCode": "",
+      "erpCode": "",
+      "price": 139000,
+      "details": null
+    },
+    {
+      "id": 13,
+      "itemId": 5,
+      "name": "Stir fried pasta with spicy sausage",
+      "code": "",
+      "posCode": "",
+      "erpCode": "",
+      "price": 119000,
+      "details": null
+    },
+    {
+      "id": 14,
+      "itemId": 6,
+      "name": "Pasta ham & mushroom in creamy sauce",
+      "code": "",
+      "posCode": "",
+      "erpCode": "",
+      "price": 119000,
+      "details": null
+    },
+    {
+      "id": 15,
+      "itemId": 7,
+      "name": "Pasta bolognese",
+      "code": "",
+      "posCode": "",
+      "erpCode": "",
+      "price": 139000,
+      "details": null
+    },
+    {
+      "id": 16,
+      "itemId": 8,
+      "name": "Pasta with vegetable in marinara sauce",
+      "code": "",
+      "posCode": "",
+      "erpCode": "",
+      "price": 109000,
+      "details": null
+    },
+    {
+      "id": 19,
+      "itemId": 9,
+      "name": "Pasta mushroom with cream sauce",
+      "code": "",
+      "posCode": "",
+      "erpCode": "",
+      "price": 109000,
+      "details": null
     }
   ],
   "itemAttributeDetails": [
@@ -634,7 +849,7 @@
         "id": "126453271",
         "name": "Pizza Hải Sản Pesto Xanh",
         "price": 185000,
-        "addons": {
+        "modifier": {
           "name": "Đế Dày - cỡ Nhỏ",
           "price": 0
         }
@@ -650,7 +865,7 @@
         "id": "145754253",
         "name": "Pizza Hải Sản Pesto Xanh",
         "price": 185000,
-        "addons": {
+        "modifier": {
           "name": "Đế Dày - cỡ Vừa",
           "price": 90000
         }
@@ -666,7 +881,7 @@
         "id": "183753643",
         "name": "Pizza Hải Sản Pesto Xanh",
         "price": 185000,
-        "addons": {
+        "modifier": {
           "name": "Đế Dày - cỡ Lớn",
           "price": 200000
         }
@@ -682,7 +897,7 @@
         "id": "191453742",
         "name": "Pizza Hải Sản Pesto Xanh",
         "price": 185000,
-        "addons": {
+        "modifier": {
           "name": "Đế Mỏng - cỡ Vừa",
           "price": 90000
         }
@@ -698,7 +913,7 @@
         "id": "163573638",
         "name": "Pizza Hải Sản Pesto Xanh",
         "price": 185000,
-        "addons": {
+        "modifier": {
           "name": "Đế Mỏng - cỡ Lớn",
           "price": 200000
         }
@@ -714,7 +929,7 @@
         "id": "132543851",
         "name": "Pizza Hải Sản Pesto Xanh",
         "price": 185000,
-        "addons": {
+        "modifier": {
           "name": "Đế Đặc Biệt Viền Phô Mai - cỡ Vừa",
           "price": 140000
         }
@@ -730,7 +945,7 @@
         "id": "121443876",
         "name": "Pizza Hải Sản Pesto Xanh",
         "price": 185000,
-        "addons": {
+        "modifier": {
           "name": "Đế Đặc Biệt Viền Phô Mai - cỡ Lớn",
           "price": 270000
         }
@@ -746,7 +961,7 @@
         "id": "116543974",
         "name": "Pizza Hải Sản Pesto Xanh",
         "price": 185000,
-        "addons": {
+        "modifier": {
           "name": "Đế Đặc Biệt Viền Phô Mai Xúc Xích - Vừa",
           "price": 190000
         }
@@ -762,7 +977,7 @@
         "id": "112334334",
         "name": "Pizza Hải Sản Pesto Xanh",
         "price": 185000,
-        "addons": {
+        "modifier": {
           "name": "Đế Đặc Biệt Viền Phô Mai Xúc Xích - Lớn",
           "price": 340000
         }
@@ -777,8 +992,8 @@
       "gf": {
         "id": "167454794",
         "name": "Pizza Phô Mai",
-        "price": 139000,
-        "addons": {
+        "price": 135000,
+        "modifier": {
           "name": "Đế Dày - cỡ Nhỏ",
           "price": 0
         }
@@ -793,8 +1008,8 @@
       "gf": {
         "id": "167789794",
         "name": "Pizza Phô Mai",
-        "price": 139000,
-        "addons": {
+        "price": 135000,
+        "modifier": {
           "name": "Đế Dày - cỡ Vừa",
           "price": 90000
         }
@@ -809,8 +1024,8 @@
       "gf": {
         "id": "167123794",
         "name": "Pizza Phô Mai",
-        "price": 139000,
-        "addons": {
+        "price": 135000,
+        "modifier": {
           "name": "Đế Dày - cỡ Lớn",
           "price": 200000
         }
@@ -825,8 +1040,8 @@
       "gf": {
         "id": "167129876",
         "name": "Pizza Phô Mai",
-        "price": 139000,
-        "addons": {
+        "price": 135000,
+        "modifier": {
           "name": "Đế Mỏng - cỡ Vừa",
           "price": 90000
         }
@@ -841,8 +1056,8 @@
       "gf": {
         "id": "167124676",
         "name": "Pizza Phô Mai",
-        "price": 139000,
-        "addons": {
+        "price": 135000,
+        "modifier": {
           "name": "Đế Mỏng - cỡ Lớn",
           "price": 200000
         }
@@ -857,8 +1072,8 @@
       "gf": {
         "id": "164789676",
         "name": "Pizza Phô Mai",
-        "price": 139000,
-        "addons": {
+        "price": 135000,
+        "modifier": {
           "name": "Đế Đặc Biệt Viền Phô Mai - cỡ Vừa",
           "price": 140000
         }
@@ -873,8 +1088,8 @@
       "gf": {
         "id": "164569321",
         "name": "Pizza Phô Mai",
-        "price": 139000,
-        "addons": {
+        "price": 135000,
+        "modifier": {
           "name": "Đế Đặc Biệt Viền Phô Mai - cỡ Lớn",
           "price": 270000
         }
@@ -889,8 +1104,8 @@
       "gf": {
         "id": "164569375",
         "name": "Pizza Phô Mai",
-        "price": 139000,
-        "addons": {
+        "price": 135000,
+        "modifier": {
           "name": "Đế Đặc Biệt Viền Phô Mai Xúc Xích - Vừa",
           "price": 190000
         }
@@ -900,13 +1115,13 @@
       "price": 299000
     },
     {
-      "id": 17,
+      "id": 18,
       "name": "Double Cheese-2C-L",
       "gf": {
         "id": "164566925",
         "name": "Pizza Phô Mai",
-        "price": 139000,
-        "addons": {
+        "price": 135000,
+        "modifier": {
           "name": "Đế Đặc Biệt Viền Phô Mai Xúc Xích - Lớn",
           "price": 340000
         }

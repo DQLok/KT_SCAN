@@ -1,29 +1,29 @@
-import 'package:kt_scan_text/models/master_data/addons.dart';
+import 'package:kt_scan_text/models/master_data/modifier.dart';
 
 class Gf {
   String id;
   String name;
   int price;
-  Addons addons;
+  Modifier modifier;
 
   Gf({
     required this.id,
     required this.name,
     required this.price,
-    required this.addons,
+    required this.modifier,
   });
 
   factory Gf.fromJson(Map<String, dynamic> json) => Gf(
         id: json["id"],
         name: json["name"],
         price: json["price"],
-        addons: Addons.fromJson(json["addons"]),
+        modifier: Modifier.fromJson(json["modifier"]),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
         "price": price,
-        "addons": addons.toJson(),
+        "modifier": modifier.toJson(),
       };
 }

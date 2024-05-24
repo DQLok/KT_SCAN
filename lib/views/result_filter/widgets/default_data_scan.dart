@@ -3,7 +3,6 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:kt_scan_text/models/master_data/data_mapping_channel.dart';
 import 'package:kt_scan_text/models/master_data/master_data.dart';
 import 'package:kt_scan_text/objects/key_value_master_data.dart';
 import 'package:kt_scan_text/objects/text_group.dart';
@@ -11,6 +10,7 @@ import 'package:kt_scan_text/utils/dice_formula.dart';
 import 'package:kt_scan_text/utils/levenshtein_formula.dart';
 import 'package:kt_scan_text/utils/regex.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:kt_scan_text/utils/utils.dart';
 
 class DefaultDataScan extends StatefulWidget {
   const DefaultDataScan(
@@ -103,85 +103,74 @@ class _DefaultDataScanState extends State<DefaultDataScan> {
   }
 
   mappingData() {
-    checkMap = listKeyValuesChild.any(
-      (element) => masterData!.dataMappingChannels.any(
-        (el) => removeVietnameseAccent(el.gf.name).contains(element.keyTG.text),
-      ),
-    );
-    print(checkMap);
-    List<String> listName = [];
-    for (var element in masterData!.dataMappingChannels) {
-      listName.add(removeVietnameseAccent(element.gf.name.toLowerCase()));
-    }
     listKeyValueChildMasterData.clear();
-    List<DataMappingChannel> listDataFilter = masterData!.dataMappingChannels.where((element) => listKeyValuesChild.any((el) {
-      String key = removeVietnameseAccent(element.gf.name).toLowerCase();
-      String values = removeVietnameseAccent(el.keyTG.text).toLowerCase();
-      bool check = getMaxRating(key, [values]);
-      if (check) {
-        listKeyValueChildMasterData.add(KeyValuesChildsMasterData(parent: KeyValueMasterData(key: el, dataMappingChannel: element), child: []));
-      }
-      return check;
-      },),).toList();
-    print("---alo-----");
-    for (var element in listDataFilter) {
-      print(element.gf.name);
-    }
-    print("before: ${listKeyValueChildMasterData.length}");
-    for (var element in listKeyValueChildMasterData) {
-      print(element.parent.dataMappingChannel.gf.name);
-    }
-    listKeyValueChildMasterData = listKeyValueChildMasterData.where((element) => listKeyValuesChild.any((el) {
-      String key = removeVietnameseAccent(element.parent.dataMappingChannel.gf.addons.name).toLowerCase();
-      String values = removeVietnameseAccent(el.keyTG.text).toLowerCase();
-      bool check = getMaxRating(key, [values]) || key.contains(values);
-      if (check) {
-        element.child.add(KeyValueMasterData(key: el, dataMappingChannel: element.parent.dataMappingChannel));
-      }
-      return check;
-      },),).toList();
-    print("after: ${listKeyValueChildMasterData.length}");
-    for (var element in listKeyValueChildMasterData) {
-      print(element.parent.dataMappingChannel.gf.name);
-    }
-    //----------
-    if (listKeyValueChildMasterData.isNotEmpty && listKeyValueChildMasterData.length > 1){
-      for (var element in listKeyValueChildMasterData) {
-        print(element.parent.key.keyTG.text+" - "+element.parent.dataMappingChannel.posCode);
-        if (element.child.isNotEmpty) {
-          print("final:");
-          print(element.child.first.dataMappingChannel.gf.addons.name);
-          print(element.child.first.key.valueTG.last.text);
-          print("*****");
-          print(element.child.first.dataMappingChannel.gf.addons.price.toString());
-          print(double.parse(element.child.first.key.valueTG.last.text).toInt().toString());
-          print("*****");
-          if (element.child.first.dataMappingChannel.gf.addons.price == int.parse(element.child.first.key.valueTG.last.text.replaceAll(".",""))) {
-            print("OKKKKKK");
+    //Step1: get Key first(gr-name)
+    masterData!.dataMappingChannels
+        .where(
+          (element) => listKeyValuesChild.any(
+            (el) {
+              bool check = comapreTwoStringCus(element.gf.name, el.keyTG.text);
+              if (comapreTwoStringCus(element.gf.name, el.keyTG.text)) {
+                listKeyValueChildMasterData.add(KeyValuesChildsMasterData(
+                    parent: KeyValueMasterData(
+                        key: el, dataMappingChannel: element),
+                    child: []));
+              }
+              return check;
+            },
+          ),
+        )
+        .toList();
+    if (listKeyValueChildMasterData.isNotEmpty) {
+      if (listKeyValueChildMasterData.any(
+        (element) =>
+            element.parent.dataMappingChannel.gf.modifier.name.isNotEmpty,
+      )) {
+        //Step2: get child Key (gr-addons-name)
+        listKeyValueChildMasterData = listKeyValueChildMasterData
+            .where(
+              (element) => listKeyValuesChild.any(
+                (el) {
+                  bool check = comapreTwoStringCus(
+                      element.parent.dataMappingChannel.gf.modifier.name,
+                      el.keyTG.text);
+                  if (check) {
+                    element.child.add(KeyValueMasterData(
+                        key: el,
+                        dataMappingChannel: element.parent.dataMappingChannel));
+                  }
+                  return check;
+                },
+              ),
+            )
+            .toList();
+        //Step3: get child Key (gr-modifier-name) with child >1
+        if (listKeyValueChildMasterData.isNotEmpty &&
+            listKeyValueChildMasterData.length > 1) {
+          for (var element in listKeyValueChildMasterData) {
+            if (element.child.isNotEmpty) {
+              int priceData = int.parse(removeChartGetOnlyNumber(
+                  "${element.child.first.dataMappingChannel.gf.modifier.price}"));
+              int priceBill = int.parse(removeChartGetOnlyNumber(
+                  element.child.first.key.valueTG.last.text));
+              if (priceData == 0 || priceBill == 0) {
+                element.child.clear();
+              } else {
+                // int numberDiv = priceBill ~/ priceData;
+                int numberMod = priceBill % priceData;
+                if (numberMod != 0) {
+                  element.child.clear();
+                }
+              }
+            }
           }
+          //Step4: get final child
+          listKeyValueChildMasterData.removeWhere(
+            (element) => element.child.isEmpty,
+          );
         }
-      }
-    }
-
-    //------
-    // List<DataMappingChannel> listDataFilterChild = listDataFilter.where((element) => listKeyValuesChild.any((el) {
-    //   String key = removeVietnameseAccent(element.gf.addons.name).toLowerCase();
-    //   print(key);
-    //   String values = removeVietnameseAccent(el.keyTG.text).toLowerCase();
-    //   return getMaxRating(key, [values]) || key.contains(values);
-    //   },),).toList();
-    //   print("child: ${listDataFilterChild.length}");
-    // for (var element in listDataFilterChild) {
-    //   print(element.posCode);
-    // }
-    String key = listKeyValuesChild.elementAt(6).keyTG.text.toLowerCase();
-    print("key: ${listKeyValuesChild.elementAt(6).keyTG.text.toLowerCase()}");
-    print("-----Dice----");
-    //--------------
-    print(DiceFormula.maxRating(key, listName));
-    print("-----------");
-    print("-----Leven-----");
-    print(LevenshteinFormula.maxRating(key, listName));
+      } else {}
+    } else {}
     setState(() {});
   }
 
@@ -314,7 +303,7 @@ class _DefaultDataScanState extends State<DefaultDataScan> {
                 listKeyValuesChild.isEmpty
                     ? const SizedBox()
                     : showListKeyValue(listKeyValuesChild),
-                    const Divider(),
+                const Divider(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -346,7 +335,7 @@ class _DefaultDataScanState extends State<DefaultDataScan> {
                           ],
                         ),
                       )
-                    : const SizedBox(),                
+                    : const SizedBox(),
               ],
             )),
       ]),

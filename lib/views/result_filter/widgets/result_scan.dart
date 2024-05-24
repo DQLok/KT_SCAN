@@ -29,12 +29,18 @@ class _ResultScanState extends State<ResultScan> {
   checkFileinLocal() async {
     String path = widget.pathIamge;
     if (path.isNotEmpty) {
-      path = await getLocalPathCache(path);
-      fileImge = File(path);
+      String pathCache = await getLocalPathCache(path);
+      fileImge = File(pathCache);
       if (fileImge.existsSync()) {
         checkPathImg = true;
       } else {
-        checkPathImg = false;
+        String pathApplication = await getLocalTemporaryPath(path);
+        fileImge = File(pathApplication);
+        if (fileImge.existsSync()) {
+          checkPathImg = true;
+        } else {
+          checkPathImg = false;
+        }
       }
     } else {
       checkPathImg = false;
@@ -91,13 +97,14 @@ class _ResultScanState extends State<ResultScan> {
                             children: [
                               Container(
                                 margin: const EdgeInsets.all(10),
-                                width: MediaQuery.of(context).size.width/1.5,
+                                width: MediaQuery.of(context).size.width / 1.5,
                                 height: MediaQuery.of(context).size.height / 2,
                                 decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: FileImage(fileImge),fit: BoxFit.fill),
-                                    border:
-                                        Border.all(color: Colors.greenAccent),),
+                                  image: DecorationImage(
+                                      image: FileImage(fileImge),
+                                      fit: BoxFit.fill),
+                                  border: Border.all(color: Colors.greenAccent),
+                                ),
                               ),
                             ],
                           ),
@@ -153,7 +160,8 @@ class _ResultScanState extends State<ResultScan> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const ResultFilterPage()));
+                                  builder: (context) =>
+                                      const ResultFilterPage()));
                         },
                         child: const Text("Danh sách Bill",
                             style: TextStyle(

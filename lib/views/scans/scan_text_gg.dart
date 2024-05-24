@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +8,7 @@ import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart
 import 'package:kt_scan_text/objects/list_bill_status.dart';
 import 'package:kt_scan_text/objects/text_group.dart';
 import 'package:kt_scan_text/store_preference/store_preference.dart';
+import 'package:kt_scan_text/utils/utils.dart';
 import 'package:kt_scan_text/views/result_filter/widgets/result_scan.dart';
 import 'package:kt_scan_text/views/scans/widgets/detector_view.dart';
 import 'package:kt_scan_text/views/scans/widgets/text_detector_painter.dart';
@@ -35,6 +38,7 @@ class _ScanTextGgState extends State<ScanTextGg> {
   AppPreference appPreference = AppPreference();
   bool showAndHide = false;
   String pathImage = "";
+  Uint8List? fileSaveIos;
 
   @override
   void dispose() async {
@@ -90,6 +94,7 @@ class _ScanTextGgState extends State<ScanTextGg> {
       _customPaint = null;
       processBlocks();
       pathImage = inputImage.filePath ?? "";
+      fileSaveIos = File(pathImage).readAsBytesSync();
     }
     _isBusy = false;
     if (mounted) {
@@ -395,6 +400,15 @@ class _ScanTextGgState extends State<ScanTextGg> {
         if (pathImage.isNotEmpty) {
           List<String> listChar = pathImage.split("/");
           pathImage = listChar.last;
+          if (Platform.isIOS) {
+            String pathSave = await getLocalTemporaryPath(pathImage);
+            File fileSave = File(pathSave);
+            if (fileSaveIos != null) {
+              fileSave.writeAsBytes(fileSaveIos!);
+              List<String> listChar = fileSave.path.split("/");
+              pathImage = listChar.last;
+            }
+          }
         } else {
           pathImage = "";
         }
@@ -409,8 +423,8 @@ class _ScanTextGgState extends State<ScanTextGg> {
       }
 
       //------
-      // ignore: use_build_context_synchronously
       Navigator.push(
+          // ignore: use_build_context_synchronously
           context,
           MaterialPageRoute(
               builder: (context) => ResultScan(

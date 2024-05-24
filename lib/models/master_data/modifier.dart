@@ -1,13 +1,13 @@
-class Addons {
+class Modifier {
   String name;
   int price;
 
-  Addons({
+  Modifier({
     required this.name,
     required this.price,
   });
 
-  factory Addons.fromJson(Map<String, dynamic> json) => Addons(
+  factory Modifier.fromJson(Map<String, dynamic> json) => Modifier(
         name: json["name"],
         price: json["price"],
       );
