@@ -2,9 +2,9 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/services.dart';
-import 'package:teca/utils/dice_formula.dart';
-import 'package:teca/utils/levenshtein_formula.dart';
-import 'package:teca/utils/regex.dart';
+import 'package:techable/utils/dice_formula.dart';
+import 'package:techable/utils/levenshtein_formula.dart';
+import 'package:techable/utils/regex.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 

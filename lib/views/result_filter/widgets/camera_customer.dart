@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:teca/main.dart';
-import 'package:teca/views/home/home.dart';
-import 'package:teca/views/result_filter/result_filter.dart';
-import 'package:teca/views/scans/scan_text_gg.dart';
+import 'package:techable/main.dart';
+import 'package:techable/views/home/home.dart';
+import 'package:techable/views/result_filter/result_filter.dart';
+import 'package:techable/views/scans/scan_text_gg.dart';
 
 class CameraCustomer extends StatefulWidget {
   const CameraCustomer({super.key});
@@ -25,7 +25,8 @@ class _CameraCustomerState extends State<CameraCustomer> {
     super.initState();
     imgPicker = ImagePicker();
     if (cameras.isEmpty) return;
-    cameraController = CameraController(cameras.first, ResolutionPreset.max);
+    cameraController = CameraController(cameras.first, ResolutionPreset.max,
+        enableAudio: false);
     cameraController!.initialize().then((value) {
       if (!mounted) {
         return;

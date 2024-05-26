@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:teca/utils/utils.dart';
-import 'package:teca/views/home/home.dart';
-import 'package:teca/views/result_filter/result_filter.dart';
-import 'package:teca/views/result_filter/widgets/camera_customer.dart';
+import 'package:techable/utils/utils.dart';
+import 'package:techable/views/home/home.dart';
+import 'package:techable/views/result_filter/result_filter.dart';
+import 'package:techable/views/result_filter/widgets/camera_customer.dart';
 
 class ResultScan extends StatefulWidget {
   const ResultScan({super.key, required this.pathIamge});

@@ -5,13 +5,13 @@ import 'dart:typed_data';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
-import 'package:teca/objects/list_bill_status.dart';
-import 'package:teca/objects/text_group.dart';
-import 'package:teca/store_preference/store_preference.dart';
-import 'package:teca/utils/utils.dart';
-import 'package:teca/views/result_filter/widgets/result_scan.dart';
-import 'package:teca/views/scans/widgets/detector_view.dart';
-import 'package:teca/views/scans/widgets/text_detector_painter.dart';
+import 'package:techable/objects/list_bill_status.dart';
+import 'package:techable/objects/text_group.dart';
+import 'package:techable/store_preference/store_preference.dart';
+import 'package:techable/utils/utils.dart';
+import 'package:techable/views/result_filter/widgets/result_scan.dart';
+import 'package:techable/views/scans/widgets/detector_view.dart';
+import 'package:techable/views/scans/widgets/text_detector_painter.dart';
 
 class ScanTextGg extends StatefulWidget {
   const ScanTextGg({super.key, required this.xFile});

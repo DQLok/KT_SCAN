@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:techable/static_app/colors_app.dart';
 
 showToastCusCenter(String msg, {int? duration}) {
   Fluttertoast.showToast(
@@ -8,7 +9,7 @@ showToastCusCenter(String msg, {int? duration}) {
       gravity: ToastGravity.CENTER,
       timeInSecForIosWeb: 1,
       webShowClose: false,
-      backgroundColor: Colors.redAccent,
+      backgroundColor: ColorsApp.primary,
       textColor: Colors.white,
       fontSize: 15);
 }
@@ -20,7 +21,7 @@ showToastCusBottom(String msg, {int? duration}) {
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 1,
       webShowClose: false,
-      backgroundColor: Colors.redAccent,
+      backgroundColor: ColorsApp.primary,
       textColor: Colors.white,
       fontSize: 15);
 }

@@ -3,14 +3,14 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:teca/models/master_data/master_data.dart';
-import 'package:teca/objects/key_value_master_data.dart';
-import 'package:teca/objects/text_group.dart';
-import 'package:teca/utils/dice_formula.dart';
-import 'package:teca/utils/levenshtein_formula.dart';
-import 'package:teca/utils/regex.dart';
+import 'package:techable/models/master_data/master_data.dart';
+import 'package:techable/objects/key_value_master_data.dart';
+import 'package:techable/objects/text_group.dart';
+import 'package:techable/utils/dice_formula.dart';
+import 'package:techable/utils/levenshtein_formula.dart';
+import 'package:techable/utils/regex.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:teca/utils/utils.dart';
+import 'package:techable/utils/utils.dart';
 
 class DefaultDataScan extends StatefulWidget {
   const DefaultDataScan(

@@ -1,4 +1,4 @@
-import 'package:teca/models/master_data/lang_data.dart';
+import 'package:techable/models/master_data/lang_data.dart';
 
 class ItemData {
   int brandId;

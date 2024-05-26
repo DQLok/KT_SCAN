@@ -1,5 +1,5 @@
-import 'package:teca/models/master_data/gf.dart';
-import 'package:teca/models/master_data/spf.dart';
+import 'package:techable/models/master_data/gf.dart';
+import 'package:techable/models/master_data/spf.dart';
 
 class DataMappingChannel {
   int id;

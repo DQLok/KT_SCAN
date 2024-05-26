@@ -1,4 +1,4 @@
-import 'package:teca/models/master_data/option_data.dart';
+import 'package:techable/models/master_data/option_data.dart';
 
 class ItemAttributeDetailAttribute {
   int id;

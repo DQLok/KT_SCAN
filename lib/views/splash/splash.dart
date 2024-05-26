@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:teca/store_preference/store_preference.dart';
-import 'package:teca/views/home/home.dart';
-import 'package:teca/views/sign_in/sign_in.dart';
+import 'package:techable/store_preference/store_preference.dart';
+import 'package:techable/views/home/home.dart';
+import 'package:techable/views/sign_in/sign_in.dart';
 import 'package:lottie/lottie.dart';
 
 class SplashPage extends StatefulWidget {

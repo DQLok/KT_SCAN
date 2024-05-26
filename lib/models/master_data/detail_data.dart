@@ -1,4 +1,4 @@
-import 'package:teca/models/master_data/details_attribute_option.dart';
+import 'package:techable/models/master_data/details_attribute_option.dart';
 
 class DetailsData {
   List<DetailsAttributeOption> attributeOptions;

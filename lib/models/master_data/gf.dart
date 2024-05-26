@@ -1,4 +1,4 @@
-import 'package:teca/models/master_data/modifier.dart';
+import 'package:techable/models/master_data/modifier.dart';
 
 class Gf {
   String id;

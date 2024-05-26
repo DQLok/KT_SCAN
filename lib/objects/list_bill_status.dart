@@ -1,4 +1,4 @@
-import 'package:teca/objects/text_group.dart';
+import 'package:techable/objects/text_group.dart';
 
 class ListBillStatus {
   String status;

@@ -1,9 +1,9 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
-import 'package:teca/objects/text_group.dart';
-import 'package:teca/views/scans/widgets/camera_view.dart';
-import 'package:teca/views/scans/widgets/gallery_view.dart';
+import 'package:techable/objects/text_group.dart';
+import 'package:techable/views/scans/widgets/camera_view.dart';
+import 'package:techable/views/scans/widgets/gallery_view.dart';
 
 enum DetectorViewMode { liveFeed, gallery }
 

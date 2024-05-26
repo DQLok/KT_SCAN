@@ -1,4 +1,4 @@
-package com.example.teca
+package com.example.techable
 
 import io.flutter.embedding.android.FlutterActivity
 

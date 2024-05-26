@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "teca" "\0"
+            VALUE "FileDescription", "techable" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "teca" "\0"
+            VALUE "InternalName", "techable" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2024 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "teca.exe" "\0"
-            VALUE "ProductName", "teca" "\0"
+            VALUE "OriginalFilename", "techable.exe" "\0"
+            VALUE "ProductName", "techable" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

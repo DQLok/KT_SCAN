@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
-import 'package:teca/objects/list_bill_status.dart';
-import 'package:teca/store_preference/store_preference.dart';
-import 'package:teca/views/home/home.dart';
-import 'package:teca/views/result_filter/widgets/camera_customer.dart';
-import 'package:teca/views/result_filter/widgets/card_result_filter.dart';
+import 'package:techable/objects/list_bill_status.dart';
+import 'package:techable/store_preference/store_preference.dart';
+import 'package:techable/views/home/home.dart';
+import 'package:techable/views/result_filter/widgets/camera_customer.dart';
+import 'package:techable/views/result_filter/widgets/card_result_filter.dart';
 
 class ResultFilterPage extends StatefulWidget {
   const ResultFilterPage({super.key});
