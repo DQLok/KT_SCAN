@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:techable/static_app/colors_app.dart';
+import 'package:techable/constants/colors_app.dart';
 
 showToastCusCenter(String msg, {int? duration}) {
   Fluttertoast.showToast(

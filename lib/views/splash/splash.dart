@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:techable/constants/image_app.dart';
+import 'package:techable/constants/preference_app.dart';
 import 'package:techable/store_preference/store_preference.dart';
 import 'package:techable/views/home/home.dart';
-import 'package:techable/views/sign_in/sign_in.dart';
+import 'package:techable/views/auth/sign_in/sign_in.dart';
 import 'package:lottie/lottie.dart';
 
 class SplashPage extends StatefulWidget {
@@ -25,7 +27,7 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   getAccountSaved() async {
-    String value = await appPreference.getConfig("account");
+    String value = await appPreference.getConfig(PreferenceApp.keyAccount);
     timers.timeout(Duration.zero);
     if (value.isNotEmpty) {
       Navigator.push(
@@ -43,7 +45,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Lottie.asset("assets/splash/scan.json")),
+      body: Center(child: Lottie.asset(ImageApp.splash)),
     );
   }
 }

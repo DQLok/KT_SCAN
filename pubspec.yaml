@@ -37,6 +37,11 @@ dependencies:
   fluttertoast: ^8.2.5
   #lottie
   lottie: ^3.1.2
+  #picture
+  cached_network_image: ^3.3.1
+  flutter_svg: ^2.0.10+1
+  #language
+  easy_localization: ^3.0.7
 
 dev_dependencies:
   flutter_launcher_icons: "^0.13.1"
@@ -57,5 +62,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/masterdata.txt
-    - assets/splash/
+    - assets/images/splash/
     - assets/logo/
+    - assets/translations/

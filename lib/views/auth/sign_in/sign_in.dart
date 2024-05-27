@@ -1,32 +1,37 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:techable/config/provider/auth_provider.dart';
-import 'package:techable/static_app/colors_app.dart';
-import 'package:techable/views/sign_up/sign_up.dart';
+import 'package:techable/configs/provider/auth_provider.dart';
+import 'package:techable/constants/colors_app.dart';
+import 'package:techable/constants/dimension_app.dart';
+import 'package:techable/constants/image_app.dart';
+import 'package:techable/constants/static_app.dart';
+import 'package:techable/constants/text_style.dart';
+import 'package:techable/views/auth/sign_up/sign_up.dart';
+import 'package:techable/widgets/image_cus.dart';
 
 class SignInPage extends ConsumerWidget {
   const SignInPage({super.key});
-  
+
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final authPro = ref.read(authProvider);
-    double paddingV = MediaQuery.viewPaddingOf(context).vertical;
-    double paddingH = MediaQuery.viewPaddingOf(context).horizontal;
     return Scaffold(
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 20),
-        padding: EdgeInsets.symmetric(vertical: paddingV, horizontal: paddingH),
+        padding: EdgeInsets.symmetric(
+            vertical: paddingScreen(context, StaticApp.vertical),
+            horizontal: paddingScreen(context, StaticApp.horizontal)),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                height: MediaQuery.of(context).size.height/10,
-                width: MediaQuery.of(context).size.width/1.2,
+              ImageCus(
+                imagePath: ImageApp.logoApp,
+                height: sizeScreen(context, StaticApp.height) / 10,
+                width: sizeScreen(context, StaticApp.width) / 1.2,
                 margin: const EdgeInsets.symmetric(vertical: 10),
-                alignment: Alignment.center,
-                child: Image.asset("assets/logo/logo.png"),
               ),
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 5),
@@ -37,11 +42,8 @@ class SignInPage extends ConsumerWidget {
                     Container(
                         margin: const EdgeInsets.symmetric(vertical: 20),
                         child: Text(
-                          "Đăng nhập",
-                          style: TextStyle(
-                              color: ColorsApp.primary,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 25),
+                          "sign_in".tr(),
+                          style: TextStyleApp.inter_s25_b_b_primary.style,
                         )),
                     TextField(
                       controller: authPro.controllerPhoneSi,
@@ -136,10 +138,9 @@ class SignInPage extends ConsumerWidget {
                 child: TextButton(
                     onPressed: () {
                       Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const SignUpPage()));
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SignUpPage()));
                     },
                     child: Text(
                       "Đăng kí tài khoản mới",

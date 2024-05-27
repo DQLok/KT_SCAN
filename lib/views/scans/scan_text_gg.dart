@@ -10,8 +10,7 @@ import 'package:techable/objects/text_group.dart';
 import 'package:techable/store_preference/store_preference.dart';
 import 'package:techable/utils/utils.dart';
 import 'package:techable/views/result_filter/widgets/result_scan.dart';
-import 'package:techable/views/scans/widgets/detector_view.dart';
-import 'package:techable/views/scans/widgets/text_detector_painter.dart';
+import 'package:techable/views/scans/widgets/gallery_view.dart';
 
 class ScanTextGg extends StatefulWidget {
   const ScanTextGg({super.key, required this.xFile});
@@ -22,14 +21,11 @@ class ScanTextGg extends StatefulWidget {
 }
 
 class _ScanTextGgState extends State<ScanTextGg> {
-  // var _script = TextRecognitionScript.latin;
   final _textRecognizer = TextRecognizer(script: TextRecognitionScript.latin);
   bool _canProcess = true;
   bool _isBusy = false;
-  CustomPaint? _customPaint;
   String? _text;
   List<TextBlock> blocks = [];
-  var _cameraLensDirection = CameraLensDirection.back;
   //--------------------------------------
   List<TextGroup> listTextGroupBlocks = [];
   List<TextGroup> listStandardAngle = [];
@@ -50,23 +46,19 @@ class _ScanTextGgState extends State<ScanTextGg> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(children: [
-        DetectorView(
-          title: 'Text Detector',
-          customPaint: _customPaint,
-          text: _text,
-          onImage: _processImage,
-          initialCameraLensDirection: _cameraLensDirection,
-          onCameraLensDirectionChanged: (value) => _cameraLensDirection = value,
-          blocks: showAndHide ? formatBlocks() : const SizedBox(),
-          fileImage: widget.xFile,
-          saveData: saveDataPreference,
-          viewDetail: viewDetailScan,
-          listTextGroup: listTextGroupBlocks,
-          listKeyValues: listKeyValues,
-          listStandardAngle: listStandardAngle,
-        ),
-      ]),
+      body: GalleryView(
+        title: "",
+        text: _text,
+        onImage: _processImage,
+        onDetectorViewModeChanged: () {},
+        blocks: showAndHide ? formatBlocks() : const SizedBox(),
+        fileImage: widget.xFile,
+        saveData: saveDataPreference,
+        viewDetail: viewDetailScan,
+        listTextGroup: listTextGroupBlocks,
+        listKeyValues: listKeyValues,
+        listStandardAngle: listStandardAngle,
+      ),
     );
   }
 
@@ -81,17 +73,17 @@ class _ScanTextGgState extends State<ScanTextGg> {
     final recognizedText = await _textRecognizer.processImage(inputImage);
     if (inputImage.metadata?.size != null &&
         inputImage.metadata?.rotation != null) {
-      final painter = TextRecognizerPainter(
-        recognizedText,
-        inputImage.metadata!.size,
-        inputImage.metadata!.rotation,
-        _cameraLensDirection,
-      );
-      _customPaint = CustomPaint(painter: painter);
+      // final painter = TextRecognizerPainter(
+      //   recognizedText,
+      //   inputImage.metadata!.size,
+      //   inputImage.metadata!.rotation,
+      //   _cameraLensDirection,
+      // );
+      // _customPaint = CustomPaint(painter: painter);
     } else {
       blocks = recognizedText.blocks;
       _text = 'Recognized text:\n\n${/*recognizedText.text*/ "---"}';
-      _customPaint = null;
+      // _customPaint = null;
       processBlocks();
       pathImage = inputImage.filePath ?? "";
       fileSaveIos = File(pathImage).readAsBytesSync();
