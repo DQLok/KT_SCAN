@@ -15,7 +15,7 @@ class SignInPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authPro = ref.read(authProvider);
+    final authPro = ref.watch(authProvider);
     return Scaffold(
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -118,7 +118,7 @@ class SignInPage extends ConsumerWidget {
                       style: TextStyle(color: ColorsApp.primary),
                     )),
               ),
-              Container(
+              SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                     onPressed: () {

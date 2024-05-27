@@ -1,114 +1,19 @@
-import 'dart:io';
-
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:techable/main.dart';
+import 'package:techable/configs/provider/scan_provider.dart';
+import 'package:techable/constants/dimension_app.dart';
+import 'package:techable/constants/static_app.dart';
+import 'package:techable/routes/routes_path.dart';
 import 'package:techable/views/home/home.dart';
-import 'package:techable/views/result_filter/result_filter.dart';
-import 'package:techable/views/scans/scan_text_gg.dart';
 
-class CameraCustomer extends StatefulWidget {
+class CameraCustomer extends ConsumerWidget {
   const CameraCustomer({super.key});
 
   @override
-  State<CameraCustomer> createState() => _CameraCustomerState();
-}
-
-class _CameraCustomerState extends State<CameraCustomer> {
-  CameraController? cameraController;
-  File? fileImg;
-  ImagePicker? imgPicker;
-
-  @override
-  void initState() {
-    super.initState();
-    imgPicker = ImagePicker();
-    if (cameras.isEmpty) return;
-    cameraController = CameraController(cameras.first, ResolutionPreset.max,
-        enableAudio: false);
-    cameraController!.initialize().then((value) {
-      if (!mounted) {
-        return;
-      }
-      setState(() {});
-    }).catchError((Object e) {
-      if (e is CameraException) {
-        switch (e.code) {
-          case "CameraAccessDenied":
-            break;
-          default:
-            break;
-        }
-      }
-    });
-  }
-
-  takeAPicture() async {
-    if (!cameraController!.value.isInitialized) {
-      return null;
-    }
-    if (cameraController!.value.isTakingPicture) {
-      return null;
-    }
-
-    try {
-      await cameraController!.setFlashMode(FlashMode.auto);
-      XFile picture = await cameraController!.takePicture();
-      if (picture.path.isNotEmpty) {
-        Navigator.push(
-            // ignore: use_build_context_synchronously
-            context,
-            MaterialPageRoute(
-                builder: (context) => ScanTextGg(
-                      xFile: picture,
-                    )));
-      }
-    } on CameraException catch (e) {
-      debugPrint("Error occured while taking picture : $e");
-      return null;
-    }
-  }
-
-  Future getImage(ImageSource source) async {
-    setState(() {
-      imgPicker = ImagePicker();
-    });
-    final pickedfile = await imgPicker!.pickImage(source: source);
-    if (pickedfile != null) {
-      if (pickedfile.path.isNotEmpty) {
-        Navigator.push(
-            // ignore: use_build_context_synchronously
-            context,
-            MaterialPageRoute(
-                builder: (context) => ScanTextGg(
-                      xFile: pickedfile,
-                    )));
-      }
-    }
-  }
-
-  switchCamera() {
-    if (cameras.isEmpty) return;
-    if (cameraController == null) return;
-    final lensDirection = cameraController!.description.lensDirection;
-    if (lensDirection == CameraLensDirection.front) {
-      cameraController = CameraController(cameras.first, ResolutionPreset.high);
-    } else {
-      cameraController = CameraController(cameras.last, ResolutionPreset.high);
-    }
-    cameraController!.initialize().then(
-      (value) {
-        if (!mounted) return;
-        setState(() {});
-      },
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    double paddingV = MediaQuery.viewPaddingOf(context).vertical;
-    double paddingH = MediaQuery.viewPaddingOf(context).horizontal;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final scanPro = ref.watch(scanProvider);
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(children: [
@@ -116,17 +21,18 @@ class _CameraCustomerState extends State<CameraCustomer> {
           child: Container(
               decoration: BoxDecoration(
                   color: Colors.redAccent.shade100,
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  borderRadius: const BorderRadius.all(Radius.circular(DimensionApp.size10)),
                   shape: BoxShape.rectangle),
-              height: MediaQuery.of(context).size.height / 1.5,
-              width: MediaQuery.of(context).size.width / 1.3,
-              child: cameraController != null
-                  ? CameraPreview(cameraController!)
+              height: sizeScreen(context, StaticApp.height) / 1.5,
+              width: sizeScreen(context, StaticApp.width) / 1.3,
+              child: scanPro.cameraController != null
+                  ? CameraPreview(scanPro.cameraController!)
                   : const SizedBox()),
         ),
         Container(
-          padding:
-              EdgeInsets.symmetric(vertical: paddingV, horizontal: paddingH),
+          padding: EdgeInsets.symmetric(
+              vertical: paddingScreen(context, StaticApp.vertical),
+              horizontal: paddingScreen(context, StaticApp.horizontal)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -188,16 +94,16 @@ class _CameraCustomerState extends State<CameraCustomer> {
                       SizedBox(
                         child: IconButton(
                             onPressed: () {
-                              getImage(ImageSource.gallery);
+                              scanPro.getPicture(context, ImageSource.gallery);
                             },
                             icon: const Icon(
                                 Icons.photo_size_select_actual_rounded)),
                       ),
                       IconButton(
-                          onPressed: cameraController == null
+                          onPressed: scanPro.cameraController == null
                               ? null
                               : () {
-                                  takeAPicture();
+                                  scanPro.takeAPicture(context);
                                 },
                           icon: const CircleAvatar(
                             radius: 30,
@@ -209,10 +115,10 @@ class _CameraCustomerState extends State<CameraCustomer> {
                           )),
                       SizedBox(
                         child: IconButton(
-                            onPressed: cameraController == null
+                            onPressed: scanPro.cameraController == null
                                 ? null
                                 : () {
-                                    switchCamera();
+                                    scanPro.switchCamera();
                                   },
                             icon: const Icon(Icons.camera)),
                       )
@@ -225,10 +131,7 @@ class _CameraCustomerState extends State<CameraCustomer> {
                         alignment: Alignment.centerLeft,
                         child: TextButton(
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const HomePage()));
+                              Navigator.pushNamed(context, RoutesPath.home);
                             },
                             child: Text(
                               "Trở về Trang chủ".toUpperCase(),
@@ -242,11 +145,7 @@ class _CameraCustomerState extends State<CameraCustomer> {
                         alignment: Alignment.centerRight,
                         child: TextButton(
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const ResultFilterPage()));
+                            Navigator.pushNamed(context, RoutesPath.resultFilter);
                           },
                           child: Text(
                             "Danh sách bill".toUpperCase(),

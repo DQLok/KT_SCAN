@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:ui';
 
-import 'package:camera/camera.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,11 +14,9 @@ import 'package:techable/routes/routes_path.dart';
 import 'package:techable/store_preference/store_preference.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-late List<CameraDescription> cameras;
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  cameras = await availableCameras();
+  WidgetsFlutterBinding.ensureInitialized();  
   await EasyLocalization.ensureInitialized();
   runApp(EasyLocalization(
       supportedLocales: settingInitLanguageApp(),

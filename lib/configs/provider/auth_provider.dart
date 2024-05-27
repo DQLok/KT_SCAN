@@ -120,6 +120,5 @@ class AuthProvider with ChangeNotifier {
   }
 }
 
-final authProvider = ChangeNotifierProvider<AuthProvider>((ref) {
-  return AuthProvider(ref);
-});
+final authProvider =
+    ChangeNotifierProvider<AuthProvider>((ref) => AuthProvider(ref));

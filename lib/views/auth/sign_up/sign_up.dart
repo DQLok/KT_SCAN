@@ -15,7 +15,7 @@ class SignUpPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authPro = ref.read(authProvider);
+    final authPro = ref.watch(authProvider);
     return Scaffold(
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: DimensionApp.size20),

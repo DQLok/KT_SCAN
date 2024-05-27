@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:techable/constants/image_app.dart';
 import 'package:techable/constants/preference_app.dart';
+import 'package:techable/routes/routes_path.dart';
 import 'package:techable/store_preference/store_preference.dart';
-import 'package:techable/views/home/home.dart';
-import 'package:techable/views/auth/sign_in/sign_in.dart';
 import 'package:lottie/lottie.dart';
 
 class SplashPage extends StatefulWidget {
@@ -30,15 +29,11 @@ class _SplashPageState extends State<SplashPage> {
     String value = await appPreference.getConfig(PreferenceApp.keyAccount);
     timers.timeout(Duration.zero);
     if (value.isNotEmpty) {
-      Navigator.push(
-          // ignore: use_build_context_synchronously
-          context,
-          MaterialPageRoute(builder: (context) => const HomePage()));
+      // ignore: use_build_context_synchronously
+      Navigator.pushNamed(context, RoutesPath.home);
     } else {
-      Navigator.push(
-          // ignore: use_build_context_synchronously
-          context,
-          MaterialPageRoute(builder: (context) => const SignInPage()));
+      // ignore: use_build_context_synchronously
+      Navigator.pushNamed(context, RoutesPath.signIn);
     }
   }
 
