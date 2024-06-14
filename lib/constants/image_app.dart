@@ -8,5 +8,5 @@ class ImageApp {
   //splash
   static const String splash = "assets/images/splash/scan.json";
   //ar
-  static const String earth = "assets/images/splash/earth.jpeg";
+  static const String earth = "assets/images/ar/earth.jpg";
 }
