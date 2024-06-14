@@ -2,6 +2,7 @@ import 'package:arcore_flutter_plugin/arcore_flutter_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:techable/constants/image_app.dart';
+// ignore: depend_on_referenced_packages
 import 'package:vector_math/vector_math_64.dart' as vector64;
 
 class ARAndroid extends StatefulWidget {
@@ -12,14 +13,12 @@ class ARAndroid extends StatefulWidget {
 }
 
 class _ARAndroidState extends State<ARAndroid> {
-  // late ArCoreController arCoreController;
-
   ArCoreController? arCoreController;
 
-  void onArCoreViewCreated(ArCoreController controller) {
+  onArCoreViewCreated(ArCoreController controller) async {
     arCoreController = controller;
 
-    earthMap(arCoreController!);
+    await earthMap(arCoreController!);
   }
 
   earthMap(ArCoreController coreController) async {
@@ -41,16 +40,14 @@ class _ARAndroidState extends State<ARAndroid> {
 
   @override
   void dispose() {
-    // arCoreController.dispose();
+    arCoreController!.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ArCoreView(
-        onArCoreViewCreated: onArCoreViewCreated,
-      ),
+    return ArCoreView(
+      onArCoreViewCreated: onArCoreViewCreated,
     );
   }
 
