@@ -9,6 +9,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.6.0"
+  arcore_flutter_plugin:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "49e716172807e288a98e02fa7a8c567b57e58b45"
+      url: "https://github.com/giandifra/arcore_flutter_plugin.git"
+    source: git
+    version: "0.1.1"
   args:
     dependency: transitive
     description:
@@ -17,6 +26,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.5.0"
+  arkit_plugin:
+    dependency: "direct main"
+    description:
+      name: arkit_plugin
+      sha256: "8ac9dfd1e65b3544d06ba009457d8a8520a157153676acf2ba232221f4c928b6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   async:
     dependency: transitive
     description:
@@ -193,6 +210,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.0.2"
+  equatable:
+    dependency: transitive
+    description:
+      name: equatable
+      sha256: c2b87cb7756efdf69892005af546c56c0b5037f54d2a88269b4f347a505e3ca2
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.5"
   fake_async:
     dependency: transitive
     description:

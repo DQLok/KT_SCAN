@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:techable/views/ar/ar.dart';
 import 'package:techable/views/qr_code/qr_code.dart';
 import 'package:techable/views/result_filter/result_filter.dart';
 import 'package:techable/views/result_filter/widgets/camera_customer.dart';
@@ -73,10 +74,32 @@ class _HomePageState extends State<HomePage> {
                                         builder: (context) => const QRCode()));
                               },
                               style: ButtonStyle(
-                                  backgroundColor:
-                                      WidgetStateProperty.all(Colors.redAccent)),
+                                  backgroundColor: WidgetStateProperty.all(
+                                      Colors.redAccent)),
                               child: const Text(
                                 "Scan QRCode",
+                                style: TextStyle(color: Colors.white),
+                              ))),
+                      const Expanded(child: SizedBox()),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Expanded(child: SizedBox()),
+                      Expanded(
+                          flex: 2,
+                          child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const AR()));
+                              },
+                              style: ButtonStyle(
+                                  backgroundColor: WidgetStateProperty.all(
+                                      Colors.redAccent)),
+                              child: const Text(
+                                "AR",
                                 style: TextStyle(color: Colors.white),
                               ))),
                       const Expanded(child: SizedBox()),

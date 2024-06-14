@@ -1,4 +1,7 @@
 PODS:
+  - arkit_plugin (0.0.1):
+    - Flutter
+    - GLTFSceneKit
   - camera_avfoundation (0.0.1):
     - Flutter
   - device_info_plus (0.0.1):
@@ -7,6 +10,7 @@ PODS:
   - fluttertoast (0.0.2):
     - Flutter
     - Toast
+  - GLTFSceneKit (0.3.0)
   - google_mlkit_barcode_scanning (0.12.0):
     - Flutter
     - google_mlkit_commons
@@ -138,6 +142,7 @@ PODS:
   - TOCropViewController (2.7.4)
 
 DEPENDENCIES:
+  - arkit_plugin (from `.symlinks/plugins/arkit_plugin/ios`)
   - camera_avfoundation (from `.symlinks/plugins/camera_avfoundation/ios`)
   - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
   - Flutter (from `Flutter`)
@@ -158,6 +163,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - GLTFSceneKit
     - GoogleDataTransport
     - GoogleMLKit
     - GoogleToolboxForMac
@@ -181,6 +187,8 @@ SPEC REPOS:
     - TOCropViewController
 
 EXTERNAL SOURCES:
+  arkit_plugin:
+    :path: ".symlinks/plugins/arkit_plugin/ios"
   camera_avfoundation:
     :path: ".symlinks/plugins/camera_avfoundation/ios"
   device_info_plus:
@@ -217,10 +225,12 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/sqflite/darwin"
 
 SPEC CHECKSUMS:
+  arkit_plugin: c08c4e6f334a922154c2caf2f6fadfaefb51c181
   camera_avfoundation: 759172d1a77ae7be0de08fc104cfb79738b8a59e
   device_info_plus: 97af1d7e84681a90d0693e63169a5d50e0839a0d
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   fluttertoast: 9f2f8e81bb5ce18facb9748d7855bf5a756fe3db
+  GLTFSceneKit: d1b437c514ba2aed5555afb0fddd64e030612d57
   google_mlkit_barcode_scanning: 383d0c2dd62d92b36c0b10c7e69cf98d3650dc40
   google_mlkit_commons: 96aaca445520311b84a2da013dedf3427fe4cc69
   google_mlkit_document_scanner: 5b889061c0b0967d83cb0c15c1b084776f509a00
@@ -256,6 +266,6 @@ SPEC CHECKSUMS:
   Toast: 1f5ea13423a1e6674c4abdac5be53587ae481c4e
   TOCropViewController: 80b8985ad794298fb69d3341de183f33d1853654
 
-PODFILE CHECKSUM: 819463e6a0290f5a72f145ba7cde16e8b6ef0796
+PODFILE CHECKSUM: 56c9d2122463bc3c3e78d1c8ad7d908f43dba6a1
 
 COCOAPODS: 1.15.2
