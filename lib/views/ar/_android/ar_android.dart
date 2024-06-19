@@ -1,9 +1,9 @@
 import 'package:arcore_flutter_plugin/arcore_flutter_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:techable/constants/image_app.dart';
 // ignore: depend_on_referenced_packages
 import 'package:vector_math/vector_math_64.dart' as vector64;
+import 'package:http/http.dart' as http;
 
 class ARAndroid extends StatefulWidget {
   const ARAndroid({super.key});
@@ -16,19 +16,40 @@ class _ARAndroidState extends State<ARAndroid> {
   ArCoreController? arCoreController;
 
   onArCoreViewCreated(ArCoreController controller) async {
-    arCoreController = controller;
+    try {
+      arCoreController = controller;
 
-    await earthMap(arCoreController!);
+      await earthMap(arCoreController!);
+    } on PlatformException catch (_) {}
   }
 
   earthMap(ArCoreController coreController) async {
-    final ByteData earthMap = await rootBundle.load(ImageApp.earth);
+    // final ByteData earthMap = await rootBundle.load(ImageApp.earth);
 
-    final material = ArCoreMaterial(
-        color: Colors.white, textureBytes: earthMap.buffer.asUint8List());
+    // final material = ArCoreMaterial(
+    //     color: Colors.white, textureBytes: earthMap.buffer.asUint8List());
 
-    final sphere = ArCoreSphere(
+    http.Response response = await http.get(
+      Uri.parse('https://images.indianexpress.com/2019/09/toys.jpg'),
+    );
+    Uint8List value = response.bodyBytes;
+
+    final material = ArCoreMaterial(color: Colors.white, textureBytes: value);
+
+    //circle
+    // final sphere = ArCoreSphere(
+    //   materials: [material],
+    // );
+    //square
+    // final sphere = ArCoreCube(
+    //   materials: [material],
+    //   size: vector64.Vector3(0.5, 0.5, 0.5),
+    // );
+    //cylinder
+    final sphere = ArCoreCylinder(
       materials: [material],
+      radius: 0.5,
+      height: 0.5,
     );
 
     final node = ArCoreNode(

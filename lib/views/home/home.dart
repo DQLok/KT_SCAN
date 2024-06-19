@@ -1,3 +1,7 @@
+import 'dart:typed_data';
+
+import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:techable/views/ar/ar.dart';
 import 'package:techable/views/qr_code/qr_code.dart';
@@ -12,6 +16,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    getImage();
+  }
+
+  getImage() async {
+    http.Response response = await http.get(
+      Uri.parse('https://images.indianexpress.com/2019/09/toys.jpg'),
+    );
+    Uint8List value = response.bodyBytes;
+    print(value);
+  }
+
   @override
   Widget build(BuildContext context) {
     double paddingV = MediaQuery.viewPaddingOf(context).vertical;
@@ -90,10 +108,10 @@ class _HomePageState extends State<HomePage> {
                           flex: 2,
                           child: ElevatedButton(
                               onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const AR()));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => const AR()));
                               },
                               style: ButtonStyle(
                                   backgroundColor: WidgetStateProperty.all(
@@ -105,6 +123,40 @@ class _HomePageState extends State<HomePage> {
                       const Expanded(child: SizedBox()),
                     ],
                   ),
+                  // CachedNetworkImage(
+                  //   width: 100,
+                  //   height: 300,
+                  //   imageUrl:
+                  //       "https://images.indianexpress.com/2019/09/toys.jpg",
+                  //   // "http://cropper-sz.oss-cn-shenzhen.aliyuncs.com/SCH/RLM2003EI/BUILD_MAP/1cd5bc.png",
+                  //   imageBuilder: (context, imageProvider) {
+                  //     imageProvider
+                  //         .obtainKey(createLocalImageConfiguration(context))
+                  //         .then((value) {
+                  //       imageProvider.resolve(value, (bytes,
+                  //           {allowUpscaling = true,
+                  //           cacheHeight = 200,
+                  //           cacheWidth = 200}) async {
+                  //         var asUint8List = bytes.buffer.asUint8List();
+
+                  //         var f = File(pt.path + "/m.jpg");
+                  //         file = await f.writeAsBytes(asUint8List);
+                  //         setState(() {
+                  //           file;
+                  //         });
+
+                  //         return instantiateImageCodec(asUint8List);
+                  //       });
+                  //       print(value);
+                  //     });
+
+                  //     return Image(
+                  //       image: imageProvider,
+                  //     );
+                  //   },
+                  //   placeholder: (context, url) => CircularProgressIndicator(),
+                  //   errorWidget: (context, url, error) => Icon(Icons.error),
+                  // ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

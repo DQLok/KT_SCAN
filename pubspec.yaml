@@ -49,6 +49,7 @@ dependencies:
   arcore_flutter_plugin:
     git: https://github.com/giandifra/arcore_flutter_plugin.git
   # ar_flutter_plugin: ^0.7.3
+  http: ^1.2.1
 
 dev_dependencies:
   flutter_launcher_icons: "^0.13.1"

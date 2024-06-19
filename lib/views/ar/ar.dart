@@ -22,6 +22,7 @@ class _ARState extends State<AR> {
           onTap: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const HomePage()));
+            // Navigator.pop(context);
           },
           child: const Icon(Icons.arrow_back_ios),
         ),
