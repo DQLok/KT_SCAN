@@ -108,10 +108,11 @@ class _HomePageState extends State<HomePage> {
                           flex: 2,
                           child: ElevatedButton(
                               onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => const AR()));
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const AR()));
                               },
                               style: ButtonStyle(
                                   backgroundColor: WidgetStateProperty.all(

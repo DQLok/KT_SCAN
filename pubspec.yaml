@@ -48,6 +48,7 @@ dependencies:
   # arcore_flutter_plugin: ^0.1.0
   arcore_flutter_plugin:
     git: https://github.com/giandifra/arcore_flutter_plugin.git
+  # arcore_flutter_plugin: ^0.2.0-alpha
   # ar_flutter_plugin: ^0.7.3
   http: ^1.2.1
 

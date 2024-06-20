@@ -1,62 +1,96 @@
 import 'package:arcore_flutter_plugin/arcore_flutter_plugin.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-// ignore: depend_on_referenced_packages
-import 'package:vector_math/vector_math_64.dart' as vector64;
-import 'package:http/http.dart' as http;
+import 'package:vector_math/vector_math_64.dart' as vector;
+import 'package:arcore_flutter_plugin/arcore_flutter_plugin.dart'
+    show ArCoreController;
 
 class ARAndroid extends StatefulWidget {
   const ARAndroid({super.key});
 
   @override
-  State<ARAndroid> createState() => _ARAndroidState();
+  _ARAndroidState createState() => _ARAndroidState();
 }
 
 class _ARAndroidState extends State<ARAndroid> {
   ArCoreController? arCoreController;
 
-  onArCoreViewCreated(ArCoreController controller) async {
-    try {
-      arCoreController = controller;
-
-      await earthMap(arCoreController!);
-    } on PlatformException catch (_) {}
+  @override
+  void initState() {
+    super.initState();
+    getI();
   }
 
-  earthMap(ArCoreController coreController) async {
-    // final ByteData earthMap = await rootBundle.load(ImageApp.earth);
+  getI() async {
+    print('ARCORE IS AVAILABLE?');
+    print(await ArCoreController.checkArCoreAvailability());
+    print('\nAR SERVICES INSTALLED?');
+    print(await ArCoreController.checkIsArCoreInstalled());
+  }
 
-    // final material = ArCoreMaterial(
-    //     color: Colors.white, textureBytes: earthMap.buffer.asUint8List());
-
-    http.Response response = await http.get(
-      Uri.parse('https://images.indianexpress.com/2019/09/toys.jpg'),
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: ArCoreView(
+          key: Key("value"),
+          onArCoreViewCreated: _onArCoreViewCreated,
+        ),
+      ),
     );
-    Uint8List value = response.bodyBytes;
+  }
 
-    final material = ArCoreMaterial(color: Colors.white, textureBytes: value);
+  void _onArCoreViewCreated(ArCoreController controller) {
+    arCoreController = controller;
 
-    //circle
-    // final sphere = ArCoreSphere(
-    //   materials: [material],
-    // );
-    //square
-    // final sphere = ArCoreCube(
-    //   materials: [material],
-    //   size: vector64.Vector3(0.5, 0.5, 0.5),
-    // );
-    //cylinder
-    final sphere = ArCoreCylinder(
+    _addSphere(arCoreController!);
+    _addCylindre(arCoreController!);
+    _addCube(arCoreController!);
+  }
+
+  void _addSphere(ArCoreController controller) {
+    final material = ArCoreMaterial(color: Color.fromARGB(120, 66, 134, 244));
+    final sphere = ArCoreSphere(
       materials: [material],
-      radius: 0.5,
-      height: 0.5,
+      radius: 0.1,
     );
-
     final node = ArCoreNode(
       shape: sphere,
-      position: vector64.Vector3(0, 0, -1.5),
+      position: vector.Vector3(0, 0, -1.5),
     );
-    arCoreController!.addArCoreNode(node);
+    controller.addArCoreNode(node);
+  }
+
+  void _addCylindre(ArCoreController controller) {
+    final material = ArCoreMaterial(
+      color: Colors.red,
+      reflectance: 1.0,
+    );
+    final cylindre = ArCoreCylinder(
+      materials: [material],
+      radius: 0.5,
+      height: 0.3,
+    );
+    final node = ArCoreNode(
+      shape: cylindre,
+      position: vector.Vector3(0.0, -0.5, -2.0),
+    );
+    controller.addArCoreNode(node);
+  }
+
+  void _addCube(ArCoreController controller) {
+    final material = ArCoreMaterial(
+      color: Color.fromARGB(120, 66, 134, 244),
+      metallic: 1.0,
+    );
+    final cube = ArCoreCube(
+      materials: [material],
+      size: vector.Vector3(0.5, 0.5, 0.5),
+    );
+    final node = ArCoreNode(
+      shape: cube,
+      position: vector.Vector3(-0.5, 0.5, -3.5),
+    );
+    controller.addArCoreNode(node);
   }
 
   @override
@@ -64,66 +98,4 @@ class _ARAndroidState extends State<ARAndroid> {
     arCoreController!.dispose();
     super.dispose();
   }
-
-  @override
-  Widget build(BuildContext context) {
-    return ArCoreView(
-      onArCoreViewCreated: onArCoreViewCreated,
-    );
-  }
-
-  // void _onArCoreViewCreated(ArCoreController controller) {
-  //   arCoreController = controller;
-
-  //   _addSphere(arCoreController);
-  //   _addCylindre(arCoreController);
-  //   _addCube(arCoreController);
-  // }
-
-  // void _addSphere(ArCoreController controller) {
-  //   final material =
-  //       ArCoreMaterial(color: const Color.fromARGB(120, 66, 134, 244));
-  //   final sphere = ArCoreSphere(
-  //     materials: [material],
-  //     radius: 0.1,
-  //   );
-  //   final node = ArCoreNode(
-  //     shape: sphere,
-  //     position: vector.Vector3(0, 0, -1.5),
-  //   );
-  //   controller.addArCoreNode(node);
-  // }
-
-  // void _addCylindre(ArCoreController controller) {
-  //   final material = ArCoreMaterial(
-  //     color: Colors.red,
-  //     reflectance: 1.0,
-  //   );
-  //   final cylindre = ArCoreCylinder(
-  //     materials: [material],
-  //     radius: 0.5,
-  //     height: 0.3,
-  //   );
-  //   final node = ArCoreNode(
-  //     shape: cylindre,
-  //     position: vector.Vector3(0.0, -0.5, -2.0),
-  //   );
-  //   controller.addArCoreNode(node);
-  // }
-
-  // void _addCube(ArCoreController controller) {
-  //   final material = ArCoreMaterial(
-  //     color: const Color.fromARGB(120, 66, 134, 244),
-  //     metallic: 1.0,
-  //   );
-  //   final cube = ArCoreCube(
-  //     materials: [material],
-  //     size: vector.Vector3(0.5, 0.5, 0.5),
-  //   );
-  //   final node = ArCoreNode(
-  //     shape: cube,
-  //     position: vector.Vector3(-0.5, 0.5, -3.5),
-  //   );
-  //   controller.addArCoreNode(node);
-  // }
 }
