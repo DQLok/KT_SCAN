@@ -21,10 +21,10 @@ class _ARAndroidState extends State<ARAndroid> {
   }
 
   getI() async {
-    print('ARCORE IS AVAILABLE?');
-    print(await ArCoreController.checkArCoreAvailability());
-    print('\nAR SERVICES INSTALLED?');
-    print(await ArCoreController.checkIsArCoreInstalled());
+    // print('ARCORE IS AVAILABLE?');
+    // print(await ArCoreController.checkArCoreAvailability());
+    // print('\nAR SERVICES INSTALLED?');
+    // print(await ArCoreController.checkIsArCoreInstalled());
   }
 
   @override
@@ -40,11 +40,13 @@ class _ARAndroidState extends State<ARAndroid> {
   }
 
   void _onArCoreViewCreated(ArCoreController controller) {
+    try {
     arCoreController = controller;
 
     _addSphere(arCoreController!);
     _addCylindre(arCoreController!);
     _addCube(arCoreController!);
+    } catch(_){}
   }
 
   void _addSphere(ArCoreController controller) {
