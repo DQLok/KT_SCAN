@@ -388,6 +388,7 @@ class _DefaultDataScanState extends State<DefaultDataScan> {
         children: List.generate(
             keyValues.length,
             (index) => Container(
+                  width: double.infinity,
                   margin: const EdgeInsets.symmetric(vertical: 5),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -400,7 +401,7 @@ class _DefaultDataScanState extends State<DefaultDataScan> {
                           child: Text(
                             "${keyValues.elementAt(index).keyTG.index}: ${keyValues.elementAt(index).keyTG.text}",
                             style: const TextStyle(
-                                color: Colors.blue, fontSize: 12),
+                                color: Colors.blue, fontSize: 10),
                           ),
                         ),
                       ),
@@ -408,30 +409,61 @@ class _DefaultDataScanState extends State<DefaultDataScan> {
                           ? const SizedBox()
                           : Expanded(
                               flex: 2,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: List.generate(
-                                    keyValues.elementAt(index).valueTG.length,
-                                    (indexChild) => Container(
-                                          margin:
-                                              const EdgeInsets.only(left: 20),
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.blueAccent)),
-                                          child: Text(
-                                            keyValues
-                                                .elementAt(index)
-                                                .valueTG
-                                                .elementAt(indexChild)
-                                                .text,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: const TextStyle(
-                                                color: Colors.blue,
-                                                fontSize: 12),
-                                          ),
-                                        )),
+                              child: SizedBox(
+                                height: 50,
+                                child: ListView.builder(
+                                  itemCount:
+                                      keyValues.elementAt(index).valueTG.length,
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder: (context, indexV) {
+                                    TextGroup textGroup = keyValues
+                                        .elementAt(index)
+                                        .valueTG
+                                        .elementAt(indexV);
+                                    return textGroup.text.isEmpty
+                                        ? const SizedBox.shrink()
+                                        : Container(
+                                            margin:
+                                                const EdgeInsets.only(left: 8),
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: Colors.blueAccent)),
+                                            child: Text(
+                                              textGroup.text,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: const TextStyle(
+                                                  color: Colors.blue,
+                                                  fontSize: 10),
+                                            ),
+                                          );
+                                  },
+                                ),
+                              )
+                              //  Row(
+                              //   mainAxisAlignment: MainAxisAlignment.end,
+                              //   children:
+                              //   List.generate(
+                              //       keyValues.elementAt(index).valueTG.length,
+                              //       (indexChild) => Container(
+                              //             margin:
+                              //                 const EdgeInsets.only(left: 8),
+                              //             decoration: BoxDecoration(
+                              //                 border: Border.all(
+                              //                     color: Colors.blueAccent)),
+                              //             child: Text(
+                              //               keyValues
+                              //                   .elementAt(index)
+                              //                   .valueTG
+                              //                   .elementAt(indexChild)
+                              //                   .text,
+                              //               overflow: TextOverflow.ellipsis,
+                              //               style: const TextStyle(
+                              //                   color: Colors.blue,
+                              //                   fontSize: 10),
+                              //             ),
+                              //           )),
+                              // ),
                               ),
-                            ),
                     ],
                   ),
                 )),

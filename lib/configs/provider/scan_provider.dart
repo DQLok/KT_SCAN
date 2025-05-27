@@ -107,27 +107,44 @@ class ScanProvider with ChangeNotifier {
     if (imageFile != null) {
       CroppedFile? croppedFile;
       if (imageFile!.path != "") {
-        croppedFile = await ImageCropper()
-            .cropImage(sourcePath: imageFile!.path, aspectRatioPresets: [
-          CropAspectRatioPreset.square,
-          CropAspectRatioPreset.ratio3x2,
-          CropAspectRatioPreset.original,
-          CropAspectRatioPreset.ratio4x3,
-          CropAspectRatioPreset.ratio16x9
-        ], uiSettings: [
-          AndroidUiSettings(
-            toolbarTitle: 'Chọn vùng dữ liệu',
-            toolbarColor: Colors.redAccent,
-            toolbarWidgetColor: Colors.white,
-            initAspectRatio: CropAspectRatioPreset.original,
-            lockAspectRatio: false,
-          ),
-        ]);
+        croppedFile = await ImageCropper().cropImage(
+            sourcePath: imageFile!.path,
+            //     aspectRatioPresets: [
+            //   CropAspectRatioPreset.square,
+            //   CropAspectRatioPreset.ratio3x2,
+            //   CropAspectRatioPreset.original,
+            //   CropAspectRatioPreset.ratio4x3,
+            //   CropAspectRatioPreset.ratio16x9
+            // ]
+            // ,
+            uiSettings: [
+              AndroidUiSettings(
+                toolbarTitle: 'Chọn vùng dữ liệu',
+                toolbarColor: Colors.redAccent,
+                toolbarWidgetColor: Colors.white,
+                initAspectRatio: CropAspectRatioPreset.original,
+                lockAspectRatio: false,
+              ),
+              IOSUiSettings(
+                title: 'Cropper',
+                aspectRatioPresets: [
+                  CropAspectRatioPreset.original,
+                  CropAspectRatioPreset.square,
+                ],
+              ),
+            ]);
       }
       if (croppedFile != null) {
         imageFile = XFile(croppedFile.path);
         InputImage inputImage = InputImage.fromFilePath(croppedFile.path);
-        processImage(inputImage);
+        await processImage(inputImage);
+         Navigator.push(
+            // ignore: use_build_context_synchronously
+            context,
+            MaterialPageRoute(
+                builder: (context) => ScanTextGg(
+                      xFile: imageFile!,
+                    )));       
       } else {
         // ignore: use_build_context_synchronously
         Navigator.push(context,
@@ -279,6 +296,7 @@ class ScanProvider with ChangeNotifier {
     listKeyValues.sort(
       (a, b) => int.parse(a.keyTG.index).compareTo(int.parse(b.keyTG.index)),
     );
+    notifyListeners();
   }
 
   //match key-value
@@ -371,7 +389,7 @@ class ScanProvider with ChangeNotifier {
           context,
           MaterialPageRoute(
               builder: (context) => ResultScan(
-                    pathIamge: /*pathImage*/"",
+                    pathIamge: /*pathImage*/ "",
                   )));
     }
   }

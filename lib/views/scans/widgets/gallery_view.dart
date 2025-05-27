@@ -8,6 +8,7 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:techable/objects/text_group.dart';
 import 'package:techable/views/result_filter/widgets/camera_customer.dart';
+import 'package:techable/views/result_filter/widgets/default_data_scan.dart';
 
 class GalleryView extends StatefulWidget {
   const GalleryView(
@@ -20,6 +21,8 @@ class GalleryView extends StatefulWidget {
       required this.fileImage,
       required this.saveData,
       required this.viewDetail,
+      required this.viewDetailPicture,
+      required this.showPicture,
       required this.listTextGroup,
       required this.listKeyValues,
       required this.listStandardAngle});
@@ -32,6 +35,8 @@ class GalleryView extends StatefulWidget {
   final XFile fileImage;
   final Function() saveData;
   final Function() viewDetail;
+  final Function() viewDetailPicture;
+  final bool showPicture;
   //----
   final List<TextGroup> listTextGroup;
   final List<KeyValueFilter> listKeyValues;
@@ -102,9 +107,9 @@ class _GalleryViewState extends State<GalleryView> {
                             Container(
                               decoration: BoxDecoration(
                                   border: Border.all(color: Colors.amber),
-                                  image: DecorationImage(
+                                  image: widget.showPicture? DecorationImage(
                                       image: FileImage(_image!),
-                                      fit: BoxFit.fill)),
+                                      fit: BoxFit.fill): null),
                               height: MediaQuery.of(context).size.height / 1.8,
                               width: MediaQuery.of(context).size.width / 1.3,
                               alignment: Alignment.center,
@@ -120,6 +125,18 @@ class _GalleryViewState extends State<GalleryView> {
                             ),
                             TextButton(
                                 onPressed: () {
+                                  widget.viewDetailPicture();
+                                },
+                                child: const Text(
+                                  "Ẩn hình",
+                                  style: TextStyle(
+                                      color: Colors.red,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.normal,
+                                      fontStyle: FontStyle.italic),
+                                )),
+                            TextButton(
+                                onPressed: () {
                                   widget.viewDetail();
                                 },
                                 child: const Text(
@@ -130,31 +147,31 @@ class _GalleryViewState extends State<GalleryView> {
                                       fontWeight: FontWeight.normal,
                                       fontStyle: FontStyle.italic),
                                 )),
-                            // TextButton(
-                            //     onPressed: () {
-                            //       Navigator.push(
-                            //           context,
-                            //           MaterialPageRoute(
-                            //               builder: (context) => DefaultDataScan(
-                            //                     pathIamge: _image != null
-                            //                         ? _image!.path
-                            //                         : "",
-                            //                     listTextGroup:
-                            //                         widget.listTextGroup,
-                            //                     listKeyValues:
-                            //                         widget.listKeyValues,
-                            //                     listStandardAngle:
-                            //                         widget.listStandardAngle,
-                            //                   )));
-                            //     },
-                            //     child: const Text(
-                            //       "default",
-                            //       style: TextStyle(
-                            //           color: Colors.green,
-                            //           fontSize: 10,
-                            //           fontWeight: FontWeight.normal,
-                            //           fontStyle: FontStyle.italic),
-                            //     ))
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => DefaultDataScan(
+                                                pathIamge: _image != null
+                                                    ? _image!.path
+                                                    : "",
+                                                listTextGroup:
+                                                    widget.listTextGroup,
+                                                listKeyValues:
+                                                    widget.listKeyValues,
+                                                listStandardAngle:
+                                                    widget.listStandardAngle,
+                                              )));
+                                },
+                                child: const Text(
+                                  "default",
+                                  style: TextStyle(
+                                      color: Colors.green,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.normal,
+                                      fontStyle: FontStyle.italic),
+                                ))
                           ],
                         ),
                       )
@@ -233,13 +250,13 @@ class _GalleryViewState extends State<GalleryView> {
           sourcePath: inputImage.filePath!,
           // maxHeight: MediaQuery.of(context).size.height ~/ 1.5,
           // maxWidth: MediaQuery.of(context).size.width ~/ 1.3,
-          aspectRatioPresets: [
-            CropAspectRatioPreset.square,
-            CropAspectRatioPreset.ratio3x2,
-            CropAspectRatioPreset.original,
-            CropAspectRatioPreset.ratio4x3,
-            CropAspectRatioPreset.ratio16x9
-          ],
+          // aspectRatioPresets: [
+          //   CropAspectRatioPreset.square,
+          //   CropAspectRatioPreset.ratio3x2,
+          //   CropAspectRatioPreset.original,
+          //   CropAspectRatioPreset.ratio4x3,
+          //   CropAspectRatioPreset.ratio16x9
+          // ],
           uiSettings: [
             AndroidUiSettings(
               toolbarTitle: 'Chọn vùng dữ liệu',
@@ -247,6 +264,13 @@ class _GalleryViewState extends State<GalleryView> {
               toolbarWidgetColor: Colors.white,
               initAspectRatio: CropAspectRatioPreset.original,
               lockAspectRatio: false,
+            ),
+            IOSUiSettings(
+              title: 'Cropper',
+              aspectRatioPresets: [
+                CropAspectRatioPreset.original,
+                CropAspectRatioPreset.square,
+              ],
             ),
           ]);
     }

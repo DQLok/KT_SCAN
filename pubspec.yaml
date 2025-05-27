@@ -26,7 +26,7 @@ dependencies:
   #document
   google_mlkit_document_scanner: ^0.2.0
   #cut image
-  image_cropper: ^6.0.0
+  image_cropper: ^9.1.0
   #view
   flashy_tab_bar2: ^0.0.10
   #store
@@ -46,8 +46,8 @@ dependencies:
   arkit_plugin: ^1.1.0
   #ar-android
   # arcore_flutter_plugin: ^0.1.0
-  arcore_flutter_plugin:
-    git: https://github.com/giandifra/arcore_flutter_plugin.git
+  # arcore_flutter_plugin:
+  #   git: https://github.com/giandifra/arcore_flutter_plugin.git
   # arcore_flutter_plugin: ^0.2.0-alpha
   # ar_flutter_plugin: ^0.7.3
   http: ^1.2.1
