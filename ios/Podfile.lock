@@ -9,23 +9,22 @@ PODS:
   - Flutter (1.0.0)
   - fluttertoast (0.0.2):
     - Flutter
-    - Toast
   - GLTFSceneKit (0.3.0)
-  - google_mlkit_barcode_scanning (0.12.0):
+  - google_mlkit_barcode_scanning (0.12.1):
     - Flutter
     - google_mlkit_commons
     - GoogleMLKit/BarcodeScanning (~> 6.0.0)
-  - google_mlkit_commons (0.7.1):
+  - google_mlkit_commons (0.8.1):
     - Flutter
     - MLKitVision
-  - google_mlkit_document_scanner (0.2.0):
+  - google_mlkit_document_scanner (0.2.1):
     - Flutter
-  - google_mlkit_image_labeling (0.12.0):
+  - google_mlkit_image_labeling (0.12.1):
     - Flutter
     - google_mlkit_commons
     - GoogleMLKit/ImageLabeling (~> 6.0.0)
     - GoogleMLKit/ImageLabelingCustom (~> 6.0.0)
-  - google_mlkit_text_recognition (0.13.0):
+  - google_mlkit_text_recognition (0.13.1):
     - Flutter
     - google_mlkit_commons
     - GoogleMLKit/TextRecognition (~> 6.0.0)
@@ -67,7 +66,7 @@ PODS:
   - GTMSessionFetcher/Core (3.4.1)
   - image_cropper (0.0.4):
     - Flutter
-    - TOCropViewController (~> 2.7.3)
+    - TOCropViewController (~> 2.7.4)
   - image_picker_ios (0.0.1):
     - Flutter
   - MLImage (1.0.0-beta5)
@@ -115,7 +114,7 @@ PODS:
     - MLKitImageLabelingCommon (~> 7.0)
     - MLKitObjectDetectionCommon (~> 7.0)
     - MLKitVision (~> 7.0)
-  - mobile_scanner (5.1.1):
+  - mobile_scanner (5.2.3):
     - Flutter
     - GoogleMLKit/BarcodeScanning (~> 6.0.0)
   - nanopb (2.30910.0):
@@ -135,10 +134,9 @@ PODS:
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
-  - sqflite (0.0.3):
+  - sqflite_darwin (0.0.4):
     - Flutter
     - FlutterMacOS
-  - Toast (4.1.1)
   - TOCropViewController (2.7.4)
 
 DEPENDENCIES:
@@ -159,7 +157,7 @@ DEPENDENCIES:
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - qr_mobile_vision (from `.symlinks/plugins/qr_mobile_vision/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
-  - sqflite (from `.symlinks/plugins/sqflite/darwin`)
+  - sqflite_darwin (from `.symlinks/plugins/sqflite_darwin/darwin`)
 
 SPEC REPOS:
   trunk:
@@ -183,7 +181,6 @@ SPEC REPOS:
     - MLKitVisionKit
     - nanopb
     - PromisesObjC
-    - Toast
     - TOCropViewController
 
 EXTERNAL SOURCES:
@@ -221,29 +218,29 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/qr_mobile_vision/ios"
   shared_preferences_foundation:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
-  sqflite:
-    :path: ".symlinks/plugins/sqflite/darwin"
+  sqflite_darwin:
+    :path: ".symlinks/plugins/sqflite_darwin/darwin"
 
 SPEC CHECKSUMS:
-  arkit_plugin: c08c4e6f334a922154c2caf2f6fadfaefb51c181
-  camera_avfoundation: 759172d1a77ae7be0de08fc104cfb79738b8a59e
-  device_info_plus: 97af1d7e84681a90d0693e63169a5d50e0839a0d
+  arkit_plugin: 2c387e26e137de4bd1fc16ec2fabd05c84c5a817
+  camera_avfoundation: be3be85408cd4126f250386828e9b1dfa40ab436
+  device_info_plus: 21fcca2080fbcd348be798aa36c3e5ed849eefbe
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  fluttertoast: 9f2f8e81bb5ce18facb9748d7855bf5a756fe3db
+  fluttertoast: 2c67e14dce98bbdb200df9e1acf610d7a6264ea1
   GLTFSceneKit: d1b437c514ba2aed5555afb0fddd64e030612d57
-  google_mlkit_barcode_scanning: 383d0c2dd62d92b36c0b10c7e69cf98d3650dc40
-  google_mlkit_commons: 96aaca445520311b84a2da013dedf3427fe4cc69
-  google_mlkit_document_scanner: 5b889061c0b0967d83cb0c15c1b084776f509a00
-  google_mlkit_image_labeling: 6e0b7cbdec78650a00cccefc95f1ee8e6168a58c
-  google_mlkit_text_recognition: 393c2526da49aa6c9c883e6d69100f54af011e24
+  google_mlkit_barcode_scanning: 27e95b3b57f7b3eb25fbff20176a61c807e0a17c
+  google_mlkit_commons: 414fc36ac51758c806381de33a1d148d2ba71ce4
+  google_mlkit_document_scanner: db8174553a4c4fbe0cbe83a63145f47c709c19ee
+  google_mlkit_image_labeling: e2baee525b82b66711a6390f9ce0e8c94991c9eb
+  google_mlkit_text_recognition: 6dd0122107954e64667d826da71de686152109fe
   GoogleDataTransport: 6c09b596d841063d76d4288cc2d2f42cc36e1e2a
   GoogleMLKit: 97ac7af399057e99182ee8edfa8249e3226a4065
   GoogleToolboxForMac: d1a2cbf009c453f4d6ded37c105e2f67a32206d8
   GoogleUtilities: ea963c370a38a8069cc5f7ba4ca849a60b6d7d15
   GoogleUtilitiesComponents: 679b2c881db3b615a2777504623df6122dd20afe
   GTMSessionFetcher: 8000756fc1c19d2e5697b90311f7832d2e33f6cd
-  image_cropper: 2c150b3d63f4feaad31054d20381ddac0a460e63
-  image_picker_ios: c560581cceedb403a6ff17f2f816d7fea1421fc1
+  image_cropper: c4326ea50132b1e1564499e5d32a84f01fb03537
+  image_picker_ios: 7fe1ff8e34c1790d6fff70a32484959f563a928a
   MLImage: 1824212150da33ef225fbd3dc49f184cf611046c
   MLKitBarcodeScanning: 10ca0845a6d15f2f6e911f682a1998b68b973e8b
   MLKitCommon: afec63980417d29ffbb4790529a1b0a2291699e1
@@ -255,17 +252,16 @@ SPEC CHECKSUMS:
   MLKitTextRecognitionCommon: c0b3a63d529296a19bce1f8bc8a513644ed4d1f6
   MLKitVision: e858c5f125ecc288e4a31127928301eaba9ae0c1
   MLKitVisionKit: 6d2ea9741b262ec0fed2a5a3de521cfa671c6e83
-  mobile_scanner: 8564358885a9253c43f822435b70f9345c87224f
+  mobile_scanner: 92e8812bf22a8f84131e2a7f9d0f44dad1a4742b
   nanopb: 438bc412db1928dac798aa6fd75726007be04262
-  native_device_orientation: 348b10c346a60ebbc62fb235a4fdb5d1b61a8f55
-  path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
+  native_device_orientation: e3580675687d5034770da198f6839ebf2122ef94
+  path_provider_foundation: 080d55be775b7414fd5a5ef3ac137b97b097e564
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
-  qr_mobile_vision: de2dbc8122cf2e0d15af3d777f6969e2d65876f6
-  shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
-  sqflite: 673a0e54cc04b7d6dba8d24fb8095b31c3a99eec
-  Toast: 1f5ea13423a1e6674c4abdac5be53587ae481c4e
+  qr_mobile_vision: fa76417a5dac0c8973355f145b195954fff29535
+  shared_preferences_foundation: 9e1978ff2562383bd5676f64ec4e9aa8fa06a6f7
+  sqflite_darwin: 20b2a3a3b70e43edae938624ce550a3cbf66a3d0
   TOCropViewController: 80b8985ad794298fb69d3341de183f33d1853654
 
 PODFILE CHECKSUM: 56c9d2122463bc3c3e78d1c8ad7d908f43dba6a1
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2

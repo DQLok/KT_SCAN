@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:techable/main.dart';
-import 'package:techable/views/ar/_android/ar_android.dart';
+// import 'package:techable/views/ar/_android/ar_android.dart';
 import 'package:techable/views/ar/_ios/ar_ios.dart';
 
 class AR extends StatefulWidget {
@@ -28,7 +28,7 @@ class _ARState extends State<AR> {
         ),
       ),
       body: Platform.isAndroid
-          ? const ARAndroid()
+          ? const SizedBox.shrink()//const ARAndroid()
           : Platform.isIOS
               ? const ARIos()
               : const SizedBox(

@@ -33,6 +33,7 @@ class _ScanTextGgState extends State<ScanTextGg> {
   //-------------
   AppPreference appPreference = AppPreference();
   bool showAndHide = false;
+  bool showAndHidePicture = true;
   String pathImage = "";
   Uint8List? fileSaveIos;
 
@@ -55,6 +56,8 @@ class _ScanTextGgState extends State<ScanTextGg> {
         fileImage: widget.xFile,
         saveData: saveDataPreference,
         viewDetail: viewDetailScan,
+        viewDetailPicture: viewDetailPicture,
+        showPicture: showAndHidePicture,
         listTextGroup: listTextGroupBlocks,
         listKeyValues: listKeyValues,
         listStandardAngle: listStandardAngle,
@@ -316,56 +319,59 @@ class _ScanTextGgState extends State<ScanTextGg> {
                   child: Column(
                     children: List.generate(
                         listKeyValues.length,
-                        (index) => Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                IntrinsicWidth(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Colors.blueAccent)),
-                                    child: Text(
-                                      "${listKeyValues.elementAt(index).keyTG.index}: ${listKeyValues.elementAt(index).keyTG.text}",
-                                      style: const TextStyle(
-                                          color: Colors.blue, fontSize: 10),
+                        (index) => SizedBox(
+                          width: double.infinity,
+                          child: Row(
+                                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  IntrinsicWidth(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Colors.blueAccent)),
+                                      child: Text(
+                                        "${listKeyValues.elementAt(index).keyTG.index}: ${listKeyValues.elementAt(index).keyTG.text}",
+                                        style: const TextStyle(
+                                            color: Colors.blue, fontSize: 10),
+                                      ),
                                     ),
                                   ),
-                                ),
-                                listKeyValues.elementAt(index).valueTG.isEmpty
-                                    ? const SizedBox()
-                                    : Expanded(
-                                        flex: 1,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: List.generate(
-                                              listKeyValues
-                                                  .elementAt(index)
-                                                  .valueTG
-                                                  .length,
-                                              (indexChild) => Container(
-                                                    margin:
-                                                        const EdgeInsets.only(
-                                                            left: 20),
-                                                    decoration: BoxDecoration(
-                                                        border: Border.all(
-                                                            color: Colors
-                                                                .blueAccent)),
-                                                    child: Text(
-                                                      listKeyValues
-                                                          .elementAt(index)
-                                                          .valueTG
-                                                          .elementAt(indexChild)
-                                                          .text,
-                                                      style: const TextStyle(
-                                                          color: Colors.blue,
-                                                          fontSize: 10),
-                                                    ),
-                                                  )),
+                                  listKeyValues.elementAt(index).valueTG.isEmpty
+                                      ? const SizedBox()
+                                      : Expanded(
+                                          flex: 1,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: List.generate(
+                                                listKeyValues
+                                                    .elementAt(index)
+                                                    .valueTG
+                                                    .length,
+                                                (indexChild) => Container(
+                                                      margin:
+                                                          const EdgeInsets.only(
+                                                              left: 5),
+                                                      decoration: BoxDecoration(
+                                                          border: Border.all(
+                                                              color: Colors
+                                                                  .blueAccent)),
+                                                      child: Text(
+                                                        listKeyValues
+                                                            .elementAt(index)
+                                                            .valueTG
+                                                            .elementAt(indexChild)
+                                                            .text,
+                                                        style: const TextStyle(
+                                                            color: Colors.blue,
+                                                            fontSize: 10  ),
+                                                      ),
+                                                    )),
+                                          ),
                                         ),
-                                      ),
-                              ],
-                            )),
+                                ],
+                              ),
+                        )),
                   ),
                 ),
               )
@@ -428,6 +434,12 @@ class _ScanTextGgState extends State<ScanTextGg> {
   viewDetailScan() {
     setState(() {
       showAndHide = !showAndHide;
+    });
+  }
+
+  viewDetailPicture() {
+    setState(() {
+      showAndHidePicture = !showAndHidePicture;
     });
   }
 }

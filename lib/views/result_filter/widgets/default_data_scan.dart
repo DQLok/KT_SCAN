@@ -400,7 +400,7 @@ class _DefaultDataScanState extends State<DefaultDataScan> {
                           child: Text(
                             "${keyValues.elementAt(index).keyTG.index}: ${keyValues.elementAt(index).keyTG.text}",
                             style: const TextStyle(
-                                color: Colors.blue, fontSize: 12),
+                                color: Colors.blue, fontSize: 10),
                           ),
                         ),
                       ),
@@ -414,7 +414,7 @@ class _DefaultDataScanState extends State<DefaultDataScan> {
                                     keyValues.elementAt(index).valueTG.length,
                                     (indexChild) => Container(
                                           margin:
-                                              const EdgeInsets.only(left: 20),
+                                              const EdgeInsets.only(left: 8),
                                           decoration: BoxDecoration(
                                               border: Border.all(
                                                   color: Colors.blueAccent)),
@@ -427,7 +427,7 @@ class _DefaultDataScanState extends State<DefaultDataScan> {
                                             overflow: TextOverflow.ellipsis,
                                             style: const TextStyle(
                                                 color: Colors.blue,
-                                                fontSize: 12),
+                                                fontSize: 10),
                                           ),
                                         )),
                               ),
