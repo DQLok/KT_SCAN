@@ -18,7 +18,7 @@ class ResultFilterPage extends StatefulWidget {
 class _ResultFilterPageState extends State<ResultFilterPage> {
   int _selectedIndex = 1;
   AppPreference appPreference = AppPreference();
-  ListBillStatus listBillStatus = ListBillStatus(status: "", listInforBill: []);
+  ListBillStatus listBillStatus = ListBillStatus(status: "", listInforBill: [],blocksData: "");
   bool showAndHide = true;
 
   @override
@@ -114,6 +114,7 @@ class _ResultFilterPageState extends State<ResultFilterPage> {
                             (index) => CardResultFilter(
                                   inforBill: listBillStatus.listInforBill
                                       .elementAt(index),
+                                      blockString: listBillStatus.blocksData,
                                 )),
                       )
                 : const Center(
@@ -134,7 +135,7 @@ class _ResultFilterPageState extends State<ResultFilterPage> {
           onPressed: () {
             setState(() {
               appPreference.clearAll();
-              listBillStatus = ListBillStatus(status: "", listInforBill: []);
+              listBillStatus = ListBillStatus(status: "", listInforBill: [],blocksData: "");
             });
           },
           icon: const CircleAvatar(

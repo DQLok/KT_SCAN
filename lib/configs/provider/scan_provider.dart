@@ -12,6 +12,7 @@ import 'package:techable/objects/list_bill_status.dart';
 import 'package:techable/objects/text_group.dart';
 import 'package:techable/store_preference/store_preference.dart';
 import 'package:techable/utils/utils.dart';
+import 'package:techable/views/result_filter/table_filter/table_filter.dart';
 import 'package:techable/views/result_filter/widgets/camera_customer.dart';
 import 'package:techable/views/result_filter/widgets/result_scan.dart';
 import 'package:techable/views/scans/scan_text_gg.dart';
@@ -138,13 +139,13 @@ class ScanProvider with ChangeNotifier {
         imageFile = XFile(croppedFile.path);
         InputImage inputImage = InputImage.fromFilePath(croppedFile.path);
         await processImage(inputImage);
-         Navigator.push(
+        Navigator.push(
             // ignore: use_build_context_synchronously
             context,
             MaterialPageRoute(
                 builder: (context) => ScanTextGg(
                       xFile: imageFile!,
-                    )));       
+                    )));
       } else {
         // ignore: use_build_context_synchronously
         Navigator.push(context,
@@ -340,8 +341,9 @@ class ScanProvider with ChangeNotifier {
   saveDataPreference(BuildContext context) async {
     if (listKeyValues.isNotEmpty) {
       String value = await appPreference.getConfig("listbill");
-      ListBillStatus listBillStatus =
-          ListBillStatus(status: "", listInforBill: []);
+      String blocksString = processTableFormat(blocks: blocks);
+      ListBillStatus listBillStatus = ListBillStatus(
+          status: "", listInforBill: [], blocksData: blocksString);
       if (value.isNotEmpty) {
         try {
           listBillStatus = ListBillStatus.fromJson(jsonDecode(value));
@@ -349,7 +351,8 @@ class ScanProvider with ChangeNotifier {
           // appPreference.clearAll();
         }
       } else {
-        listBillStatus = ListBillStatus(status: "ok", listInforBill: []);
+        listBillStatus = ListBillStatus(
+            status: "ok", listInforBill: [], blocksData: blocksString);
       }
       if (listBillStatus.status == "ok") {
         List<InforBill> listInforBill = listBillStatus.listInforBill;
@@ -376,8 +379,10 @@ class ScanProvider with ChangeNotifier {
         listInforBill.add(
             InforBill(pathIamge: pathImage, listKeyValueFilter: listKeyValues));
         //----
-        ListBillStatus newListBillStatus =
-            ListBillStatus(status: "ok", listInforBill: listInforBill);
+        ListBillStatus newListBillStatus = ListBillStatus(
+            status: "ok",
+            listInforBill: listInforBill,
+            blocksData: blocksString);
         //----
         appPreference.setConfig(
             "listbill", jsonEncode(newListBillStatus.toJson()));

@@ -10,9 +10,10 @@ import 'package:techable/utils/utils.dart';
 
 class DetailResultFilter extends StatefulWidget {
   const DetailResultFilter(
-      {super.key, required this.pathIamge, required this.listKeyValues});
+      {super.key, required this.pathIamge, required this.listKeyValues, required this.blockString});
   final String pathIamge;
   final List<KeyValueFilter> listKeyValues;
+  final String blockString;
 
   @override
   State<DetailResultFilter> createState() => _DetailResultFilterState();
@@ -243,7 +244,7 @@ class _DetailResultFilterState extends State<DetailResultFilter> {
                                             .elementAt(index)
                                             .keyTG
                                             .text,
-                                        style: TextStyle(
+                                        style: TextStyle(fontSize: 10,
                                             color: Colors.blue.shade900),
                                         textAlign: TextAlign.start,
                                       ),
@@ -270,6 +271,7 @@ class _DetailResultFilterState extends State<DetailResultFilter> {
                                                     .elementAt(ind)
                                                     .text,
                                                 style: const TextStyle(
+                                                  fontSize: 10,
                                                     color: Colors.blue),
                                                 textAlign: TextAlign.end,
                                               ),
@@ -286,6 +288,8 @@ class _DetailResultFilterState extends State<DetailResultFilter> {
                         )
                 ],
               )),
+          const Divider(),
+          Text(widget.blockString),
           const Divider(),
           Padding(
               padding: const EdgeInsets.all(16.0),

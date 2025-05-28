@@ -25,7 +25,8 @@ class GalleryView extends StatefulWidget {
       required this.showPicture,
       required this.listTextGroup,
       required this.listKeyValues,
-      required this.listStandardAngle});
+      required this.listStandardAngle,
+      required this.blocksData});
 
   final String title;
   final String? text;
@@ -41,6 +42,7 @@ class GalleryView extends StatefulWidget {
   final List<TextGroup> listTextGroup;
   final List<KeyValueFilter> listKeyValues;
   final List<TextGroup> listStandardAngle;
+  final List<TextBlock> blocksData;
 
   @override
   State<GalleryView> createState() => _GalleryViewState();
@@ -162,6 +164,7 @@ class _GalleryViewState extends State<GalleryView> {
                                                     widget.listKeyValues,
                                                 listStandardAngle:
                                                     widget.listStandardAngle,
+                                                    blocksData: widget.blocksData,
                                               )));
                                 },
                                 child: const Text(

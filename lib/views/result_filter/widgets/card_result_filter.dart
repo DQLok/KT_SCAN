@@ -6,8 +6,9 @@ import 'package:techable/utils/utils.dart';
 import 'package:techable/views/result_filter/widgets/detail_result_filter.dart';
 
 class CardResultFilter extends StatefulWidget {
-  const CardResultFilter({super.key, required this.inforBill});
+  const CardResultFilter({super.key, required this.inforBill, required this.blockString});
   final InforBill inforBill;
+  final String blockString;
 
   @override
   State<CardResultFilter> createState() => _CardResultFilterState();
@@ -51,6 +52,7 @@ class _CardResultFilterState extends State<CardResultFilter> {
                 builder: (context) => DetailResultFilter(
                       pathIamge: fileImge.path,
                       listKeyValues: widget.inforBill.listKeyValueFilter,
+                      blockString: widget.blockString,
                     )));
       },
       child: Card(
@@ -72,20 +74,17 @@ class _CardResultFilterState extends State<CardResultFilter> {
                           widget.inforBill.listKeyValueFilter.length > 5
                               ? 5
                               : widget.inforBill.listKeyValueFilter.length,
-                          (index) => Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    widget.inforBill.listKeyValueFilter
-                                        .elementAt(index)
-                                        .keyTG
-                                        .text,
-                                    overflow: TextOverflow.ellipsis,
-                                    textAlign: TextAlign.start,
-                                  ),
-                                ],
-                              )),
+                          (index) => Container(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              widget.inforBill.listKeyValueFilter
+                                  .elementAt(index)
+                                  .keyTG
+                                  .text,
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.start,
+                            ),
+                          )),
                     ),
                   ),
                   checkPathImg

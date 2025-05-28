@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:techable/models/master_data/master_data.dart';
 import 'package:techable/objects/key_value_master_data.dart';
 import 'package:techable/objects/text_group.dart';
@@ -11,6 +12,7 @@ import 'package:techable/utils/levenshtein_formula.dart';
 import 'package:techable/utils/regex.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:techable/utils/utils.dart';
+import 'package:techable/views/result_filter/table_filter/table_filter.dart';
 
 class DefaultDataScan extends StatefulWidget {
   const DefaultDataScan(
@@ -18,11 +20,13 @@ class DefaultDataScan extends StatefulWidget {
       required this.pathIamge,
       required this.listTextGroup,
       required this.listKeyValues,
-      required this.listStandardAngle});
+      required this.listStandardAngle,
+      required this.blocksData});
   final String pathIamge;
   final List<TextGroup> listTextGroup;
   final List<KeyValueFilter> listKeyValues;
   final List<TextGroup> listStandardAngle;
+  final List<TextBlock> blocksData;
 
   @override
   State<DefaultDataScan> createState() => _DefaultDataScanState();
@@ -43,6 +47,8 @@ class _DefaultDataScanState extends State<DefaultDataScan> {
   String formula = "";
   //------
   List<KeyValuesChildsMasterData> listKeyValueChildMasterData = [];
+  //------json table----
+  String textJsonTable = "";
 
   @override
   void initState() {
@@ -51,7 +57,12 @@ class _DefaultDataScanState extends State<DefaultDataScan> {
       checkFileinLocal();
       processText();
       readDataFromFileAssets();
+      processTableWithBlock();
     }
+  }
+
+  processTableWithBlock() {
+    textJsonTable = processTableFormat(blocks: widget.blocksData);
   }
 
   checkFileinLocal() {
@@ -304,6 +315,9 @@ class _DefaultDataScanState extends State<DefaultDataScan> {
                     ? const SizedBox()
                     : showListKeyValue(listKeyValuesChild),
                 const Divider(),
+                // PrettyJsonScreen(text: textJsonTable),
+                Text(textJsonTable),
+                const Divider(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -318,7 +332,7 @@ class _DefaultDataScanState extends State<DefaultDataScan> {
                 const Divider(),
                 ElevatedButton(
                     onPressed: () {
-                      showHideMasterData();
+                      // showHideMasterData();
                     },
                     child: const Text("Show Master Data")),
                 showHideButton
@@ -438,32 +452,7 @@ class _DefaultDataScanState extends State<DefaultDataScan> {
                                           );
                                   },
                                 ),
-                              )
-                              //  Row(
-                              //   mainAxisAlignment: MainAxisAlignment.end,
-                              //   children:
-                              //   List.generate(
-                              //       keyValues.elementAt(index).valueTG.length,
-                              //       (indexChild) => Container(
-                              //             margin:
-                              //                 const EdgeInsets.only(left: 8),
-                              //             decoration: BoxDecoration(
-                              //                 border: Border.all(
-                              //                     color: Colors.blueAccent)),
-                              //             child: Text(
-                              //               keyValues
-                              //                   .elementAt(index)
-                              //                   .valueTG
-                              //                   .elementAt(indexChild)
-                              //                   .text,
-                              //               overflow: TextOverflow.ellipsis,
-                              //               style: const TextStyle(
-                              //                   color: Colors.blue,
-                              //                   fontSize: 10),
-                              //             ),
-                              //           )),
-                              // ),
-                              ),
+                              )),
                     ],
                   ),
                 )),

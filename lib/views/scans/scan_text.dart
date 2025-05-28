@@ -108,6 +108,7 @@ class ScanTextPage extends ConsumerWidget {
                                                       scanPro.listKeyValues,
                                                   listStandardAngle:
                                                       scanPro.listStandardAngle,
+                                                      blocksData: const [],
                                                 )));
                                   },
                                   child: const Text(

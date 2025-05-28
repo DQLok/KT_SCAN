@@ -3,19 +3,22 @@ import 'package:techable/objects/text_group.dart';
 class ListBillStatus {
   String status;
   List<InforBill> listInforBill;
+  String blocksData;
 
-  ListBillStatus({required this.status, required this.listInforBill});
+  ListBillStatus({required this.status, required this.listInforBill, required this.blocksData});
 
   factory ListBillStatus.fromJson(Map<String, dynamic> json) => ListBillStatus(
-        status: json["status"],
+        status: json["status"] ?? "",
         listInforBill: List<InforBill>.from(
             json["listInforBill"].map((x) => InforBill.fromJson(x))),
+        blocksData: json["blocksData"] ?? ""
       );
 
   Map<String, dynamic> toJson() => {
         "status": status,
         "listInforBill":
             List<dynamic>.from(listInforBill.map((x) => x.toJson())),
+        "blocksData": blocksData
       };
 }
 

@@ -9,6 +9,7 @@ import 'package:techable/objects/list_bill_status.dart';
 import 'package:techable/objects/text_group.dart';
 import 'package:techable/store_preference/store_preference.dart';
 import 'package:techable/utils/utils.dart';
+import 'package:techable/views/result_filter/table_filter/table_filter.dart';
 import 'package:techable/views/result_filter/widgets/result_scan.dart';
 import 'package:techable/views/scans/widgets/gallery_view.dart';
 
@@ -61,6 +62,7 @@ class _ScanTextGgState extends State<ScanTextGg> {
         listTextGroup: listTextGroupBlocks,
         listKeyValues: listKeyValues,
         listStandardAngle: listStandardAngle,
+        blocksData: blocks,
       ),
     );
   }
@@ -320,58 +322,67 @@ class _ScanTextGgState extends State<ScanTextGg> {
                     children: List.generate(
                         listKeyValues.length,
                         (index) => SizedBox(
-                          width: double.infinity,
-                          child: Row(
-                                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              width: double.infinity,
+                              child: Row(
                                 children: [
-                                  IntrinsicWidth(
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: Colors.blueAccent)),
-                                      child: Text(
-                                        "${listKeyValues.elementAt(index).keyTG.index}: ${listKeyValues.elementAt(index).keyTG.text}",
-                                        style: const TextStyle(
-                                            color: Colors.blue, fontSize: 10),
-                                      ),
+                                  Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 4,
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.blueAccent)),
+                                    child: Text(
+                                      "${listKeyValues.elementAt(index).keyTG.index}: ${listKeyValues.elementAt(index).keyTG.text}",
+                                      style: const TextStyle(
+                                          color: Colors.blue, fontSize: 10),
+                                      overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
                                   listKeyValues.elementAt(index).valueTG.isEmpty
                                       ? const SizedBox()
                                       : Expanded(
                                           flex: 1,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: List.generate(
-                                                listKeyValues
-                                                    .elementAt(index)
-                                                    .valueTG
-                                                    .length,
-                                                (indexChild) => Container(
-                                                      margin:
-                                                          const EdgeInsets.only(
-                                                              left: 5),
-                                                      decoration: BoxDecoration(
-                                                          border: Border.all(
-                                                              color: Colors
-                                                                  .blueAccent)),
-                                                      child: Text(
-                                                        listKeyValues
-                                                            .elementAt(index)
-                                                            .valueTG
-                                                            .elementAt(indexChild)
-                                                            .text,
-                                                        style: const TextStyle(
-                                                            color: Colors.blue,
-                                                            fontSize: 10  ),
-                                                      ),
-                                                    )),
+                                          child: SizedBox(
+                                            height: 30,
+                                            child: ListView.builder(
+                                              itemCount: listKeyValues
+                                                  .elementAt(index)
+                                                  .valueTG
+                                                  .length,
+                                              scrollDirection: Axis.horizontal,
+                                              itemBuilder: (context, indexV) {
+                                                TextGroup textGroup =
+                                                    listKeyValues
+                                                        .elementAt(index)
+                                                        .valueTG
+                                                        .elementAt(indexV);
+                                                return textGroup.text.isEmpty
+                                                    ? const SizedBox.shrink()
+                                                    : Container(
+                                                        margin: const EdgeInsets
+                                                            .only(left: 8),
+                                                        decoration: BoxDecoration(
+                                                            border: Border.all(
+                                                                color: Colors
+                                                                    .blueAccent)),
+                                                        child: Text(
+                                                          textGroup.text,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          style:
+                                                              const TextStyle(
+                                                                  color: Colors
+                                                                      .blue,
+                                                                  fontSize: 10),
+                                                        ),
+                                                      );
+                                              },
+                                            ),
                                           ),
-                                        ),
+                                        )
                                 ],
                               ),
-                        )),
+                            )),
                   ),
                 ),
               )
@@ -380,10 +391,11 @@ class _ScanTextGgState extends State<ScanTextGg> {
   }
 
   saveDataPreference() async {
+    String blocksString = processTableFormat(blocks: blocks);
     if (listKeyValues.isNotEmpty) {
       String value = await appPreference.getConfig("listbill");
       ListBillStatus listBillStatus =
-          ListBillStatus(status: "", listInforBill: []);
+          ListBillStatus(status: "", listInforBill: [],blocksData: blocksString);
       if (value.isNotEmpty) {
         try {
           listBillStatus = ListBillStatus.fromJson(jsonDecode(value));
@@ -391,7 +403,7 @@ class _ScanTextGgState extends State<ScanTextGg> {
           // appPreference.clearAll();
         }
       } else {
-        listBillStatus = ListBillStatus(status: "ok", listInforBill: []);
+        listBillStatus = ListBillStatus(status: "ok", listInforBill: [],blocksData: blocksString);
       }
       if (listBillStatus.status == "ok") {
         List<InforBill> listInforBill = listBillStatus.listInforBill;
@@ -414,7 +426,7 @@ class _ScanTextGgState extends State<ScanTextGg> {
             InforBill(pathIamge: pathImage, listKeyValueFilter: listKeyValues));
         //----
         ListBillStatus newListBillStatus =
-            ListBillStatus(status: "ok", listInforBill: listInforBill);
+            ListBillStatus(status: "ok", listInforBill: listInforBill,blocksData: blocksString);
         //----
         appPreference.setConfig(
             "listbill", jsonEncode(newListBillStatus.toJson()));
