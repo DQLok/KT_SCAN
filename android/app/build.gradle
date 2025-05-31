@@ -52,6 +52,22 @@ android {
         versionName flutterVersionName
     }
 
+    flavorDimensions "env"
+    productFlavors {
+        root {
+            dimension "env"
+            applicationIdSuffix ".root"
+            versionNameSuffix "-root"
+            resValue "string", "app_name", "KT SCAN"
+        }
+        dongnguyen {
+            dimension "env"
+            applicationIdSuffix ".dongnguyen"
+            versionNameSuffix "-dongnguyen"
+            resValue "string", "app_name", "DONG NGUYEN"
+        }
+    }
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.

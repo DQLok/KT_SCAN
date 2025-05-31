@@ -51,6 +51,7 @@ dependencies:
   # arcore_flutter_plugin: ^0.2.0-alpha
   # ar_flutter_plugin: ^0.7.3
   http: ^1.2.1
+  flutter_dotenv: ^5.2.1
 
 dev_dependencies:
   flutter_launcher_icons: "^0.13.1"
@@ -63,6 +64,11 @@ flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
   image_path: "assets/logo/icon.jpg"
+  flavors:
+    root:
+      image_path: "assets/logo/icon.png"
+    dongnguyen:
+      image_path: "assets/logo/logo_dongnguyen.png"
   min_sdk_android: 21 # android min sdk min:16, default 21
   # adaptive_icon_background: "#ffffff"
   # adaptive_icon_foreground: "#ffffff"
@@ -75,3 +81,4 @@ flutter:
     - assets/images/splash/
     - assets/logo/
     - assets/translations/
+    - env/

@@ -3,11 +3,12 @@ import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:techable/configs/env.dart';
 import 'package:techable/constants/colors_app.dart';
 import 'package:techable/constants/image_app.dart';
 import 'package:techable/constants/preference_app.dart';
-import 'package:techable/constants/static_app.dart';
 import 'package:techable/objects/locale_cus.dart';
 import 'package:techable/routes/routes_generator.dart';
 import 'package:techable/routes/routes_path.dart';
@@ -18,6 +19,7 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();  
   await EasyLocalization.ensureInitialized();
+  await Env.load();
   runApp(EasyLocalization(
       supportedLocales: settingInitLanguageApp(),
       path: ImageApp.translations,
@@ -59,7 +61,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: StaticApp.nameApp,
+      title: dotenv.env["APP_NAME"] ?? "",
       debugShowCheckedModeBanner: false,
       localizationsDelegates: context.localizationDelegates,
       locale: context.locale,

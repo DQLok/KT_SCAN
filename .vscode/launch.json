@@ -1,0 +1,22 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "KT_SCAN",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main_root.dart",
+      "args": ["--flavor", "root", "--dart-define=FLAVOR=root"]
+    },
+    {
+      "name": "DongNguyen",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main_dongnguyen.dart",
+      "args": ["--flavor", "dongnguyen", "--dart-define=FLAVOR=dongnguyen"]
+    },
+  ]
+}
